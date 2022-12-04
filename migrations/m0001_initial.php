@@ -8,254 +8,108 @@ class m0001_initial
     {
         $db = Application::$app->db;
         $sql = "
-            CREATE TABLE `cart` (
-            `id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `user_id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `status` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-            `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
-
-            -- --------------------------------------------------------
-
-            --
-            -- Table structure for table `cart_detail`
-            --
-
-            CREATE TABLE `cart_detail` (
-            `product_id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `cart_id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `quantity` int(11) NOT NULL,
-            `size` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `note` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-            `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
-
-            -- --------------------------------------------------------
-
-            --
-            -- Table structure for table `categories`
-            --
-
-            CREATE TABLE `categories` (
-            `id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `name` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-            `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
-
-            -- --------------------------------------------------------
-
-            --
-            -- Table structure for table `users`
-            --
-
-            CREATE TABLE `users` (
-            `id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `firstname` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `lastname` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `email` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `phone_number` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `password` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `image_url` varchar(4000) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `address` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `ward_id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `district_id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `province_id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `role` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-            `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
-
-            -- --------------------------------------------------------
-
-            --
-            -- Table structure for table `feedbacks`
-            --
-
-            -- --------------------------------------------------------
-
-
-            CREATE TABLE `feedbacks` (
-            `id` int(11) NOT NULL,
-            `user_id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `product_id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `stars` int(11) NOT NULL,
-            `comment` int(11) NOT NULL,
-            `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
-
-            -- --------------------------------------------------------
-
-            --
-            -- Table structure for table `orders`
-            --
-
-            CREATE TABLE `orders` (
-            `id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `user_id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `payment_method` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `status` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-            `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
-
-            -- --------------------------------------------------------
-
-            --
-            -- Table structure for table `order_detail`
-            --
-
-            CREATE TABLE `order_detail` (
-            `product_id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `order_id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `quantity` int(11) NOT NULL,
-            `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-            `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
-
-            -- --------------------------------------------------------
-
-            --
-            -- Table structure for table `products`
-            --
-
-            CREATE TABLE `products` (
-            `id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `category_id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `name` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `image_url` varchar(1000) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `price` int(12) NOT NULL,
-            `description` varchar(4000) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-            `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
-
-            -- --------------------------------------------------------
-
-            --
-            -- Table structure for table `stores`
-            --
-
-            CREATE TABLE `stores` (
-            `id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `address` varchar(1000) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `status` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `image_url` varchar(4000) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `open_time` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `phone` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-            `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-            `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
-
-            --
-            -- Indexes for dumped tables
-            --
-
-            --
-            -- Indexes for table `cart`
-            --
-            ALTER TABLE `cart`
-            ADD PRIMARY KEY (`id`),
-            ADD KEY `cart_user_fk` (`user_id`);
-
-            --
-            -- Indexes for table `cart_detail`
-            --
-            ALTER TABLE `cart_detail`
-            ADD KEY `cart_fk` (`cart_id`),
-            ADD KEY `product_fk` (`product_id`);
-
-            --
-            -- Indexes for table `categories`
-            --
-            ALTER TABLE `categories`
-            ADD PRIMARY KEY (`id`);
-
-            --
-            -- Indexes for table `users`
-            --
-            ALTER TABLE `users`
-            ADD PRIMARY KEY (`id`);
-
-            --
-            -- Indexes for table `feedbacks`
-            --
-            ALTER TABLE `feedbacks`
-            ADD PRIMARY KEY (`id`),
-            ADD KEY `feedback_user_fk` (`user_id`),
-            ADD KEY `feedback_product_fk` (`product_id`);
-
-            --
-            -- Indexes for table `orders`
-            --
-            ALTER TABLE `orders`
-            ADD PRIMARY KEY (`id`),
-            ADD KEY `order_user_fk` (`user_id`);
-
-            --
-            -- Indexes for table `order_detail`
-            --
-            ALTER TABLE `order_detail`
-            ADD KEY `order_product_fk` (`product_id`),
-            ADD KEY `order_fk` (`order_id`);
-
-            --
-            -- Indexes for table `products`
-            --
-            ALTER TABLE `products`
-            ADD PRIMARY KEY (`id`),
-            ADD KEY `category_id` (`category_id`);
-
-            --
-            -- Indexes for table `stores`
-            --
-            ALTER TABLE `stores`
-            ADD PRIMARY KEY (`id`);
-
-            --
-            -- Constraints for dumped tables
-            --
-
-            --
-            -- Constraints for table `cart`
-            --
-            ALTER TABLE `cart`
-            ADD CONSTRAINT `cart_user_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
-            --
-            -- Constraints for table `cart_detail`
-            --
-            ALTER TABLE `cart_detail`
-            ADD CONSTRAINT `cart_fk` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`),
-            ADD CONSTRAINT `product_fk` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
-
-            --
-            -- Constraints for table `feedbacks`
-            --
-            ALTER TABLE `feedbacks`
-            ADD CONSTRAINT `feedback_user_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-            ADD CONSTRAINT `feedback_product_fk` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
-
-            --
-            -- Constraints for table `orders`
-            --
-            ALTER TABLE `orders`
-            ADD CONSTRAINT `order_user_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
-            --
-            -- Constraints for table `order_detail`
-            --
-            ALTER TABLE `order_detail`
-            ADD CONSTRAINT `order_fk` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
-            ADD CONSTRAINT `order_product_fk` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
-
-            --
-            -- Constraints for table `products`
-            --
-            ALTER TABLE `products`
-            ADD CONSTRAINT `category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
+        CREATE TABLE stores (
+            id varchar(100) NOT NULL,
+            address varchar(1000) NOT NULL,
+            status varchar(100) NOT NULL,
+            image_url varchar(4000) NOT NULL,
+            open_time varchar(100) NOT NULL,
+            phone varchar(100) NOT NULL,
+            created_at timestamp NOT NULL DEFAULT current_timestamp(),
+            updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+            PRIMARY KEY (id)
+          );
+          
+          CREATE TABLE users (
+            id varchar(100) NOT NULL,
+            firstname varchar(100) NOT NULL,
+            lastname varchar(100) NOT NULL,
+            email varchar(100) NOT NULL,
+            phone_number varchar(100) NOT NULL,
+            password varchar(100) NOT NULL,
+            image_url varchar(4000) DEFAULT NULL,
+            address varchar(100) NOT NULL,
+            ward_id varchar(100) DEFAULT NULL,
+            district_id varchar(100) DEFAULT NULL,
+            province_id varchar(100) DEFAULT NULL,
+            created_at timestamp NOT NULL DEFAULT current_timestamp(),
+            updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+            role varchar(100)   DEFAULT NULL,
+            PRIMARY KEY (id)
+          );
+          
+          CREATE TABLE categories (
+            id varchar(100) NOT NULL,
+            name varchar(100) NOT NULL,
+            created_at timestamp NOT NULL DEFAULT current_timestamp(),
+            updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+            PRIMARY KEY (id)
+          );
+          
+          CREATE TABLE products (
+            id varchar(100) NOT NULL,
+            category_id varchar(100) NOT NULL,
+            name varchar(100) NOT NULL,
+            image_url varchar(1000) NOT NULL,
+            price int NOT NULL,
+            description varchar(4000) NOT NULL,
+            is_deleted boolean default false,
+            created_at timestamp NOT NULL DEFAULT current_timestamp(),
+            updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+            PRIMARY KEY (id),
+            CONSTRAINT category_id FOREIGN KEY (category_id) REFERENCES categories (id)
+          );
+          
+          CREATE TABLE orders (
+            id varchar(100) NOT NULL,
+            user_id varchar(100) NOT NULL,
+            payment_method varchar(100) NOT NULL,
+            status varchar(100) NOT NULL,
+            created_at timestamp NOT NULL DEFAULT current_timestamp(),
+            updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+            delivery_name varchar(100)   DEFAULT NULL,
+            delivery_phone varchar(100)   DEFAULT NULL,
+            delivery_address varchar(100)   DEFAULT NULL,
+            display varchar(10),
+            PRIMARY KEY (id),
+            CONSTRAINT order_customer_fk FOREIGN KEY (user_id) REFERENCES users (id)
+          );
+          
+          CREATE TABLE order_detail (
+            id varchar(100) NOT NULL,
+            product_id varchar(100) NOT NULL,
+            order_id varchar(100) NOT NULL,
+            quantity int NOT NULL,
+            created_at timestamp NOT NULL DEFAULT current_timestamp(),
+            updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+            size varchar(100)  DEFAULT NULL,
+            note varchar(100)  DEFAULT NULL,
+            CONSTRAINT order_fk FOREIGN KEY (order_id) REFERENCES orders (id),
+            CONSTRAINT order_product_fk FOREIGN KEY (product_id) REFERENCES products (id)
+          );
+          
+          CREATE TABLE cart (
+            id varchar(100) NOT NULL,
+            user_id varchar(100) NOT NULL,
+            status varchar(100) NOT NULL,
+            created_at timestamp NOT NULL DEFAULT current_timestamp(),
+            updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+            PRIMARY KEY (id),
+            CONSTRAINT cart_customer_fk FOREIGN KEY (user_id) REFERENCES users (id)
+          );
+          
+          CREATE TABLE cart_detail (
+            order_detail_id varchar(100) NOT NULL,
+            product_id varchar(100) NOT NULL,
+            cart_id varchar(100) NOT NULL,
+            quantity int NOT NULL,
+            note varchar(100) DEFAULT NULL,
+            created_at timestamp NOT NULL DEFAULT current_timestamp(),
+            updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+            size varchar(100)  DEFAULT NULL,
+            CONSTRAINT cart_fk FOREIGN KEY (cart_id) REFERENCES cart (id),
+            CONSTRAINT product_fk FOREIGN KEY (product_id) REFERENCES products (id)
+          );
         ";
         $db->pdo->exec($sql);
     }

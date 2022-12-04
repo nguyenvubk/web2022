@@ -5,8 +5,8 @@ CREATE TABLE stores (
   image_url varchar(4000) NOT NULL,
   open_time varchar(100) NOT NULL,
   phone varchar(100) NOT NULL,
-  created_at timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE '7UTC'),
-  updated_at timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE '7UTC'),
+  created_at timestamp NOT NULL DEFAULT current_timestamp(),
+  updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (id)
 );
 
@@ -22,8 +22,8 @@ CREATE TABLE users (
   ward_id varchar(100) DEFAULT NULL,
   district_id varchar(100) DEFAULT NULL,
   province_id varchar(100) DEFAULT NULL,
-  created_at timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE '7UTC'),
-  updated_at timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE '7UTC'),
+  created_at timestamp NOT NULL DEFAULT current_timestamp(),
+  updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   role varchar(100)   DEFAULT NULL,
   PRIMARY KEY (id)
 );
@@ -31,8 +31,8 @@ CREATE TABLE users (
 CREATE TABLE categories (
   id varchar(100) NOT NULL,
   name varchar(100) NOT NULL,
-  created_at timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE '7UTC'),
-  updated_at timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE '7UTC'),
+  created_at timestamp NOT NULL DEFAULT current_timestamp(),
+  updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (id)
 );
 
@@ -43,8 +43,9 @@ CREATE TABLE products (
   image_url varchar(1000) NOT NULL,
   price int NOT NULL,
   description varchar(4000) NOT NULL,
-  created_at timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE '7UTC'),
-  updated_at timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE '7UTC'),
+  is_deleted boolean default false,
+  created_at timestamp NOT NULL DEFAULT current_timestamp(),
+  updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (id),
   CONSTRAINT category_id FOREIGN KEY (category_id) REFERENCES categories (id)
 );
@@ -54,8 +55,8 @@ CREATE TABLE orders (
   user_id varchar(100) NOT NULL,
   payment_method varchar(100) NOT NULL,
   status varchar(100) NOT NULL,
-  created_at timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE '7UTC'),
-  updated_at timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE '7UTC'),
+  created_at timestamp NOT NULL DEFAULT current_timestamp(),
+  updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   delivery_name varchar(100)   DEFAULT NULL,
   delivery_phone varchar(100)   DEFAULT NULL,
   delivery_address varchar(100)   DEFAULT NULL,
@@ -69,8 +70,8 @@ CREATE TABLE order_detail (
   product_id varchar(100) NOT NULL,
   order_id varchar(100) NOT NULL,
   quantity int NOT NULL,
-  created_at timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE '7UTC'),
-  updated_at timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE '7UTC'),
+  created_at timestamp NOT NULL DEFAULT current_timestamp(),
+  updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   size varchar(100)  DEFAULT NULL,
   note varchar(100)  DEFAULT NULL,
   CONSTRAINT order_fk FOREIGN KEY (order_id) REFERENCES orders (id),
@@ -81,8 +82,8 @@ CREATE TABLE cart (
   id varchar(100) NOT NULL,
   user_id varchar(100) NOT NULL,
   status varchar(100) NOT NULL,
-  created_at timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE '7UTC'),
-  updated_at timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE '7UTC'),
+  created_at timestamp NOT NULL DEFAULT current_timestamp(),
+  updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (id),
   CONSTRAINT cart_customer_fk FOREIGN KEY (user_id) REFERENCES users (id)
 );
@@ -93,8 +94,8 @@ CREATE TABLE cart_detail (
   cart_id varchar(100) NOT NULL,
   quantity int NOT NULL,
   note varchar(100) DEFAULT NULL,
-  created_at timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE '7UTC'),
-  updated_at timestamp without time zone NOT NULL DEFAULT (current_timestamp AT TIME ZONE '7UTC'),
+  created_at timestamp NOT NULL DEFAULT current_timestamp(),
+  updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   size varchar(100)  DEFAULT NULL,
   CONSTRAINT cart_fk FOREIGN KEY (cart_id) REFERENCES cart (id),
   CONSTRAINT product_fk FOREIGN KEY (product_id) REFERENCES products (id)

@@ -2,7 +2,7 @@
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'buyme');
 define('DB_USER', 'root');
-define('DB_PASSWORD', '955363');
+define('DB_PASSWORD', '');
 define('BASE_URL', "http" . ($_SERVER['HTTPS'] ? 's' : '') . "://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}");
 
 $path = str_replace("\\", "/", "http://" . $_SERVER['SERVER_NAME'] . __DIR__ . "/");
