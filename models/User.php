@@ -107,7 +107,7 @@ class User extends UserModel
     {
         $list = [];
         $db = Database::getInstance();
-        $req = $db->query("SELECT * FROM users WHERE role = 'client'");
+        $req = $db->query("SELECT * FROM users WHERE role = 'client' and is_deleted = false");
 
         foreach ($req->fetchAll() as $item) {
             $userModel = new User;
@@ -172,19 +172,14 @@ class User extends UserModel
 
     public function delete()
     {
-        // $tablename = $this->tableName();
-        // $sql = "DELETE FROM $tablename WHERE id=?";
-        // $stmt= self::prepare($sql);
-        // $stmt->execute([$this->id]);
-        // new method
-        // $statement = self::prepare(
-        //     "UPDATE users 
-        //     SET 
-        //         is_deleted = '1'
-        //     WHERE id = '$this->id';
-        //     "
-        // );
-        // $statement->execute();
+        $statement = self::prepare(
+            "UPDATE users 
+            SET 
+                is_deleted = '1'
+            WHERE id = '$this->id';
+            "
+        );
+        $statement->execute();
         return true;     
     }   
 }
