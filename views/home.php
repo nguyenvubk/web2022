@@ -6,7 +6,7 @@
 </div> -->
 
 <div class="home-page">
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-touch="true" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
                 aria-current="true" aria-label="Slide 1"></button>
@@ -17,15 +17,16 @@
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="2000">
-                <img src="/images/slider/slider-1.jpg" class="d-block w-100" alt="...">
+                <img src="https://minio.thecoffeehouse.com/image/admin/baner-home-web_510005.jpg" alt="...">
             </div>
             <div class="carousel-item" data-bs-interval="2000">
-                <img src="/images/slider/slider-2.jpg" class="d-block w-100" alt="...">
+                <img src="https://ipos.vn/wp-content/uploads/2022/02/the-cfhouse.jpg" alt="...">
             </div>
             <div class="carousel-item" data-bs-interval="2000">
-                <img src="/images/slider/slider-3.jpg" class="d-block w-100" alt="...">
+                <img src="http://file.hstatic.net/1000075078/article/kv_2_banner_blog_0afa0107f39943b5bdbba46b6187a4e5_d0ffa3b2677c4d119ecdd26a9dd84da0.jpg" alt="...">
             </div>
         </div>
+
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
             data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -40,107 +41,115 @@
 
     <div class="container">
         <div class="home-block">
-            <div class="row gy-5">
-                <div class="col-md-12 col-lg-6">
-                    <div>
-                        <img src="/images/home/home-1.png" />
+            <div class="row menu-list-home">
+                <div class="col-lg-6 col-12">
+                    <img src="https://file.hstatic.net/1000075078/file/banner_app_59792ee4e6074b33aca7f140433e9292.jpg" alt="" class="w-100">
+                </div>
+                <div class="col-lg-3 col-6">
+                    <img src="https://product.hstatic.net/1000075078/product/1669736910_cloudfee-hanh-nhan-nuong_b583e36e46a140db934c5a27326d0f36_large.png" alt="" class="w-100">
+                    <div class="menu-item-info">
+                        <h3>
+                            <a href="#">CloudFee Hạnh Nhân Nướng</a>
+                        </h3>
+                        <p class="price-product-item">49.000 đ</p>
                     </div>
-                    <h3>Tinh thần tối giản</h3>
-                    <p>
-                        Buy me store được thiết kế với phong cách chủ đạo mang tinh thần tối giản, thể hiện qua
-                        cách
-                        phân
-                        chia không gian tinh tế với sự tinh giản cả trong đường nét, cách bày trí lẫn nguyên vật
-                        liệu.<br><br>
-
-                        Sự gần gũi, sang trọng và tinh tế của Buy me store được thể hiện với nhiều yếu tố. Việc sử dụng
-                        vật
-                        liệu
-                        chủ đạo là đá rửa cho tường, đá mài cho sàn nhà và sự kết hợp có tính toán tạo nên một thể thống
-                        nhất cho không gian. Bên cạnh đó, ánh sáng tự nhiên và cây xanh cũng được tận dụng góp phần tạo
-                        nên
-                        một không gian nghệ thuật kiến trúc.<br><br>
-
-                        Phong cách tối giản ngày càng thân thuộc hơn với cuộc sống năng động của người Việt Nam hiện
-                        nay.
-                        Chúng được sử dụng nhiều trong các thiết kế thời trang, kiến trúc và nay là một không gian
-                        thưởng
-                        thức cà phê.<br><br>
-                    </p>
                 </div>
-                <div class="col-md-12 col-lg-6 home-poster">
-                    <img class="home-image" src="/images/poster/poster-1.jpg" />
-                    <img class="home-image" src="/images/poster/poster-2.jpg" />
+                <div class="col-lg-3 col-6">
+                    <img src="https://product.hstatic.net/1000075078/product/1669736910_cloudfee-hanh-nhan-nuong_b583e36e46a140db934c5a27326d0f36_large.png" alt="" class="w-100">
+                    <div class="menu-item-info">
+                        <h3>
+                            <a href="#">CloudFee Hạnh Nhân Nướng</a>
+                        </h3>
+                        <p class="price-product-item">49.000 đ</p>
+                    </div>
                 </div>
+                <div class="col-lg-3 col-6">
+                    <img src="https://product.hstatic.net/1000075078/product/1669736910_cloudfee-hanh-nhan-nuong_b583e36e46a140db934c5a27326d0f36_large.png" alt="" class="w-100">
+                    <div class="menu-item-info">
+                        <h3>
+                            <a href="#">CloudFee Hạnh Nhân Nướng</a>
+                        </h3>
+                        <p class="price-product-item">49.000 đ</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <img src="https://product.hstatic.net/1000075078/product/1669736910_cloudfee-hanh-nhan-nuong_b583e36e46a140db934c5a27326d0f36_large.png" alt="" class="w-100">
+                    <div class="menu-item-info">
+                        <h3>
+                            <a href="#">CloudFee Hạnh Nhân Nướng</a>
+                        </h3>
+                        <p class="price-product-item">49.000 đ</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <img src="https://product.hstatic.net/1000075078/product/1669736910_cloudfee-hanh-nhan-nuong_b583e36e46a140db934c5a27326d0f36_large.png" alt="" class="w-100">
+                    <div class="menu-item-info">
+                        <h3>
+                            <a href="#">CloudFee Hạnh Nhân Nướng</a>
+                        </h3>
+                        <p class="price-product-item">49.000 đ</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <img src="https://product.hstatic.net/1000075078/product/1669736910_cloudfee-hanh-nhan-nuong_b583e36e46a140db934c5a27326d0f36_large.png" alt="" class="w-100">
+                    <div class="menu-item-info">
+                        <h3>
+                            <a href="#">CloudFee Hạnh Nhân Nướng</a>
+                        </h3>
+                        <p class="price-product-item">49.000 đ</p>
+                    </div>
+                </div>
+
             </div>
+        </div>
+        <div class="home-block d-flex justify-content-center">
+            <p class="introduce">-- Giới thiệu --</p>
         </div>
         <div class="home-block">
             <div class="row gy-5">
                 <div class="col-md-12 col-lg-6 home-poster">
-                    <img class="home-image" src="/images/poster/poster-4.png" />
-                    <img class="home-image" src="/images/poster/poster-3.png" />
+                    <img src="https://magiamgialientuc.com/wp-content/uploads/2018/08/T%C3%A1n-g%E1%BA%ABu-c%C3%B9ng-b%E1%BA%A1n-b%C3%A8-ho%E1%BA%B7c-th%C6%B0-gi%C3%A3n-t%E1%BA%A1i-The-Coffee-House.jpg" alt="" class="home-img w-100">
                 </div>
-                <div class="col-md-12 col-lg-6">
+                <div class="col-md-12 col-lg-6 home-content">
                     <div>
-                        <img src="/images/home/home-2.png" />
+                        <img src="/images/home/bullet-1.png"/>
                     </div>
-                    <h3>Nguyên liệu nhập khẩu cao cấp</h3>
+                    <h3>Không chỉ là uống cà phê</h3>
                     <p>
-                        Buy me store được thiết kế với phong cách chủ đạo mang tinh thần tối giản, thể hiện qua
-                        cách
-                        phân
-                        chia không gian tinh tế với sự tinh giản cả trong đường nét, cách bày trí lẫn nguyên vật
-                        liệu.<br><br>
+                    Việc đi uống cà phê từ lâu không chỉ là ngồi uống một tách cà phê mà còn là dịp gặp mặt và trò chuyện 
+                    cùng bạn bè để cùng nhau thư giãn và chia sẻ những điều trong cuộc sống. Đến với <strong>My Coffee</strong>, 
+                    chúng tôi trân trọng và đề cao giá trị kết nối giữa con người và trải nghiệm của khách hàng. Chúng 
+                    tôi được truyền cảm hứng từ những ly cà phê và thức uống do mình tạo ra.
+                    <br><br>
 
-                        Sự gần gũi, sang trọng và tinh tế của Buy me store được thể hiện với nhiều yếu tố. Việc sử dụng
-                        vật
-                        liệu
-                        chủ đạo là đá rửa cho tường, đá mài cho sàn nhà và sự kết hợp có tính toán tạo nên một thể thống
-                        nhất cho không gian. Bên cạnh đó, ánh sáng tự nhiên và cây xanh cũng được tận dụng góp phần tạo
-                        nên
-                        một không gian nghệ thuật kiến trúc.<br><br>
-
-                        Phong cách tối giản ngày càng thân thuộc hơn với cuộc sống năng động của người Việt Nam hiện
-                        nay.
-                        Chúng được sử dụng nhiều trong các thiết kế thời trang, kiến trúc và nay là một không gian
-                        thưởng
-                        thức cà phê.<br><br>
+                    Chúng tôi tin tưởng mạnh mẽ rằng những thức uống đảm bảo nhất về chất lượng cùng thái độ phục vụ tận 
+                    tình chu đáo và không gian yên tĩnh tại <strong>My Coffee</strong> sẽ mang lại những niềm vui cho bạn và bạn có 
+                    thể chia sẻ cùng bạn bè và gia đình.
                     </p>
                 </div>
+                
             </div>
         </div>
         <div class="home-block">
-            <div class="row  gy-5">
-                <div class="col-md-12 col-lg-6">
+            <div class="row gy-5">
+                
+                <div class="col-md-12 col-lg-6 home-content">
                     <div>
-                        <img src="/images/home/home-3.png" />
+                        <img src="/images/home/bullet-2.png"/>
                     </div>
-                    <h3>Sản phẩm chính hãng </h3>
+                    <h3>My Coffee</h3>
                     <p>
-                        Bộ sưu tập sản phẩm của Buy me store xoay quanh các dòng sản phẩm gia dụng, được nhập khẩu chính
-                        hãng từ những thương hiệu danh tiếng của Nhật Bản, Vương Quốc Anh và New Zealand…<br><br>
-
-                        Thương hiệu KINTO (Nhật Bản) với các sản phẩm gia dụng được tạo nên từ nguyên liệu cao cấp dưới
-                        bàn tay của các thợ thủ công Nhật Bản cho ra những bình giữ nhiệt, bình nước, ly và dĩa
-                        sứ.<br><br>
-
-                        Thương hiệu MINOR FIGURES (Vương Quốc Anh) - Thức uống vị yến mạch (Oat milk)
-                        Buy me store còn tạo nên sự khác biệt bằng việc nhập khẩu và phân phối chính hãng dòng sản phẩm
-                        thức
-                        uống vị yến mạch (Oat Milk) của thương hiệu Minor Figures (Vương Quốc Anh) phù hợp với người ăn
-                        chay và đưa hương vị cà phê lên một một tầm cao mới.<br><br>
-
-                        Thương hiệu J.Friends & Co. (New Zealand) – Mật ong Manuka
-                        Một trong những sản phẩm mới rất được ưu chuộng của Buy me store là mật ong Manuka của thương
-                        hiệu
-                        J.Friends & Co. (New Zealand). Mật ong Manuka là loại mật ong thượng hạng được sản xuất đặc biệt
-                        ở Úc và New Zealand có độ kháng khuẩn (MGO) cao, có rất nhiều lợi ích cho sức khỏe như giảm đau
-                        họng, làm lành vết thương.<br><br>
+                    Bắt đầu ra mắt vào năm 2022 nhưng với cái tên <strong>My Coffee</strong> và sự phát triển của thương 
+                    hiệu là điều mà nhiều Startup đáng mơ ước, đặc biệt trong ngành F&B. Ngôi nhà cà phê cho biết 
+                    sẽ trở thành Starbucks thứ 2 ở Việt Nam, khi nhắc tới <strong>My Coffee</strong> là nhắc tới một thương 
+                    hiệu cà phê Việt.
+                    <br><br>
+                    Có 3 yếu tố tiên quyết để quán cà phê này thu hút khách hàng là không gian của quán, thái độ phục 
+                    vụ của nhân viên và những tiện ích mà chuỗi cửa hàng cà phê này mang lại cho khách hàng.
                     </p>
                 </div>
                 <div class="col-md-12 col-lg-6 home-poster">
-                    <img class="home-image" src="/images/poster/poster-5.png" />
-                    <img class="home-image" src="/images/poster/poster-6.png" />
+                    <img src="https://magiamgialientuc.com/wp-content/uploads/2018/08/%C4%90%E1%BB%99i-ng%C5%A9-nh%C3%A2n-vi%C3%AAn-t%E1%BA%A1i-The-coffee-house-1.jpg" alt="" class="w-100">
                 </div>
             </div>
         </div>

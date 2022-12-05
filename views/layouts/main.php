@@ -30,7 +30,7 @@ header("Content-type: text/html; charset=utf-8");
     <link rel="stylesheet" href="/css/profile.css">
     <link rel="stylesheet" href="/css/order.css">
 
-    <title>Buy me store</title>
+    <title>My Coffee</title>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>
@@ -56,7 +56,8 @@ header("Content-type: text/html; charset=utf-8");
 
         <nav class="navbar navbar-expand-lg ">
             <a class="navbar-brand" href="/">
-                <img class="logo" alt="logo" src='/images/logo/logo-2.png'>
+                <img class="logo" alt="logo" src='/images/logo/logo-1.png'>
+                My Coffee
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,11 +66,30 @@ header("Content-type: text/html; charset=utf-8");
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <!-- <li class="nav-item active">
                         <a class="nav-link" href="/">Trang chủ <span class="sr-only">(current)</span></a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/menu">Thực đơn</a>
+                        <a class="nav-link" id="menu" href="/menu">Thực đơn</a>
+                        <div class="menu-hide">
+                            <div class="row justify-content-around">
+                                <div class="col d-flex justify-content-center">
+                                    <a href="/menu?category_id=1">Cà phê</a>
+                                </div>
+                                <div class="col d-flex justify-content-center">
+                                    <a href="/menu?category_id=5">Trà trái cây - Trà sữa</a>
+                                </div>
+                                <div class="col d-flex justify-content-center">
+                                    <a href="/menu?category_id=2">Đá xay</a>
+                                </div>
+                                <div class="col d-flex justify-content-center">
+                                    <a href="/menu?category_id=18">Thưởng thức tại nhà</a>
+                                </div>
+                                <div class="col d-flex justify-content-center">
+                                    <a href="/menu?category_id=20">Tumbler collection</a>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/stores">Cửa hàng</a>
@@ -89,46 +109,48 @@ header("Content-type: text/html; charset=utf-8");
                 use app\core\Application;
 
                 if (Application::isGuest() == 1) : ?>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
+                <ul class="navbar-nav ml-auto account">
+                    <li class="nav-item active me-1">
                         <a class="login__button nav-link" href="/login">Đăng nhập</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item active ms-1">
                         <a class="nav-link" href="/register">Đăng ký</a>
                     </li>
                 </ul>
                 <?php else : ?>
                 <ul class="navbar-nav ml-auto">
-
                     <li class="nav-item active">
-                        <a class="nav-link" href="/profile">
+                        <a class="nav-link" href="/profile" title="Tài khoản">
                             <div class="header-image header-image-user">
                                 <img class="header-image-icon" src="/images/user.png" />
                             </div>
                             Chào <?php echo Application::$app->user->getDisplayName() ?>
                         </a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/cart">
-                            <div class="header-image">
-                                <img class="header-image-icon" src="/images/cart.png" />
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/orders">
-                            <div class="header-image">
-                                <img class="header-image-icon" src="/images/orders.png" />
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/logout">
-                            <div class="header-image">
-                                <img class="header-image-icon" src="/images/logout.png" />
-                            </div>
-                        </a>
-                    </li>
+                    <ul class="navbar-nav ml-auto account">
+                        <li class="nav-item active me-1">
+                            <a class="nav-link" href="/cart" title="Giỏ hàng">
+                                <div class="header-image">
+                                    <img class="header-image-icon" src="/images/cart.png" />
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item active mx-1">
+                            <a class="nav-link" href="/orders" title="Đơn hàng">
+                                <div class="header-image">
+                                    <img class="header-image-icon" src="/images/orders.png" />
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item active ms-1">
+                            <a class="nav-link" href="/logout" title="Đăng xuất">
+                                <div class="header-image">
+                                    <img class="header-image-icon" src="/images/logout.png" />
+                                </div>
+                            </a>
+                        </li> 
+                    </ul>
+
                 </ul>
                 <?php endif; ?>
             </div>
@@ -150,9 +172,45 @@ header("Content-type: text/html; charset=utf-8");
         </div>
     </div>
     <div class="footer">
-        <div class="footer__inner">
+        <!-- <div class="footer__inner">
             <h6>Copyright @ 2021 Buy me store. All rights reversed.</h6>
+        </div> -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 footer-col">
+                    <h3 class="footer-title">Giới thiệu</h3>
+                    <ul class="footer-linklists">
+                        <li>Về chúng tôi</li>
+                        <li>Sản phẩm</li>
+                        <li>Tin tức</li>
+                        <li>Liên hệ</li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 footer-col">
+                <h3 class="footer-title">Điều khoản</h3>
+                    <ul class="footer-linklists">
+                        <li>Điều khoản sử dụng</li>
+                        <li>Chính sách bảo mật thông tin</li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 footer-col">
+                    <div class="hotline-footer">
+                        <p >
+                            <img src="https://file.hstatic.net/1000075078/file/phone_0a42df1c753c4fa0910108daa73fe2ef.png"" alt="">
+                            Đặt hàng: 0123 4567
+                        </p>
+                        <p>
+                            <img src="https://file.hstatic.net/1000075078/file/map-pin-2-line_575ccb91b6f94a308d1bd507d4ae72a7.png" alt="">
+                            Liên hệ
+                        </p>
+                    </div>
+                    <div class="address-footer">
+                        Đường 621, Khu đô thị Đại học Quốc gia TP. HCM, Dĩ an, Bình Dương
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
 
     <!-- Optional JavaScript -->
