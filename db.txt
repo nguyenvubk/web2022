@@ -280,6 +280,7 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `role` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `is_deleted` boolean default false,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -290,7 +291,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('6191e42fe4e3f','Nguyễn Xuân','Vũ','admin@gmail.com','0984699491','$2y$10$wFVXGlQ3qFngyLrwYG7JkOCm/dkS2DnVOIydExoUZyObb5AWt4jIC','','HCM City','','','','2021-11-14 21:38:07','2021-12-01 00:12:24','admin'),('61a7015fdba2e','Nguyễn Trần','Tuấn','tuannguyen@gmail.com','0924955363','$2y$10$zbNG4cJd7q4LhCNFv5RQbukDkeRYfs4MTO692Bxr6jUevnu/92ofa',NULL,'Hồ Chí Minh City',NULL,NULL,NULL,'2021-12-01 05:00:15','2021-12-01 05:00:15','client'),('62a998d97a755','Võ Quý','Long','admin+3@gmail.com','0924955362','$2y$10$4q1RjkoRFw0S6jMN1ce3Iei2IiTllzH3t2jDs9KUdVfIupUqTXFi2',NULL,'KTX KHU A DHQG TP HCM',NULL,NULL,NULL,'2022-06-15 08:31:21','2022-06-15 08:40:27','client');
+INSERT INTO `users` (`id`,`firstname` ,`lastname` ,`email` ,`phone_number`,`password` ,`image_url` ,`address` ,`ward_id` ,`district_id`,`province_id` ,`created_at` ,`updated_at` ,`role`) VALUES ('6191e42fe4e3f','Nguyễn Xuân','Vũ','admin@gmail.com','0984699491','$2y$10$wFVXGlQ3qFngyLrwYG7JkOCm/dkS2DnVOIydExoUZyObb5AWt4jIC','','HCM City','','','','2021-11-14 21:38:07','2021-12-01 00:12:24','admin'),('61a7015fdba2e','Nguyễn Trần','Tuấn','tuannguyen@gmail.com','0924955363','$2y$10$zbNG4cJd7q4LhCNFv5RQbukDkeRYfs4MTO692Bxr6jUevnu/92ofa',NULL,'Hồ Chí Minh City',NULL,NULL,NULL,'2021-12-01 05:00:15','2021-12-01 05:00:15','client'),('62a998d97a755','Võ Quý','Long','admin+3@gmail.com','0924955362','$2y$10$4q1RjkoRFw0S6jMN1ce3Iei2IiTllzH3t2jDs9KUdVfIupUqTXFi2',NULL,'KTX KHU A DHQG TP HCM',NULL,NULL,NULL,'2022-06-15 08:31:21','2022-06-15 08:40:27','client');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
