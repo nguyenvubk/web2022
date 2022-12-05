@@ -147,7 +147,7 @@ class Order extends DBModel
                 $unitPrice += 6000;
             }
             $totalPrice += $unitPrice * $item['quantity'];
-            $totalPayment += $item['quantity'];
+            $totalPayment += $unitPrice * $item['quantity'];
         }    
         array_push($list, $totalPrice, $totalPayment);
         return $list;
