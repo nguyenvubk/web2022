@@ -87,6 +87,7 @@ DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `image_url` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -99,7 +100,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES ('1','Cà phê','2021-10-29 19:31:28','2021-10-29 19:31:28'),('18','Thưởng thức tại nhà','2021-10-29 19:31:28','2021-10-29 19:31:28'),('2','Đá Xay - Choco - Matcha','2021-10-29 19:31:28','2021-10-29 19:31:28'),('20','Bộ sưu tập quà tặng','2021-10-29 19:31:28','2021-10-29 19:31:28'),('5','Trà Trái Cây - Trà Sữa','2021-10-29 19:31:28','2021-10-29 19:31:28');
+INSERT INTO `categories` (id, name,created_at,updated_at) VALUES ('1','Cà phê','2021-10-29 19:31:28','2021-10-29 19:31:28'),('18','Thưởng thức tại nhà','2021-10-29 19:31:28','2021-10-29 19:31:28'),('2','Đá Xay - Choco - Matcha','2021-10-29 19:31:28','2021-10-29 19:31:28'),('20','Bộ sưu tập quà tặng','2021-10-29 19:31:28','2021-10-29 19:31:28'),('5','Trà Trái Cây - Trà Sữa','2021-10-29 19:31:28','2021-10-29 19:31:28');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
