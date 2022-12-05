@@ -39,6 +39,12 @@ class LoginForm extends Model
                 $this->addError('password', self::RULE_WRONG_PASSWORD);
                 return false;
             }
+        }else {
+            $user = User::findOne(['id' => $this->userId]);
+            if (!$user) {
+                $this->addError('id', self::RULE_INVALID_ID);
+                return false;
+            }
         }
 
         return Application::$app->login($user);
