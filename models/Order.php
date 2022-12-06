@@ -206,7 +206,7 @@ class Order extends DBModel
         $req = $db->query(
             "SELECT *
             FROM cart_detail JOIN products ON cart_detail.product_id = products.id 
-            WHERE cart_detail.cart_id = '$order_id';"
+            WHERE cart_detail.cart_id = '$order_id' ORDER BY created_at;"
         );
 
         foreach ($req->fetchAll() as $item) {

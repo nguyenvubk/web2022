@@ -41,7 +41,7 @@
     margin-top: 50px;
     max-width: 800px;
     width: 100%;
-    overflow: hidden;
+    overflow: auto;
     overflow-x: scroll;
     display: flex;
     flex-direction: row;
@@ -128,10 +128,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(to bottom, #f6d365 0%, #fda085 100%);
+    background-image: linear-gradient(to bottom, #f8ffff 0%, #FFF2D9 100%);
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     padding-right: 10px;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
 }
 
 .menu__search {
@@ -157,9 +158,8 @@
 
 .menu__listing {
     width: 100%;
-    overflow: hidden;
-    max-height: 400px;
-    overflow-y: scroll;
+    overflow: auto;
+    max-height: 380px;
 }
 
 .menu__listing .container {
@@ -266,4 +266,9 @@ h1 {
     div.cart-page__content.col-xl-4.col-md-5 {
         display: none;
     }
+}
+
+#floatingInput::placeholder{
+    overflow: hidden;
+    text-overflow: ellipsis; 
 }

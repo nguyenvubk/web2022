@@ -12,7 +12,7 @@
             <p style="text-align:center">
                 <span style="font-size:22px">
                     <span style="color:#616161">
-                        <strong>Buy me store</strong>
+                        <strong>My Coffee</strong>
                     </span>
                 </span>
             </p>
@@ -34,10 +34,10 @@
                 <br>
             </p>
             <p style="text-align:center">
-                <strong>Điện thoại: </strong>+84949 494 494
+                <strong>Điện thoại: </strong>0123 4567
             </p>
             <p style="text-align:center">
-                <strong>Email: </strong> hi@Buy mestore.vn
+                <strong>Email: </strong> hi@mycoffee.vn
             </p>
             <br><br><br><br>
         </div>

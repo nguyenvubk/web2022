@@ -57,6 +57,9 @@ $app->router->post('/update', [CartController::class, 'update']);
 $app->router->get('/orders', [OrdersController::class, 'orders']);
 $app->router->get('/error', [SiteController::class, 'error']);
 $app->router->get('/order', [OrderDetailController::class, 'orderDetail']);
+$app->router->get('/news', [SiteController::class, 'news']);
+
+
 
 // admin general
 $app->router->get('/admin', [AdminController::class, 'index']);

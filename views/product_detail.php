@@ -121,8 +121,8 @@ if (Application::isGuest()) {
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
-                <img src="/images/logo/logo-2.png" width="30px" class="rounded me-2" alt="logo-2">
-                <strong class="me-auto">Buy me store</strong>
+                <img src="/images/logo/logo-1.png" width="30px" class="rounded me-2" alt="logo-2">
+                <strong class="me-auto">My Coffee</strong>
                 <small>Bây giờ</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
@@ -142,6 +142,8 @@ if (Application::isGuest()) {
             var toastLiveExample = document.getElementById('liveToast')
             var toast = new bootstrap.Toast(toastLiveExample)
             toast.show()";
+        Application::$app->response->redirect('/menu');
+        
     }
     ?>
 </script>

@@ -7,18 +7,23 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Bảng điều khiển</title>
 
+    <link rel="shortcut icon" href="/images/admin.png" type="image/x-icon">
+
     <link rel="stylesheet" href="/css/admin/dataTables.bootstrap.css">
     <link rel="stylesheet" href="/css/admin/dt-sidebar.css">
     <link rel="stylesheet" href="/css/admin/dt-gradients.css">
     <link rel="stylesheet" href="/css/admin/dt-theme.css">
     <link rel="stylesheet" href="/css/admin/dt-styles.css">
-    <link rel="stylesheet" href="/css/error.css">
+    <!-- <link rel="stylesheet" href="/css/error.css"> -->
     <link rel="stylesheet" href="/css/admin/profile.css">
     <link rel="stylesheet" href="/css/admin/dashboard.css">
-    <link rel="stylesheet" href="/css/admin/create_user.css">
+    <!-- <link rel="stylesheet" href="/css/admin/create_user.css"> -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/js/admin/jquery-3.2.1.js"></script>
     <script src="/js/admin/bootstrap.min.js"></script>
     <script src="/js/admin/jquery.dataTables.js"></script>
@@ -42,7 +47,7 @@ $userModel = User::getUserInfo($userID);
 ?>
 <body>
   <div id="wrapper" class="toggled">
-    <div id="sidebar-wrapper" class="harmonic">
+    <div id="sidebar-wrapper" class="custom-background">
       <ul class="sidebar-nav">
         <li class="sidebar-brand">
           <a>
@@ -104,7 +109,7 @@ $userModel = User::getUserInfo($userID);
             <a class="navbar-brand" href="#menu-toggle" id="menu-toggle">
               <i class="fa fa-arrow-left" aria-hidden="true"></i>
             </a>
-            <a class="navbar-brand" href="/">Back to Buy me store</a>
+            <a class="navbar-brand" href="/">Back to My Coffee</a>
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
@@ -125,7 +130,6 @@ $userModel = User::getUserInfo($userID);
 
   <script src="/js/admin/simple-sidebar.js"></script>
   <script src="/js/admin/plugins.js"></script>
-
 </body>
 
 </html>
