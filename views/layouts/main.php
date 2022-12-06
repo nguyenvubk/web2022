@@ -18,6 +18,7 @@ header("Content-type: text/html; charset=utf-8");
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+    <link rel="shortcut icon" href="/images/logo/logo-1.png" type="image/x-icon">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/menu.css">
@@ -29,6 +30,7 @@ header("Content-type: text/html; charset=utf-8");
     <link rel="stylesheet" href="/css/stores.css">
     <link rel="stylesheet" href="/css/profile.css">
     <link rel="stylesheet" href="/css/order.css">
+    <link rel="stylesheet" href="/css/news.css">
 
     <title>My Coffee</title>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -49,6 +51,7 @@ header("Content-type: text/html; charset=utf-8");
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 </head>
 
 <body>
@@ -72,7 +75,7 @@ header("Content-type: text/html; charset=utf-8");
                     <li class="nav-item">
                         <a class="nav-link" id="menu" href="/menu">Thực đơn</a>
                         <div class="menu-hide">
-                            <div class="row justify-content-around">
+                            <div class="row justify-content-around align-items-center">
                                 <div class="col d-flex justify-content-center">
                                     <a href="/menu?category_id=1">Cà phê</a>
                                 </div>
@@ -95,10 +98,10 @@ header("Content-type: text/html; charset=utf-8");
                         <a class="nav-link" href="/stores">Cửa hàng</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/about">Về Buy me</a>
+                        <a class="nav-link" href="/about">Về chúng tôi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/contact">Tin tức</a>
+                        <a class="nav-link" href="/news">Tin tức</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/contact">Liên hệ</a>
@@ -197,7 +200,7 @@ header("Content-type: text/html; charset=utf-8");
                     <div class="hotline-footer">
                         <p >
                             <img src="https://file.hstatic.net/1000075078/file/phone_0a42df1c753c4fa0910108daa73fe2ef.png"" alt="">
-                            Đặt hàng: 0123 4567
+                            Đặt hàng: <span class="phone">0123 4567</span> 
                         </p>
                         <p>
                             <img src="https://file.hstatic.net/1000075078/file/map-pin-2-line_575ccb91b6f94a308d1bd507d4ae72a7.png" alt="">

@@ -8,6 +8,7 @@
   font-size: 16px;
   position: fixed;
   z-index: 100;
+  border-bottom: 1px solid #00000026;
 }
 
 .navbar {
@@ -15,6 +16,7 @@
   max-width: 1230px;
   height: 80px;
   width: 100%;
+  
 }
 
 .nav-link {
@@ -189,6 +191,7 @@
   padding: 10px 0;
   border-radius: 0 0 10px 10px;
   background-color: rgba(255, 255, 255, 0.9);
+  border-bottom: 1px solid #00000026;
   display: none !important;  
 }
 
@@ -237,5 +240,9 @@
 
 .address-footer {
   color: rgb(255, 255, 255);
+  font-size: 14px;
+}
+
+.hotline-footer .phone {
   font-size: 14px;
 }

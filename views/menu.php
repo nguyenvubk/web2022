@@ -18,8 +18,8 @@ use app\models\CartItem;
         <div class="menu__search">
             <?php $form = app\core\Form\Form::begin('', "post") ?>
                 <div class="form-floating mb-3">
-                    <input type="keyword" name="keyword" class="form-control" id="floatingInput" placeholder="Tìm kiếm theo tên sản phẩm bạn quan tâm">
-                    <label for="floatingInput">Tìm kiếm theo tên sản phẩm bạn quan tâm</label>
+                    <input type="keyword" name="keyword" class="form-control" id="floatingInput" placeholder="Tìm kiếm">
+                    <label for="floatingInput">Tìm kiếm</label>
                     <div class="col-md-3 col-lg-2">
                             <button class="btn btn-outline-secondary search-button" type="submit"
                                 id="button-addon1">Tìm</button>
@@ -92,7 +92,7 @@ use app\models\CartItem;
                                     <div class="item-info">
                                         <p class="item-name">' . $param->name . '</p>
                                         <div class="item-footer">
-                                            <p>' . $param->price . '</p>
+                                            <p>' . number_format($param->price). 'đ' . '</p>
                                             <div class="item-button">
                                                 <img class="item-button-image"
                                                     src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTYuODU3MTQgNi44NTcxNFYwSDkuMTQyODZWNi44NTcxNEgxNlY5LjE0Mjg2SDkuMTQyODZWMTZINi44NTcxNFY5LjE0Mjg2SDBWNi44NTcxNEg2Ljg1NzE0WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="

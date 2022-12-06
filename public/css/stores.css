@@ -1,5 +1,5 @@
 .menu_sp {
-    margin: 20px 0;
+    margin: 30px 0;
 }
 .menu {
     display: flex;
@@ -34,11 +34,10 @@
 
 
 .menu__options {
-    margin-top: 50px;
+    margin-top: 30px;
     max-width: 800px;
     width: 100%;
-    overflow: hidden;
-    overflow-x: scroll;
+    overflow-x: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -72,7 +71,7 @@
 
 .menu__listing {
     width: 100%;
-    margin-bottom: 50px;
+    margin: 10px;
 }
 
 .item-card {
@@ -124,7 +123,7 @@
 }
 
 .wrapper_product {
-    padding: 0 15px;
+    padding: 0 10px;
 }
 
 .item-butotn-image {

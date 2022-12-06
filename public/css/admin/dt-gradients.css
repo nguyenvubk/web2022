@@ -36,3 +36,7 @@
     background: -o-linear-gradient(#314755, #26a0da);
     background: linear-gradient(#314755, #26a0da); 
 }
+
+.custom-background {
+    background-color: #343A40;
+}
