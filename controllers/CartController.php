@@ -59,6 +59,7 @@ class CartController extends Controller
         $id = Application::$app->request->getParam('order_detail_id');
         $newNote = Application::$app->request->getBody()['note'];
         $newQuantity = Application::$app->request->getBody()['quantity'];
+
         $cartDetailModel = CartDetail::getCartDetail($id);
         $cartDetailModel->note = $newNote;
         $cartDetailModel->quantity = $newQuantity;
