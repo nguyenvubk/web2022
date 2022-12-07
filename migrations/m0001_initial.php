@@ -15,6 +15,7 @@ class m0001_initial
             image_url varchar(4000) NOT NULL,
             open_time varchar(100) NOT NULL,
             phone varchar(100) NOT NULL,
+            is_deleted BOOLEAN DEFAULT FALSE,
             created_at timestamp NOT NULL DEFAULT current_timestamp(),
             updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
             PRIMARY KEY (id)
@@ -35,12 +36,14 @@ class m0001_initial
             created_at timestamp NOT NULL DEFAULT current_timestamp(),
             updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
             role varchar(100)   DEFAULT NULL,
+            is_deleted BOOLEAN DEFAULT FALSE,
             PRIMARY KEY (id)
           );
           
           CREATE TABLE categories (
             id varchar(100) NOT NULL,
             name varchar(100) NOT NULL,
+            is_deleted BOOLEAN DEFAULT FALSE,
             created_at timestamp NOT NULL DEFAULT current_timestamp(),
             updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
             PRIMARY KEY (id)
