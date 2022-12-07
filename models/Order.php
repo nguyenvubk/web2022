@@ -28,7 +28,7 @@ class Order extends DBModel
         $delivery_phone,
         $delivery_address,
         //$display = '',
-        $created_at = '',
+        $created_at = ''
     ) {
         $this->id = $id;
         $this->user_id = $user_id;
@@ -147,7 +147,7 @@ class Order extends DBModel
                 $unitPrice += 6000;
             }
             $totalPrice += $unitPrice * $item['quantity'];
-            $totalPayment += $unitPrice * $item['quantity'];
+            $totalPayment += $item['quantity'];
         }    
         array_push($list, $totalPrice, $totalPayment);
         return $list;
@@ -206,7 +206,7 @@ class Order extends DBModel
         $req = $db->query(
             "SELECT *
             FROM cart_detail JOIN products ON cart_detail.product_id = products.id 
-            WHERE cart_detail.cart_id = '$order_id' ORDER BY created_at;"
+            WHERE cart_detail.cart_id = '$order_id';"
         );
 
         foreach ($req->fetchAll() as $item) {

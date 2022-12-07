@@ -40,6 +40,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+INSERT INTO `cart` VALUES ('61a63c320c493','6191e42fe4e3f','done','2021-11-30 14:58:58','2021-11-30 15:27:55'),('61a642fd3dc78','6191e42fe4e3f','done','2021-11-30 15:27:57','2021-11-30 16:44:31'),('61a654f1f1bf8','6191e42fe4e3f','done','2021-11-30 16:44:33','2021-11-30 17:01:28'),('61a658eac78bf','6191e42fe4e3f','done','2021-11-30 17:01:30','2021-11-30 18:19:09'),('61a66b2024243','6191e42fe4e3f','done','2021-11-30 18:19:12','2021-11-30 18:21:38'),('61a66bb5d7a46','6191e42fe4e3f','done','2021-11-30 18:21:41','2021-11-30 18:21:51'),('61a66bbfe1f89','6191e42fe4e3f','done','2021-11-30 18:21:51','2021-11-30 18:22:42'),('61a66bf996b3e','6191e42fe4e3f','done','2021-11-30 18:22:49','2021-12-01 00:12:57'),('61a6be0b26a58','6191e42fe4e3f','done','2021-12-01 00:12:59','2021-12-01 02:07:58'),('61a6d902758c1','6191e42fe4e3f','done','2021-12-01 02:08:02','2021-12-01 02:13:26'),('61a6da4bac0f5','6191e42fe4e3f','done','2021-12-01 02:13:31','2021-12-01 02:29:59'),('61a6de2a24327','6191e42fe4e3f','done','2021-12-01 02:30:02','2021-12-01 02:48:30'),('61a6e280276eb','6191e42fe4e3f','done','2021-12-01 02:48:32','2021-12-01 15:43:11'),('61a701662dc6e','61a7015fdba2e','done','2021-12-01 05:00:22','2021-12-01 05:18:42'),('61a705b62a69d','61a7015fdba2e','done','2021-12-01 05:18:46','2021-12-06 08:05:33'),('61a79813accfe','6191e42fe4e3f','done','2021-12-01 15:43:15','2021-12-03 11:11:05'),('61a9fb4e5e7bd','6191e42fe4e3f','done','2021-12-03 11:11:10','2021-12-03 11:48:02'),('61aa03f4c3407','6191e42fe4e3f','done','2021-12-03 11:48:04','2021-12-05 04:38:34'),('61ac4256e0c0f','6191e42fe4e3f','done','2021-12-05 04:38:46','2021-12-05 04:41:20'),('61ac430e083eb','6191e42fe4e3f','done','2021-12-05 04:41:50','2021-12-05 04:42:04'),('61ac43431d792','6191e42fe4e3f','done','2021-12-05 04:42:43','2021-12-05 04:46:16'),('61ac44a4d6b7f','6191e42fe4e3f','done','2021-12-05 04:48:36','2021-12-05 05:27:02'),('61ac4deb37ea2','6191e42fe4e3f','done','2021-12-05 05:28:11','2021-12-05 05:28:11'),('61ac4deeef299','6191e42fe4e3f','processing','2021-12-05 05:28:14','2021-12-05 05:28:14'),('61adc44d7818a','61a7015fdba2e','processing','2021-12-06 08:05:33','2021-12-06 08:05:33');
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +87,6 @@ DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `image_url` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
@@ -99,7 +99,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` (id, name,created_at,updated_at) VALUES ('1','Cà phê','2021-10-29 19:31:28','2021-10-29 19:31:28'),('18','Thưởng thức tại nhà','2021-10-29 19:31:28','2021-10-29 19:31:28'),('2','Đá Xay - Choco - Matcha','2021-10-29 19:31:28','2021-10-29 19:31:28'),('20','Bộ sưu tập quà tặng','2021-10-29 19:31:28','2021-10-29 19:31:28'),('5','Trà Trái Cây - Trà Sữa','2021-10-29 19:31:28','2021-10-29 19:31:28');
+INSERT INTO `categories` VALUES ('1','Cà phê','2021-10-29 19:31:28','2021-10-29 19:31:28'),('18','Thưởng thức tại nhà','2021-10-29 19:31:28','2021-10-29 19:31:28'),('2','Đá Xay - Choco - Matcha','2021-10-29 19:31:28','2021-10-29 19:31:28'),('20','Bộ sưu tập quà tặng','2021-10-29 19:31:28','2021-10-29 19:31:28'),('5','Trà Trái Cây - Trà Sữa','2021-10-29 19:31:28','2021-10-29 19:31:28');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -156,6 +156,7 @@ CREATE TABLE `order_detail` (
 
 LOCK TABLES `order_detail` WRITE;
 /*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
+INSERT INTO `order_detail` VALUES ('5b03966a1acd4d5bbd672374','61a66b1dbb87c',3,'2021-11-30 18:19:09','2021-11-30 18:19:09','Medium','','61a66b1dbdd1d'),('5b03966a1acd4d5bbd672374','61a66bb25540c',5,'2021-11-30 18:21:38','2021-11-30 18:21:38','Medium','','61a66bb25b801'),('5b03966a1acd4d5bbd672374','61a66bf20b7d8',4,'2021-11-30 18:22:42','2021-11-30 18:22:42','Medium','','61a66bf20e1d3'),('5b03966a1acd4d5bbd672374','61a6be095386c',4,'2021-12-01 00:12:57','2021-12-01 00:12:57','Medium','','61a6be0956a44'),('5b03966a1acd4d5bbd672373','61a6d8fea96ec',1,'2021-12-01 02:07:58','2021-12-01 02:07:58','Medium','','61a6d8feaf375'),('5b03966a1acd4d5bbd672374','61a6da46658c8',4,'2021-12-01 02:13:26','2021-12-01 02:13:26','Medium','','61a6da4666895'),('5b03966a1acd4d5bbd672374','61a6de27a9304',4,'2021-12-01 02:29:59','2021-12-01 02:29:59','Medium','','61a6de27abb68'),('5b03966a1acd4d5bbd672374','61a6e27e20e1b',3,'2021-12-01 02:48:30','2021-12-01 02:48:30','Medium','','61a6e27e22106'),('5b03966a1acd4d5bbd672374','61a705b290d29',2,'2021-12-01 05:18:42','2021-12-01 05:18:42','Medium','','61a705b293841'),('5b03966a1acd4d5bbd672375','61a7980fbcc4e',5,'2021-12-01 15:43:11','2021-12-01 15:43:11','Medium','','61a7980fc0034'),('5b03966a1acd4d5bbd67237b','61a7980fbcc4e',1,'2021-12-01 15:43:11','2021-12-01 15:43:11','Medium','','61a7980fc1198'),('5b03966a1acd4d5bbd672375','61a9fb4992d46',4,'2021-12-03 11:11:05','2021-12-03 11:11:05','Medium','','61a9fb499907f'),('5b03966a1acd4d5bbd67237a','61a9fb4992d46',3,'2021-12-03 11:11:05','2021-12-03 11:11:05','Medium','','61a9fb499a2c3'),('5b03966a1acd4d5bbd672374','61aa03f287953',4,'2021-12-03 11:48:02','2021-12-03 11:48:02','Medium','','61aa03f28a0a3'),('5b03966a1acd4d5bbd672395','61aa03f287953',1,'2021-12-03 11:48:02','2021-12-03 11:48:02','Medium','','61aa03f28ba1f'),('5b03966a1acd4d5bbd67237e','61aa03f287953',1,'2021-12-03 11:48:02','2021-12-03 11:48:02','Medium','','61aa03f28c9e6'),('5b03966a1acd4d5bbd672377','61ac424a64ff5',1,'2021-12-05 04:38:34','2021-12-05 04:38:34','Medium','','61ac424a6b4a7'),('5b03966a1acd4d5bbd672377','61ac42f01b1aa',1,'2021-12-05 04:41:20','2021-12-05 04:41:20','Medium','','61ac42f01d663'),('5b03966a1acd4d5bbd672375','61ac431c6bf97',1,'2021-12-05 04:42:04','2021-12-05 04:42:04','Medium','','61ac431c6d857'),('5b03966a1acd4d5bbd672377','61ac441826418',1,'2021-12-05 04:46:16','2021-12-05 04:46:16','Medium','','61ac441827c13'),('5b03966a1acd4d5bbd672375','61ac4da63ef70',1,'2021-12-05 05:27:02','2021-12-05 05:27:02','Medium','','61ac4da64135d'),('5b03966a1acd4d5bbd672375','61adc44d64bc7',4,'2021-12-06 08:05:33','2021-12-06 08:05:33','Medium','','61adc44d6a13c'),('5b03966a1acd4d5bbd672375','61adc44d64bc7',4,'2021-12-06 08:05:33','2021-12-06 08:05:33','Medium','','61adc44d6b834');
 /*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,6 +190,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES ('61aa03f287953','6191e42fe4e3f','cash','done','2021-12-03 11:48:02','2021-12-03 11:50:42','Võ Quý Long','0924955363','HCM City','none'),('61ac424a64ff5','6191e42fe4e3f','cash','processing','2021-12-05 04:38:34','2021-12-05 04:38:34','Võ Quý Long','0924955363','HCM City',''),('61ac42f01b1aa','6191e42fe4e3f','cash','processing','2021-12-05 04:41:20','2021-12-05 04:41:20','Võ Quý Long','0924955363','HCM City',NULL),('61ac431c6bf97','6191e42fe4e3f','cash','processing','2021-12-05 04:42:04','2021-12-05 04:42:04','Võ Quý Long','0924955363','HCM City',NULL),('61ac441826418','6191e42fe4e3f','cash','processing','2021-12-05 04:46:16','2021-12-05 04:46:16','Võ Quý Long','0924955363','HCM City',''),('61ac4da63ef70','6191e42fe4e3f','cash','processing','2021-12-05 05:27:02','2021-12-05 05:27:02','Võ Quý Long','0924955363','HCM City',''),('61ac4deb39b1e','6191e42fe4e3f','cash','processing','2021-12-05 05:28:11','2021-12-05 05:28:11','Võ Quý Long','0924955363','HCM City',''),('61adc44d64bc7','61a7015fdba2e','cash','done','2021-12-06 08:05:33','2022-06-16 04:04:22','Nguyễn Trần Tuấn','0924955363','Hồ Chí Minh City','');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,7 +279,6 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `role` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `is_deleted` boolean default false,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -288,7 +289,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`,`firstname` ,`lastname` ,`email` ,`phone_number`,`password` ,`image_url` ,`address` ,`ward_id` ,`district_id`,`province_id` ,`created_at` ,`updated_at` ,`role`) VALUES ('6191e42fe4e3f','Nguyễn Xuân','Vũ','admin@gmail.com','0984699491','$2y$10$wFVXGlQ3qFngyLrwYG7JkOCm/dkS2DnVOIydExoUZyObb5AWt4jIC','','HCM City','','','','2021-11-14 21:38:07','2021-12-01 00:12:24','admin');
+INSERT INTO `users` VALUES ('6191e42fe4e3f','Nguyễn Xuân','Vũ','admin@gmail.com','0984699491','$2y$10$wFVXGlQ3qFngyLrwYG7JkOCm/dkS2DnVOIydExoUZyObb5AWt4jIC','','HCM City','','','','2021-11-14 21:38:07','2021-12-01 00:12:24','admin'),('61a7015fdba2e','Nguyễn Trần','Tuấn','tuannguyen@gmail.com','0924955363','$2y$10$zbNG4cJd7q4LhCNFv5RQbukDkeRYfs4MTO692Bxr6jUevnu/92ofa',NULL,'Hồ Chí Minh City',NULL,NULL,NULL,'2021-12-01 05:00:15','2021-12-01 05:00:15','client'),('62a998d97a755','Võ Quý','Long','admin+3@gmail.com','0924955362','$2y$10$4q1RjkoRFw0S6jMN1ce3Iei2IiTllzH3t2jDs9KUdVfIupUqTXFi2',NULL,'KTX KHU A DHQG TP HCM',NULL,NULL,NULL,'2022-06-15 08:31:21','2022-06-15 08:40:27','client');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

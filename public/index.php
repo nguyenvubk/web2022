@@ -9,6 +9,7 @@ use app\controllers\AdminController;
 use app\controllers\StoreController;
 use app\controllers\UserController;
 use app\controllers\CategoryController;
+use app\controllers\NewsController;
 use app\controllers\SaleController;
 use app\controllers\CartController;
 use app\controllers\OrdersController;
@@ -57,7 +58,8 @@ $app->router->post('/update', [CartController::class, 'update']);
 $app->router->get('/orders', [OrdersController::class, 'orders']);
 $app->router->get('/error', [SiteController::class, 'error']);
 $app->router->get('/order', [OrderDetailController::class, 'orderDetail']);
-$app->router->get('/news', [SiteController::class, 'news']);
+$app->router->get('/news', [NewsController::class, 'news']);
+$app->router->get('/news/content', [NewsController::class, 'content']);
 
 
 
@@ -68,6 +70,7 @@ $app->router->get('/admin/users', [UserController::class, 'index']);
 $app->router->get('/admin/products', [ProductController::class, 'index']);
 $app->router->get('/admin/stores', [StoreController::class, 'index']);
 $app->router->get('/admin/categories', [CategoryController::class, 'index']);
+$app->router->get('/admin/news', [NewsController::class, 'index']);
 $app->router->get('/admin/stores', [StoreController::class, 'index']);
 $app->router->get('/admin/profile', [AdminController::class, 'profile']);
 $app->router->post('/admin/profile', [AdminController::class, 'profile']);
@@ -93,6 +96,11 @@ $app->router->post('/admin/categories/delete', [CategoryController::class, 'dele
 $app->router->post('/admin/categories/edit', [CategoryController::class, 'update']);
 $app->router->post('/admin/categories/create', [CategoryController::class, 'create']);
 $app->router->post('/admin/categories/details', [CategoryController::class, 'details']);
+//news
+$app->router->get('/admin/news/delete', [NewsController::class, 'delete']);
+$app->router->get('/admin/news/edit', [NewsController::class, 'update']);
+$app->router->get('/admin/news/create', [NewsController::class, 'create']);
+$app->router->get('/admin/news/details', [NewsController::class, 'details']);
 // store
 $app->router->get('/admin/stores/delete', [StoreController::class, 'delete']);
 $app->router->get('/admin/stores/edit', [StoreController::class, 'update']);

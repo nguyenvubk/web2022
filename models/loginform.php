@@ -31,18 +31,18 @@ class LoginForm extends Model
     {
         if($input == "email") {
             $user = User::findOne(['email' => $this->email]);
-            if (!$user || $user->is_deleted) {
-                $this->addError('email', self::RULE_INVALID_EMAIL);
+            if (!$user) {
+                $this->addError('email', self::RULE_INVALID_ID);
                 return false;
             }
             if (!password_verify($this->password, $user->password)) {
                 $this->addError('password', self::RULE_WRONG_PASSWORD);
                 return false;
             }
-        }else {
+        } else {
             $user = User::findOne(['id' => $this->userId]);
-            if (!$user || $user->is_deleted) {
-                $this->addError('id', self::RULE_INVALID_ID);
+            if (!$user) {
+                $this->addError('id', self::RULE_INVALID_EMAIL);
                 return false;
             }
         }

@@ -27,7 +27,6 @@
                 <td>
                   <a class="fa fa-eye btn btn-info btn-sm" href="/admin/categories/details?id=<?=$categoryModel->getId()?>"></a>
                   <a class="fa fa-pencil btn btn-warning btn-sm" href="/admin/categories/edit?id=<?=$categoryModel->getId()?>"></a>
-                  <a class="fa fa-trash btn btn-danger btn-sm" href="/admin/categories/delete?id=<?=$categoryModel->getId()?>"></a>
                 </td>
               </tr>
             <?php 

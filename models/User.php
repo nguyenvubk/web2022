@@ -107,7 +107,7 @@ class User extends UserModel
     {
         $list = [];
         $db = Database::getInstance();
-        $req = $db->query("SELECT * FROM users WHERE role = 'client' and is_deleted = false");
+        $req = $db->query("SELECT * FROM users WHERE role = 'client'");
 
         foreach ($req->fetchAll() as $item) {
             $userModel = new User;
@@ -159,40 +159,23 @@ class User extends UserModel
                 firstname = '$user->firstname', 
                 lastname = '$user->lastname',
                 email = '$user->email',
+                password = 'password_hash($user->password, PASSWORD_DEFAULT)',
                 phone_number = '$user->phone_number',
+                role = '$user->role',
                 address = '$user->address'
             WHERE id = '$user->id';
             "
         );
-        if ($user->password != ''){
-            $user->password = password_hash($user->password,PASSWORD_DEFAULT);
-            $statement = self::prepare(
-                "UPDATE users 
-                SET 
-                    firstname = '$user->firstname', 
-                    lastname = '$user->lastname',
-                    email = '$user->email',
-                    password = '$user->password',
-                    phone_number = '$user->phone_number',
-                    address = '$user->address'
-                WHERE id = '$user->id';
-                "
-            );
-        }
         $statement->execute();
         return true;
     }
 
     public function delete()
     {
-        $statement = self::prepare(
-            "UPDATE users 
-            SET 
-                is_deleted = '1'
-            WHERE id = '$this->id';
-            "
-        );
-        $statement->execute();
+        $tablename = $this->tableName();
+        $sql = "DELETE FROM $tablename WHERE id=?";
+        $stmt= self::prepare($sql);
+        $stmt->execute([$this->id]);
         return true;     
     }   
 }

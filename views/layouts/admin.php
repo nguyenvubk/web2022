@@ -70,6 +70,11 @@ $userModel = User::getUserInfo($userID);
             </a>
           </li>
           <li>
+            <a href="/admin/news">
+                <i class="fa fa-list"></i> &nbsp;Quản lý tin tức
+            </a>
+          </li>
+          <li>
             <a href="/admin/users">
               <i class="fa fa-users" aria-hidden="true"></i> &nbsp;Quản lý người dùng
             </a>
@@ -89,6 +94,7 @@ $userModel = User::getUserInfo($userID);
               <i class="fas fa-user-cog" aria-hidden="true"></i>&nbsp;Tài khoản của tôi
             </a>
           </li>
+          
       </ul>
     </div>
     <div id="page-content-wrapper">
@@ -108,11 +114,12 @@ $userModel = User::getUserInfo($userID);
             </button>
             <a class="navbar-brand" href="#menu-toggle" id="menu-toggle">
               <i class="fa fa-arrow-left" aria-hidden="true"></i>
+              Bảng điều khiển
             </a>
-            <a class="navbar-brand" href="/">Back to My Coffee</a>
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
+              <a class="navbar-text" href="/">Back to My Coffee</a>
               <li><a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Đăng xuất</a></li>
             </ul>
           </div>

@@ -9,15 +9,13 @@ class Category extends DBModel
 {
     public string $id;
     public string $name;
-    public string $image_url;
     
     public function __construct(
         $id = '',
-        $name = '',$image_url = ''
+        $name = ''
     ) {
         $this->name = $name;
         $this->id = $id;
-        $this->image_url = $image_url;
     }
 
     public function getName() 
@@ -34,7 +32,6 @@ class Category extends DBModel
     {
         return $this->name;
     }
-    public function getImageUrl() { return $this->image_url; }
 
     public function getLabel($attribute)
     {

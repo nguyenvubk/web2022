@@ -5,54 +5,75 @@
 <div class="articles">
     <div class="row">
         <div class="col-lg-4 col-6 article-img">
-            <img src="//file.hstatic.net/1000075078/article/1__1__88407c0ec0b84592ade162dcc6860bed_master.jpg" alt="">
+            <a href="/news/content">
+                <img src="//file.hstatic.net/1000075078/article/1__1__88407c0ec0b84592ade162dcc6860bed_master.jpg" alt="">
+            </a>
         </div>
         <div class="col-lg-8 col-6 article-info">
-            <div class="article-title">CÀ PHÊ SỮA ESPRESSO THE COFFEE HOUSE - BẬT LON BẬT VỊ NGON</div>
+            <div class="article-title">
+                <a href="/news/content">CÀ PHÊ SỮA ESPRESSO THE COFFEE HOUSE - BẬT LON BẬT VỊ NGON</a> 
+            </div>
             <div class="article-date">15/09/2022</div>
             <div class="article-description">Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.</div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-4 col-6 article-img">
-            <img src="//file.hstatic.net/1000075078/article/1__1__88407c0ec0b84592ade162dcc6860bed_master.jpg" alt="">
+            <a href="/news/content">
+                <img src="//file.hstatic.net/1000075078/article/1__1__88407c0ec0b84592ade162dcc6860bed_master.jpg" alt="">
+            </a>
         </div>
         <div class="col-lg-8 col-6 article-info">
-            <div class="article-title">CÀ PHÊ SỮA ESPRESSO THE COFFEE HOUSE - BẬT LON BẬT VỊ NGON</div>
+            <div class="article-title">
+                <a href="/news/content">CÀ PHÊ SỮA ESPRESSO THE COFFEE HOUSE - BẬT LON BẬT VỊ NGON</a> 
+            </div>
             <div class="article-date">15/09/2022</div>
             <div class="article-description">Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.</div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-4 col-6 article-img">
-            <img src="//file.hstatic.net/1000075078/article/1__1__88407c0ec0b84592ade162dcc6860bed_master.jpg" alt="">
+            <a href="/news/content">
+                <img src="//file.hstatic.net/1000075078/article/1__1__88407c0ec0b84592ade162dcc6860bed_master.jpg" alt="">
+            </a>
         </div>
         <div class="col-lg-8 col-6 article-info">
-            <div class="article-title">CÀ PHÊ SỮA ESPRESSO THE COFFEE HOUSE - BẬT LON BẬT VỊ NGON</div>
+            <div class="article-title">
+                <a href="/news/content">CÀ PHÊ SỮA ESPRESSO THE COFFEE HOUSE - BẬT LON BẬT VỊ NGON</a> 
+            </div>
             <div class="article-date">15/09/2022</div>
             <div class="article-description">Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.</div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-4 col-6 article-img">
-            <img src="//file.hstatic.net/1000075078/article/1__1__88407c0ec0b84592ade162dcc6860bed_master.jpg" alt="">
+            <a href="/news/content">
+                <img src="//file.hstatic.net/1000075078/article/1__1__88407c0ec0b84592ade162dcc6860bed_master.jpg" alt="">
+            </a>
         </div>
         <div class="col-lg-8 col-6 article-info">
-            <div class="article-title">CÀ PHÊ SỮA ESPRESSO THE COFFEE HOUSE - BẬT LON BẬT VỊ NGON</div>
+            <div class="article-title">
+                <a href="/news/content">CÀ PHÊ SỮA ESPRESSO THE COFFEE HOUSE - BẬT LON BẬT VỊ NGON</a> 
+            </div>
             <div class="article-date">15/09/2022</div>
             <div class="article-description">Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.</div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-4 col-6 article-img">
-            <img src="//file.hstatic.net/1000075078/article/1__1__88407c0ec0b84592ade162dcc6860bed_master.jpg" alt="">
+            <a href="/news/content">
+                <img src="//file.hstatic.net/1000075078/article/1__1__88407c0ec0b84592ade162dcc6860bed_master.jpg" alt="">
+            </a>
         </div>
         <div class="col-lg-8 col-6 article-info">
-            <div class="article-title">CÀ PHÊ SỮA ESPRESSO THE COFFEE HOUSE - BẬT LON BẬT VỊ NGON</div>
+            <div class="article-title">
+                <a href="/news/content">CÀ PHÊ SỮA ESPRESSO THE COFFEE HOUSE - BẬT LON BẬT VỊ NGON</a> 
+            </div>
             <div class="article-date">15/09/2022</div>
             <div class="article-description">Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.</div>
         </div>
     </div>
+    
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-end" id="news-pagination">
             <li class="page-item page-disabled">
