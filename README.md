@@ -74,9 +74,12 @@ SET NAMES utf8
 
 ## Run project
 
-Để chạy project, chạy lệnh sau:
-
+Để chạy project, chạy lệnh sau(nếu như có php.ini và trong file này có extension=pdo_mysql):
 ```bash
 cd public
 php -S localhost:8000
+```
+Nếu không có thì thực hiện lệnh sau:
+```
+php -d extension=pdo_mysql -S localhost:80000
 ```
