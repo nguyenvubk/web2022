@@ -22,6 +22,10 @@
     overflow: hidden;
 }
 
+.article-title:hover a {
+    color: #E57905;
+}
+
 .article-date {
     font-size: 14px;
     margin: 5px 0;
@@ -74,4 +78,11 @@
 
 .no-pointer {
     pointer-events: none;
+}
+
+
+#fulltext {
+    display: block;
+    overflow: hidden;
+    resize: none;
 }

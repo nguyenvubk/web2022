@@ -1,0 +1,35 @@
+.content img {
+    max-width: 100%;
+}
+
+.content-action {
+    margin-bottom: 30px;    
+}
+
+.prev-article, .next-article {
+    padding: 9px 60px 7px;
+    background-color: #000000;
+    color: white;
+    font-weight: bold;
+}
+
+.prev-article:hover, .next-article:hover {
+    background-color: #343434;
+    color: white;
+}
+
+.article-content {
+    max-width: 90%;
+}
+
+.content-title {
+    font-size: 34px;
+    font-weight: bold;
+    padding-top: 20px;
+}
+
+.content-date {
+    font-size: 14px;
+    color: gray;
+    padding-bottom: 20px;
+}

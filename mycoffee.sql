@@ -1,3 +1,6 @@
+create database buyme;
+use buyme;
+
 CREATE TABLE stores (
   id varchar(100) NOT NULL,
   address varchar(1000) NOT NULL,

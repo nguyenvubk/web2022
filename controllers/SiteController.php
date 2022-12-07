@@ -74,9 +74,6 @@ class SiteController extends Controller
         ]);
     }
 
-    public function news() {
-        return $this->render('news');
-    }
 
     public function login(Request $request)
     {

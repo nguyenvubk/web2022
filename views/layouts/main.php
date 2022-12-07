@@ -31,6 +31,8 @@ header("Content-type: text/html; charset=utf-8");
     <link rel="stylesheet" href="/css/profile.css">
     <link rel="stylesheet" href="/css/order.css">
     <link rel="stylesheet" href="/css/news.css">
+    <link rel="stylesheet" href="/css/content.css">
+
 
     <title>My Coffee</title>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
