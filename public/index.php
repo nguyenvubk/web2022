@@ -101,6 +101,10 @@ $app->router->get('/admin/news/delete', [NewsController::class, 'delete']);
 $app->router->get('/admin/news/edit', [NewsController::class, 'update']);
 $app->router->get('/admin/news/create', [NewsController::class, 'create']);
 $app->router->get('/admin/news/details', [NewsController::class, 'details']);
+
+$app->router->post('/admin/news/delete', [NewsController::class, 'delete']);
+$app->router->post('/admin/news/edit', [NewsController::class, 'update']);
+$app->router->post('/admin/news/create', [NewsController::class, 'create']);
 // store
 $app->router->get('/admin/stores/delete', [StoreController::class, 'delete']);
 $app->router->get('/admin/stores/edit', [StoreController::class, 'update']);

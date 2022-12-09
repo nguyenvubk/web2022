@@ -10,11 +10,11 @@
       </header>
       <div class="panel-body">
         <dl class="dl-horizontal">
-          <dt>Mã cửa hàng</dt><dd><?= $params['model']->getId() ?></dd>
-          <dt>Trạng thái</dt><dd><?= $params['model']->getStatus() ?></dd>
-          <dt>Địa chỉ</dt><dd><?= $params['model']->getAddress() ?></dd>
-          <dt>Số điện thoại</dt><dd><?= $params['model']->getHotline() ?></dd>
-          <dt>Giờ mở cửa</dt><dd><?= $params['model']->getOpentime() ?></dd>
+          <dt>Mã cửa hàng</dt><dd><?= $params['storeModel']->getId() ?></dd>
+          <dt>Trạng thái</dt><dd><?= $params['storeModel']->getStatus() ?></dd>
+          <dt>Địa chỉ</dt><dd><?= $params['storeModel']->getAddress() ?></dd>
+          <dt>Số điện thoại</dt><dd><?= $params['storeModel']->getHotline() ?></dd>
+          <dt>Giờ mở cửa</dt><dd><?= $params['storeModel']->getOpentime() ?></dd>
         </dl>
       </div>
     </section>

@@ -33,7 +33,6 @@
                 <td>
                     <a class="fa fa-eye btn btn-info btn-sm" href="/admin/stores/details?id=<?=$storeModel->getId()?>"></a>
                     <a class="fa fa-pencil btn btn-warning btn-sm" href="/admin/stores/edit?id=<?=$storeModel->getId()?>"></a>
-                    <a class="fa fa-trash btn btn-danger btn-sm" href="/admin/stores/delete?id=<?=$storeModel->getId()?>"></a>
                 </td>
               </tr>
             <?php 

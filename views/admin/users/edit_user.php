@@ -25,7 +25,7 @@
               <?php echo $form->field($userModel, 'phone_number') ?>
             </div>
             <div class="form-group col-md-4">
-              <?php echo $form->field($userModel, 'email') ?>
+              <?php echo $form->fieldtype($userModel, 'email', 'email') ?>
             </div>
             <div class="form-group col-md-4">
               <?php echo $form->field($userModel, 'role') ?>

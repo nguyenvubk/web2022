@@ -39,8 +39,7 @@ document.title = 'Đơn hàng đã huỷ';
                             <td>
                                 <a class="fa fa-eye btn btn-info btn-sm"
                                     href="/admin/orders/accepted/details?id=<?= $orderModel->getId() ?>"></a>
-                                <a class="fa fa-trash btn btn-danger btn-sm"
-                                    href="/admin/orders/rejected/delete?id=<?= $orderModel->getId() ?>"></a>
+
                             </td>
                         </tr>
                         <?php

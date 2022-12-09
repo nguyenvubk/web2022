@@ -72,4 +72,15 @@ class StoreController extends Controller
             ]);
         } 
     }
+    public function details(Request $request)
+    {
+        if ($request->getMethod() === 'get') {
+            $id = Application::$app->request->getParam('id');
+            $storeModel = Store::get($id);
+            $this->setLayout('admin');
+            return $this->render('/admin/stores/details_store', [
+                'storeModel' => $storeModel
+            ]);
+        } 
+    }
 }

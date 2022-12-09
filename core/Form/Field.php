@@ -11,6 +11,7 @@ class Field
     public const TYPE_EMAIL = 'email';
     public const TYPE_PASSWORD = 'password';
     public const TYPE_NUMBER = 'number';
+    public const TYPE_URL = 'url';
 
 
     public Model $model;

@@ -103,7 +103,7 @@ header("Content-type: text/html; charset=utf-8");
                         <a class="nav-link" href="/about">Về chúng tôi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/news">Tin tức</a>
+                        <a class="nav-link" href="/news?page=1">Tin tức</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/contact">Liên hệ</a>
