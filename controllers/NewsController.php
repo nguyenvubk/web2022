@@ -15,10 +15,14 @@ class NewsController extends Controller
 
     public function news(Request $request) {
         if ($request->getMethod() == 'get') {
-            $page = Application::$app->request->getParam('page');
+            if (!isset($_GET['page'])) {
+                $page = 1;
+            }
+            else $page = Application::$app->request->getParam('page');
             $newsModel = News::getNewsActive($page, 5);
-            $maxPage = (News::getCountActive()-1)/5 + 1;
+            $maxPage = floor((News::getCountActive()-1)/5) + 1;
             if ($maxPage < 1) $maxPage = 1;
+        
             return $this->render('news', [
                 'news' => $newsModel,
                 'page' => $page,
@@ -28,8 +32,17 @@ class NewsController extends Controller
         }
         return $this->render('news');
     }
-    public function content() {
-        return $this->render('content');
+    public function content(Request $request) {
+        if ($request->getMethod() == 'get') {
+            $id = Application::$app->request->getParam('id');
+            $relate = News::getNewsRelated($id);
+            $newsObj = News::getNewsDetail($id);
+            return $this->render('content', [
+                'news' => $newsObj,
+                'prev' => $relate['prev'],
+                'next' => $relate['next']
+            ]);
+        }
     }
     public function index() 
     {

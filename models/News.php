@@ -152,16 +152,16 @@ class News extends DBModel
 
     public static function getCountActive() {
         $db = Database::getInstance();
-        $req = $db->query("SELECT COUNT(id) FROM news WHERE is_deleted = 0 AND status = 1");
+        $req = $db->query("SELECT COUNT(id) AS count FROM news WHERE is_deleted = 0 AND status = 1");
         $item = $req->fetchAll()[0];
-        return $item[0];
+        return $item['count'];
     }
 
     public static function getNewsActive(int $page, int $size) {
         if ($page > 0 && $size > 0) {
             $list = [];
             $db = Database::getInstance();
-            $req = $db->query("SELECT * FROM news WHERE is_deleted = 0 AND status = 1 LIMIT ".(($page-1)*$size).", ".$size);
+            $req = $db->query("SELECT * FROM news WHERE is_deleted = 0 AND status = 1 ORDER BY updated_at DESC LIMIT ".(($page-1)*$size).", ".$size);
 
             // die("SELECT * FROM news WHERE is_deleted = 0 AND status = 1 LIMIT ".(($page-1)*$size).", ".$size);
     
@@ -172,6 +172,22 @@ class News extends DBModel
             return $list;
         }
         return [];
+    }
+    public static function getNewsRelated($id) {
+            $db = Database::getInstance();
+            $req = $db->query("SELECT * FROM news WHERE is_deleted = 0 AND status = 1 ORDER BY updated_at DESC");
+    
+            $fetchData = $req->fetchAll();
+            foreach ($fetchData as $key => $item) {
+                if ($item['id'] == $id) {
+                    $prev = '';
+                    $next = '';
+                    if ($key != 0) $prev = $fetchData[$key-1]['id'];
+                    if ($key != count($fetchData)-1) $next = $fetchData[$key+1]['id'];
+                    return ['prev' => $prev, 'next' => $next];
+                }
+            }
+            return ['prev' => '', 'next' => ''];
     }
 
     public static function getAllNews()

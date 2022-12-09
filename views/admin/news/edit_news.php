@@ -11,8 +11,8 @@
       <div class="panel-body">
         <?php $form = app\core\Form\Form::beginEnctype('', "post") ?>
             <div class="form-group col-md-8">
-                <label for="name">Tiêu đề bài viết</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Tên bài viết"
+                <label for="title">Tiêu đề bài viết</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Tên bài viết"
                     value="<?=$params['news']->getTitle()?>"
                 >
             </div>
