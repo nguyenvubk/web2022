@@ -21,7 +21,7 @@ It's a simple php-mvc template version 1.0. We will maintain and develop in futu
 Đầu tiên, sử dụng DBMS của bạn tạo một connection mysql database với cấu hình sau:<br />
 
 Server host : localhost<br />
-Database : buyme<br />
+Database : mycoffee<br />
 Port : 3306<br />
 Username : root<br />
 Password : (có hay không cũng được)<br />
