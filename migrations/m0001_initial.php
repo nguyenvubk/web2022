@@ -113,6 +113,19 @@ class m0001_initial
             CONSTRAINT cart_fk FOREIGN KEY (cart_id) REFERENCES cart (id),
             CONSTRAINT product_fk FOREIGN KEY (product_id) REFERENCES products (id)
           );
+
+          CREATE TABLE news (
+            id varchar(100) NOT NULL,
+            title varchar(100) NOT NULL,
+            description varchar(255) NOT NULL,
+            image VARCHAR(255) NOT NULL,
+            status boolean default false,
+            content mediumtext CHARACTER SET utf8 NOT NULL,
+            is_deleted boolean default false,
+            created_at timestamp NOT NULL DEFAULT current_timestamp(),
+            updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+            PRIMARY KEY(id)
+          );
         ";
         $db->pdo->exec($sql);
     }
