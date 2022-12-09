@@ -81,5 +81,5 @@ php -S localhost:8000
 ```
 Nếu không có thì thực hiện lệnh sau:
 ```
-php -d extension=pdo_mysql -S localhost:80000
+php -d extension=pdo_mysql -S localhost:8000
 ```
