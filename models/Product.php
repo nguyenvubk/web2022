@@ -134,7 +134,7 @@ class Product extends DBModel
     {
         $list = [];
         $db = Database::getInstance();
-        $req = $db->query('SELECT * FROM products WHERE is_deleted = false');
+        $req = $db->query('SELECT * FROM products WHERE is_deleted = false ORDER BY updated_at DESC');
 
         foreach ($req->fetchAll() as $item) {
             $list[] = new Product($item['id'], $item['category_id'], $item['name'], $item['price'], $item['description'], $item['image_url']);
