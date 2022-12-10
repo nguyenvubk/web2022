@@ -9,18 +9,18 @@
         <a href="/admin/news">Trở về</a>
       </header>
       <div class="panel-body">
-        <?php $form = app\core\Form\Form::begin('', "post") ?>
+        <?php $form = app\core\Form\Form::beginEnctype('', "post") ?>
             <div class="form-group col-md-8">
-              <label for="name">Tiêu đề bài viết</label>
-              <input type="text" class="form-control" id="name" name="name" placeholder="Tên bài viết">
+              <label for="title">Tiêu đề bài viết</label>
+              <input type="text" class="form-control" id="title" name="title" placeholder="Tên bài viết">
             </div>
             <div class="form-group col-md-4">
               <label for="image">Hình ảnh</label>
-              <input type="file" id="image" name="image" style="width: 100%" accept="image/png, image/jpeg" required>
+              <input type="file" id="image" name="image" style="width: 100%" accept="image/png, image/jpeg, image/gif" required>
             </div>
             <div class="form-group col-md-8">
-              <label for="desc">Mô tả</label>
-              <textarea type="text" class="form-control" id="desc" name="desc" placeholder="Mô tả"></textarea>
+              <label for="description">Mô tả</label>
+              <textarea type="text" class="form-control" id="description" name="description" placeholder="Mô tả"></textarea>
             </div>
             <div class="form-group col-md-4">
                 <label for="status">Trạng thái</label>
@@ -31,8 +31,8 @@
             </div>
             <div class="form-group col-md-8">
                 <label>Chi tiết bài viết</label>
-                <textarea name="fulltext" id="fulltext" class="form-control"></textarea>
-                <script>CKEDITOR.replace('fulltext');</script>
+                <textarea name="content" id="content" class="form-control"></textarea>
+                <script>CKEDITOR.replace('content');</script>
             </div>
         
           <div class="form-row">

@@ -20,11 +20,11 @@
             </div>
             <div class="form-group col-md-4">
               <label for="price">Giá</label>
-              <input type="text" class="form-control" id="price" name="price" placeholder="Giá">
+              <input type="number" min="1000" value="1000" class="form-control" id="price" name="price" placeholder="Giá">
             </div>
             <div class="form-group col-md-4">
               <label for="image_url">Địa chỉ hình ảnh</label>
-              <input type="text" class="form-control" id="image_url" name="image_url" placeholder="Địa chỉ hình ảnh">
+              <input type="url" class="form-control" id="image_url" name="image_url" placeholder="Địa chỉ hình ảnh">
             </div>
             <div class="form-row">
               <div class="form-group col-md-12">

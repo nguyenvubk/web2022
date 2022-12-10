@@ -1,5 +1,8 @@
 .content img {
     max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 .content-action {
@@ -7,10 +10,18 @@
 }
 
 .prev-article, .next-article {
-    padding: 9px 60px 7px;
+    padding: 9px 40px 7px;
     background-color: #000000;
     color: white;
     font-weight: bold;
+}
+@media screen and (max-width: 480px) {
+    .prev-article, .next-article {
+        padding: 6px 20px 5px;
+        background-color: #000000;
+        color: white;
+        font-weight: bold;
+    }
 }
 
 .prev-article:hover, .next-article:hover {
@@ -28,8 +39,20 @@
     padding-top: 20px;
 }
 
+@media screen and (max-width: 480px) {
+    .content-title {
+        font-size: 25px;
+        font-weight: bold;
+        padding-top: 20px;
+    }
+}
+
 .content-date {
     font-size: 14px;
     color: gray;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.hidden {
+    visibility: hidden;
 }

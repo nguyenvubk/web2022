@@ -18,7 +18,7 @@
             <?php echo $form->field($productModel, 'category_id') ?>
             </div>
             <div class="form-group col-md-3">
-              <?php echo $form->field($productModel, 'price') ?>
+              <?php echo $form->fieldtype($productModel, 'price', 'number') ?>
             </div>
             <div class="form-group col-md-3">
               <?php echo $form->field($productModel, 'image_url') ?>

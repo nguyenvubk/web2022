@@ -21,35 +21,30 @@
             </tr>
           </thead>
           <tbody>
+              <?php 
+                foreach($params['news'] as $newsModel) {
+              ?>
                 <tr class="news-list">
                     <td>1</td>
                     <td>
-                        <img width="60" height="60"src="http://file.hstatic.net/1000075078/article/1__1__88407c0ec0b84592ade162dcc6860bed_master.jpg" />
+                        <img width="60" height="60"src="/images/news/<?=$newsModel->getImage();?>" />
                     </td>
-                    <td>CÀ PHÊ SỮA ESPRESSO THE COFFEE HOUSE - BẬT LON BẬT VỊ NGON</td>
-                    <td>15/09/2022</td>
-                    <td>Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.</td>
+                    <td><?=$newsModel->getTitle()?></td>
+                    <td><?=$newsModel->getDate()?></td>
+                    <td><?=$newsModel->getDescription()?></td>
                     <td>
-                        <a class="fa fa-eye btn btn-info btn-sm" href="/admin/news/details"></a>
-                        <a class="fa fa-pencil btn btn-warning btn-sm" href="/admin/news/edit"></a>
-                        <a class="fa fa-trash btn btn-danger btn-sm" href=""></a>
-                    </td>  
+                        <a class="fa fa-eye btn btn-info btn-sm" href="/admin/news/details?id=<?=$newsModel->getId()?>"></a>
+                        <a class="fa fa-pencil btn btn-warning btn-sm" href="/admin/news/edit?id=<?=$newsModel->getId()?>"></a>
+                        <?php $form = app\core\Form\Form::begin('/admin/news/delete', "post") ?>
+                          <input type="hidden" name="id" value="<?=$newsModel->getId()?>">
+                          <button type="submit" class="fa fa-trash btn btn-danger btn-sm"<?=$newsModel->getId()?>"></button>
+                        <?php app\core\form\Form::end() ?>
+                      </td>  
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>
-                        <img width="60" height="60"src="http://file.hstatic.net/1000075078/article/1__1__88407c0ec0b84592ade162dcc6860bed_master.jpg" />
-                    </td>
-                    <td>CÀ PHÊ SỮA ESPRESSO THE COFFEE HOUSE - BẬT LON BẬT VỊ NGON</td>
-                    <td>15/09/2022</td>
-                    <td>Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.</td>
-                    <td>
-                        <a class="fa fa-eye btn btn-info btn-sm" href=""></a>
-                        <a class="fa fa-pencil btn btn-warning btn-sm" href=""></a>
-                        <a class="fa fa-trash btn btn-danger btn-sm" href=""></a>
-                    
-                    </td>  
-                </tr>
+              <?php 
+                }
+              ?>
+
           </tbody>
         </table>
       </div>

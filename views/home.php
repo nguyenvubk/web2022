@@ -6,7 +6,7 @@
 </div> -->
 
 <div class="home-page">
-    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-touch="true" data-bs-ride="carousel">
+    <div id="carouselExampleIndicators" class="carousel slide carousel-fade d-flex align-items-center" data-bs-touch="true" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
                 aria-current="true" aria-label="Slide 1"></button>

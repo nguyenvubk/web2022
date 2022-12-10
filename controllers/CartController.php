@@ -72,10 +72,11 @@ class CartController extends Controller
 
         $items = CartItem::getCartItem($cart_id);
 
-        return $this->render('cart', [
-            'items' => $items,
-            'user' => $user,
-        ]);
+        // return $this->render('cart', [
+        //     'items' => $items,
+        //     'user' => $user,
+        // ]);
+        Application::$app->response->redirect('/cart'); 
     }
 
     public function placeOrder()
