@@ -1,4 +1,4 @@
 /vendor/
-/public/images/news/
+/public/images/news
 .env
 .env.example
