@@ -172,10 +172,13 @@ class User extends UserModel
 
     public function delete()
     {
-        $tablename = $this->tableName();
-        $sql = "DELETE FROM $tablename WHERE id=?";
-        $stmt= self::prepare($sql);
-        $stmt->execute([$this->id]);
-        return true;     
+        $statement = self::prepare(
+            "UPDATE users 
+            SET 
+                is_deleted = '1'
+            WHERE id = '$this->id';
+            "
+        );
+        $statement->execute();   
     }   
 }

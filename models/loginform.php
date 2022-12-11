@@ -31,7 +31,7 @@ class LoginForm extends Model
     {
         if($input == "email") {
             $user = User::findOne(['email' => $this->email]);
-            if (!$user) {
+            if (!$user || $user->is_deleted) {
                 $this->addError('email', self::RULE_INVALID_ID);
                 return false;
             }
@@ -41,7 +41,7 @@ class LoginForm extends Model
             }
         } else {
             $user = User::findOne(['id' => $this->userId]);
-            if (!$user) {
+            if (!$user || $user->is_deleted) {
                 $this->addError('id', self::RULE_INVALID_EMAIL);
                 return false;
             }
