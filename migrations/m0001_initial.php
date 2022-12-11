@@ -8,6 +8,7 @@ class m0001_initial
     {
         $db = Application::$app->db;
         $sql = "
+        DROP TABLE IF EXISTS stores;
         CREATE TABLE stores (
             id varchar(100) NOT NULL,
             address varchar(1000) NOT NULL,
@@ -21,6 +22,7 @@ class m0001_initial
             PRIMARY KEY (id)
           );
           
+          DROP TABLE IF EXISTS users;
           CREATE TABLE users (
             id varchar(100) NOT NULL,
             firstname varchar(100) NOT NULL,
@@ -40,6 +42,7 @@ class m0001_initial
             PRIMARY KEY (id)
           );
           
+          DROP TABLE IF EXISTS categories;
           CREATE TABLE categories (
             id varchar(100) NOT NULL,
             name varchar(100) NOT NULL,
@@ -49,6 +52,7 @@ class m0001_initial
             PRIMARY KEY (id)
           );
           
+          DROP TABLE IF EXISTS products;
           CREATE TABLE products (
             id varchar(100) NOT NULL,
             category_id varchar(100) NOT NULL,
@@ -63,6 +67,7 @@ class m0001_initial
             CONSTRAINT category_id FOREIGN KEY (category_id) REFERENCES categories (id)
           );
           
+          DROP TABLE IF EXISTS orders;
           CREATE TABLE orders (
             id varchar(100) NOT NULL,
             user_id varchar(100) NOT NULL,
@@ -78,6 +83,7 @@ class m0001_initial
             CONSTRAINT order_customer_fk FOREIGN KEY (user_id) REFERENCES users (id)
           );
           
+          DROP TABLE IF EXISTS order_detail;
           CREATE TABLE order_detail (
             id varchar(100) NOT NULL,
             product_id varchar(100) NOT NULL,
@@ -91,6 +97,7 @@ class m0001_initial
             CONSTRAINT order_product_fk FOREIGN KEY (product_id) REFERENCES products (id)
           );
           
+          DROP TABLE IF EXISTS cart;
           CREATE TABLE cart (
             id varchar(100) NOT NULL,
             user_id varchar(100) NOT NULL,
@@ -101,6 +108,7 @@ class m0001_initial
             CONSTRAINT cart_customer_fk FOREIGN KEY (user_id) REFERENCES users (id)
           );
           
+          DROP TABLE IF EXISTS cart_detail;
           CREATE TABLE cart_detail (
             order_detail_id varchar(100) NOT NULL,
             product_id varchar(100) NOT NULL,
@@ -114,6 +122,7 @@ class m0001_initial
             CONSTRAINT product_fk FOREIGN KEY (product_id) REFERENCES products (id)
           );
 
+          DROP TABLE IF EXISTS news;
           CREATE TABLE news (
             id varchar(100) NOT NULL,
             title varchar(100) NOT NULL,

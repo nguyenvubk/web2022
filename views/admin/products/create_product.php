@@ -12,6 +12,7 @@
         <?php $form = app\core\Form\Form::begin('', "post") ?>
             <div class="form-group col-md-4">
               <label for="category_id">Tên mục</label>
+
               <!-- <input type="text" class="form-control" id="category_id" name="category_id" placeholder="Tên mục">-->
               <select name="category_id" id="category_id" class='form-control'>
                 <?php

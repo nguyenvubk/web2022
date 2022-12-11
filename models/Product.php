@@ -134,7 +134,7 @@ class Product extends DBModel
     {
         $list = [];
         $db = Database::getInstance();
-        $req = $db->query('SELECT * FROM products WHERE is_deleted = false');
+        $req = $db->query('SELECT * FROM products WHERE is_deleted = false ORDER BY updated_at DESC');
 
         foreach ($req->fetchAll() as $item) {
             $list[] = new Product($item['id'], $item['category_id'], $item['name'], $item['price'], $item['description'], $item['image_url']);
@@ -168,7 +168,7 @@ class Product extends DBModel
     {
         $list = [];
         $db = Database::getInstance();
-        $req = $db->query("SELECT * FROM products WHERE category_id = '$category_id'");
+        $req = $db->query("SELECT * FROM products WHERE category_id = '$category_id' AND is_deleted = false ORDER BY updated_at DESC");
 
         foreach ($req->fetchAll() as $item) {
             $list[] = new Product($item['id'], $item['category_id'], $item['name'], $item['price'], $item['description'], $item['image_url']);
@@ -180,7 +180,7 @@ class Product extends DBModel
     {
         $list = [];
         $db = Database::getInstance();
-        $req = $db->query("SELECT * FROM products WHERE name LIKE '%$keyword%';");
+        $req = $db->query("SELECT * FROM products WHERE name LIKE '%$keyword%'AND is_deleted = false ORDER BY updated_at DESC;");
 
         foreach ($req->fetchAll() as $item) {
             $list[] = new Product($item['id'], $item['category_id'], $item['name'], $item['price'], $item['description'], $item['image_url']);

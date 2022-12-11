@@ -194,7 +194,7 @@ class News extends DBModel
     {
         $list = [];
         $db = Database::getInstance();
-        $req = $db->query('SELECT * FROM news WHERE is_deleted = 0');
+        $req = $db->query('SELECT * FROM news WHERE is_deleted = 0 ORDER BY updated_at DESC');
 
         foreach ($req->fetchAll() as $item) {
             $list[] = new News($item['id'], $item['title'], $item['description'], $item['image'], $item['status'], $item['content'], $item['updated_at']);
@@ -207,7 +207,7 @@ class News extends DBModel
     {
         $list = [];
         $db = Database::getInstance();
-        $req = $db->query('SELECT * FROM news WHERE is_deleted = 0 AND status = 1');
+        $req = $db->query('SELECT * FROM news WHERE is_deleted = 0 AND status = 1 ORDER BY updated_at DESC');
 
         foreach ($req->fetchAll() as $item) {
             $list[] = new News($item['id'], $item['title'], $item['description'], $item['image'], $item['status'], $item['content'], $item['updated_at']);
@@ -248,7 +248,7 @@ class News extends DBModel
     {
         $list = [];
         $db = Database::getInstance();
-        $req = $db->query("SELECT * FROM news WHERE title LIKE '%$keyword%';");
+        $req = $db->query("SELECT * FROM news WHERE title LIKE '%$keyword%' ORDER BY updated_at DESC;");
 
         foreach ($req->fetchAll() as $item) {
             $list[] = new News($item['id'], $item['title'], $item['description'], $item['image'], $item['status'], $item['content'], $item['updated_at']);
