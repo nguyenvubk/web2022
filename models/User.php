@@ -159,13 +159,26 @@ class User extends UserModel
                 firstname = '$user->firstname', 
                 lastname = '$user->lastname',
                 email = '$user->email',
-                password = 'password_hash($user->password, PASSWORD_DEFAULT)',
                 phone_number = '$user->phone_number',
-                role = '$user->role',
                 address = '$user->address'
             WHERE id = '$user->id';
             "
         );
+        if ($user->password != ''){
+            $user->password = password_hash($user->password,PASSWORD_DEFAULT);
+            $statement = self::prepare(
+                "UPDATE users 
+                SET 
+                    firstname = '$user->firstname', 
+                    lastname = '$user->lastname',
+                    email = '$user->email',
+                    password = '$user->password',
+                    phone_number = '$user->phone_number',
+                    address = '$user->address'
+                WHERE id = '$user->id';
+                "
+            );
+        }
         $statement->execute();
         return true;
     }
