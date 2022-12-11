@@ -77,22 +77,18 @@ header("Content-type: text/html; charset=utf-8");
                     <li class="nav-item">
                         <a class="nav-link" id="menu" href="/menu">Thực đơn</a>
                         <div class="menu-hide">
-                            <div class="row justify-content-around align-items-center">
-                                <div class="col d-flex justify-content-center">
-                                    <a href="/menu?category_id=1">Cà phê</a>
-                                </div>
-                                <div class="col d-flex justify-content-center">
-                                    <a href="/menu?category_id=5">Trà trái cây - Trà sữa</a>
-                                </div>
-                                <div class="col d-flex justify-content-center">
-                                    <a href="/menu?category_id=2">Đá xay</a>
-                                </div>
-                                <div class="col d-flex justify-content-center">
-                                    <a href="/menu?category_id=18">Thưởng thức tại nhà</a>
-                                </div>
-                                <div class="col d-flex justify-content-center">
-                                    <a href="/menu?category_id=20">Tumbler collection</a>
-                                </div>
+                            <div class="d-flex flex-row flex-wrap justify-content-around align-items-center menu-category">
+                            <?php  
+                                use app\models\Category;
+                                $categoryModel = Category::getCategorySorted();
+                                foreach($categoryModel as $category) {
+                                    ?>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="/menu?category_id=<?=$category->getId()?>"><?=$category->getName()?></a>
+                                    </div>
+                                    <?php
+                                }
+                            ?>  
                             </div>
                         </div>
                     </li>

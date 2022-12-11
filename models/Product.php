@@ -142,6 +142,18 @@ class Product extends DBModel
 
         return $list;
     }
+    public static function getProducts(int $limit)
+    {
+        $list = [];
+        $db = Database::getInstance();
+        $req = $db->query('SELECT * FROM products WHERE is_deleted = false LIMIT '.$limit);
+
+        foreach ($req->fetchAll() as $item) {
+            $list[] = new Product($item['id'], $item['category_id'], $item['name'], $item['price'], $item['description'], $item['image_url']);
+        }
+
+        return $list;
+    }
 
     public static function getProductDetail($id)
     {

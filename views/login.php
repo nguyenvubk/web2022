@@ -19,7 +19,7 @@
             </div>
             <div class="card-footer">
                 <div class="d-flex justify-content-center links">
-                    Trở thành viên Buy me store !<a href="/register">Đăng ký</a>
+                    Trở thành viên My Coffee!<a href="/register">Đăng ký</a>
                 </div>
             </div>
         </div>

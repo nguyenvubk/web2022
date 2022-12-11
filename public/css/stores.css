@@ -86,12 +86,11 @@
     border-radius: 5px;
 }
 
-.item-info {
+.item-info-store {
     padding-top: 12px ;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 106px;
 }
 
 .item-name {

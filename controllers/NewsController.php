@@ -35,13 +35,16 @@ class NewsController extends Controller
     public function content(Request $request) {
         if ($request->getMethod() == 'get') {
             $id = Application::$app->request->getParam('id');
-            $relate = News::getNewsRelated($id);
             $newsObj = News::getNewsDetail($id);
+
+            $relate = News::getNewsRelated($id);
             return $this->render('content', [
                 'news' => $newsObj,
                 'prev' => $relate['prev'],
                 'next' => $relate['next']
             ]);
+
+
         }
     }
     public function index() 

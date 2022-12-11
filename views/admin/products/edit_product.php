@@ -15,7 +15,19 @@
               <?php echo $form->field($productModel, 'id') ?>
             </div>
             <div class="form-group col-md-3">
-            <?php echo $form->field($productModel, 'category_id') ?>
+
+              <label for="category_id">Tên mục</label>
+              <select name="category_id" id="category_id" class='form-control'>
+                <?php
+                  foreach($params['categories'] as $category) {
+                    ?>
+                    <option value="<?=$category->getId()?>" <?=$productModel->getCategoryId() == $category->getId()?'selected':''?>><?=$category->getName()?></option>
+                    <?php
+                  }
+                ?>
+              </select>
+            </div>
+
             </div>
             <div class="form-group col-md-3">
               <?php echo $form->fieldtype($productModel, 'price', 'number') ?>
