@@ -8,26 +8,6 @@ class m0002_importData
     {
         $db = Application::$app->db;
         $sql = "
-        INSERT INTO news (id,title,description,image,status,content) VALUES
-         ('6392da3f069d1', 'CÀ PHÊ SỮA - BẬT LON BẬT VỊ NGON', 'Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.',
-         'banner1.jpg', 1, '<p>Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.</p>&#13;&#10;'),
-         ('6392da3f069d2', 'CÀ PHÊ SỮA - BẬT LON BẬT VỊ NGON', 'Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.',
-         'banner1.jpg', 1, '<p>Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.</p>&#13;&#10;'),
-         ('6392da3f069d3', 'CÀ PHÊ SỮA - BẬT LON BẬT VỊ NGON', 'Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.',
-         'banner1.jpg', 1, '<p>Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.</p>&#13;&#10;'),
-         ('6392da3f069d4', 'CÀ PHÊ SỮA - BẬT LON BẬT VỊ NGON', 'Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.',
-         'banner1.jpg', 1, '<p>Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.</p>&#13;&#10;'),
-         ('6392da3f069d5', 'CÀ PHÊ SỮA - BẬT LON BẬT VỊ NGON', 'Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.',
-         'banner1.jpg', 1, '<p>Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.</p>&#13;&#10;'),
-         ('6392da3f069d7', 'CÀ PHÊ SỮA - BẬT LON BẬT VỊ NGON', 'Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.',
-         'banner1.jpg', 1, '<p>Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.</p>&#13;&#10;'),
-         ('6392da3f069d8', 'CÀ PHÊ SỮA - BẬT LON BẬT VỊ NGON', 'Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.',
-         'banner1.jpg', 1, '<p>Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.</p>&#13;&#10;'),
-         ('6392da3f069d9', 'CÀ PHÊ SỮA - BẬT LON BẬT VỊ NGON', 'Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.',
-         'banner1.jpg', 1, '<p>Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.</p>&#13;&#10;'),
-         ('6392da3f069d0', 'CÀ PHÊ SỮA - BẬT LON BẬT VỊ NGON', 'Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.',
-         'banner1.jpg', 1, '<p>Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.</p>&#13;&#10;');
-
         INSERT INTO stores (id,address,status,image_url,open_time,phone,created_at,updated_at) VALUES
         ('117','114 Đường 9A Khu Dân cư Trung Sơn','hoạt động','https://minio.thecoffeehouse.com/image/admin/store/5b21f8cb1acd4d02032668ea_trung_20son_201.jpeg','7:00 - 22:00','02871087088','2021-10-30 03:15:23','2021-10-30 03:15:23'),
         ('129','93/5 Nguyễn Ảnh Thủ','hoạt động','https://minio.thecoffeehouse.com/image/admin/store/5b21f8cb1acd4d02032668eb_nguyen_20anh_20thu_201.jpeg','7:00 - 22:00','02871087088','2021-10-30 03:15:23','2021-10-30 03:15:23'),
