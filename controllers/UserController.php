@@ -26,20 +26,23 @@ class UserController extends Controller{
 
     public function create(Request $request)
     {
-        $userModel = new User;
+        $userModel = new User();
         if($request->getMethod() === 'post') {
             $userModel->loadData($request->getBody());
-            if($userModel->getRole() === 'client') {
-                $userModel->saveAdmin($userModel->getRole());
+            if ($userModel->validate()) {
+                if($userModel->getRole() === 'client') {
+                    $userModel->saveAdmin($userModel->getRole());
+                }
+                else $userModel->save();
+                Application::$app->response->redirect('/admin/users');
             }
-            else $userModel->save();
-            Application::$app->response->redirect('/admin/users');
-        } else if($request->getMethod() === 'get') {
-            $this->setLayout('admin');
-            return $this->render('/admin/users/create_user',  [
-                'userModel' => $userModel
-            ]);
         }
+
+        $this->setLayout('admin');
+        return $this->render('/admin/users/create_user',  [
+            'userModel' => $userModel
+        ]);
+        
     }
 
     public function delete(Request $request)
