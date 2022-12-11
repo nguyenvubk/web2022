@@ -25,9 +25,9 @@
                     <div class="col-md-12">
                         <?php echo $form->field($user, 'email') ?><br>
                     </div>
-                    <div class="col-md-12">
+                    <!-- <div class="col-md-12">
                         <?php echo $form->field($user, 'role') ?><br>
-                    </div>
+                    </div> -->
                 </div><br><br>
                 <div class="mt-5 text-center">
                     <button class="btn btn-primary profile-button" type="submit">Cập nhật</button>
