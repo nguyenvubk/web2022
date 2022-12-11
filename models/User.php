@@ -107,7 +107,7 @@ class User extends UserModel
     {
         $list = [];
         $db = Database::getInstance();
-        $req = $db->query("SELECT * FROM users WHERE role = 'client'");
+        $req = $db->query("SELECT * FROM users WHERE role = 'client' AND is_deleted = false ORDER BY updated_at DESC");
 
         foreach ($req->fetchAll() as $item) {
             $userModel = new User;
