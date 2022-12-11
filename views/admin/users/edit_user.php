@@ -24,13 +24,10 @@
             <div class="form-group col-md-4">
               <?php echo $form->field($userModel, 'phone_number') ?>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
               <?php echo $form->fieldtype($userModel, 'email', 'email') ?>
             </div>
-            <div class="form-group col-md-4">
-              <?php echo $form->field($userModel, 'role') ?>
-            </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
               <?php echo $form->field($userModel, 'address') ?>
             </div>
             <div class="form-row">
