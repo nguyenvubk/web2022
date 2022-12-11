@@ -11,6 +11,8 @@ use app\middlewares\AuthMiddleware;
 use app\models\LoginForm;
 use app\models\Store;
 use app\models\User;
+use app\models\News;
+use app\models\Product;
 
 class SiteController extends Controller
 {
@@ -30,8 +32,12 @@ class SiteController extends Controller
 
     public function home()
     {
+        $news = News::getNews(3);
+        $product = Product::getProducts(6);
         return $this->render('home', [
-            'name' => 'My Coffee store'
+            'name' => 'My Coffee',
+            'news' => $news,
+            'product' => $product
         ]);
     }
 

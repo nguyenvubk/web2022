@@ -16,15 +16,18 @@
                 aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="2000">
-                <img src="https://minio.thecoffeehouse.com/image/admin/baner-home-web_510005.jpg" alt="...">
-            </div>
-            <div class="carousel-item" data-bs-interval="2000">
-                <img src="https://ipos.vn/wp-content/uploads/2022/02/the-cfhouse.jpg" alt="...">
-            </div>
-            <div class="carousel-item" data-bs-interval="2000">
-                <img src="http://file.hstatic.net/1000075078/article/kv_2_banner_blog_0afa0107f39943b5bdbba46b6187a4e5_d0ffa3b2677c4d119ecdd26a9dd84da0.jpg" alt="...">
-            </div>
+            <?php 
+                foreach ($params['news'] as $key => $newsModel) {
+                    ?>
+                    <div class="carousel-item <?=$key==0?'active':''?>" data-bs-interval="2000">
+                        <a href="/news/content?id=<?=$newsModel->getId()?>">
+                            <img src="/images/news/<?=$newsModel->getImage()?>" alt="...">
+
+                        </a>
+                    </div>
+                    <?php
+                }
+            ?>
         </div>
 
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -45,60 +48,23 @@
                 <div class="col-lg-6 col-12">
                     <img src="https://file.hstatic.net/1000075078/file/banner_app_59792ee4e6074b33aca7f140433e9292.jpg" alt="" class="w-100">
                 </div>
-                <div class="col-lg-3 col-6">
-                    <img src="https://product.hstatic.net/1000075078/product/1669736910_cloudfee-hanh-nhan-nuong_b583e36e46a140db934c5a27326d0f36_large.png" alt="" class="w-100">
-                    <div class="menu-item-info">
-                        <h3>
-                            <a href="#">CloudFee Hạnh Nhân Nướng</a>
-                        </h3>
-                        <p class="price-product-item">49.000 đ</p>
+                
+                <?php foreach($params['product'] as $productModel) {
+                    ?>
+                    <div class="col-lg-3 col-6">
+                        <a href="/product?id=<?=$productModel->getId()?>">
+                            <img src="<?=$productModel->getImageUrl()?>" alt="" class="w-100">
+                        </a>
+                        <div class="menu-item-info">
+                            <h3>
+                                <a href="/product?id=<?=$productModel->getId()?>"><?=$productModel->getName()?></a>
+                            </h3>
+                            <p class="price-product-item"><?=number_format($productModel->getPrice())?> đ</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-6">
-                    <img src="https://product.hstatic.net/1000075078/product/1669736910_cloudfee-hanh-nhan-nuong_b583e36e46a140db934c5a27326d0f36_large.png" alt="" class="w-100">
-                    <div class="menu-item-info">
-                        <h3>
-                            <a href="#">CloudFee Hạnh Nhân Nướng</a>
-                        </h3>
-                        <p class="price-product-item">49.000 đ</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-6">
-                    <img src="https://product.hstatic.net/1000075078/product/1669736910_cloudfee-hanh-nhan-nuong_b583e36e46a140db934c5a27326d0f36_large.png" alt="" class="w-100">
-                    <div class="menu-item-info">
-                        <h3>
-                            <a href="#">CloudFee Hạnh Nhân Nướng</a>
-                        </h3>
-                        <p class="price-product-item">49.000 đ</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-6">
-                    <img src="https://product.hstatic.net/1000075078/product/1669736910_cloudfee-hanh-nhan-nuong_b583e36e46a140db934c5a27326d0f36_large.png" alt="" class="w-100">
-                    <div class="menu-item-info">
-                        <h3>
-                            <a href="#">CloudFee Hạnh Nhân Nướng</a>
-                        </h3>
-                        <p class="price-product-item">49.000 đ</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-6">
-                    <img src="https://product.hstatic.net/1000075078/product/1669736910_cloudfee-hanh-nhan-nuong_b583e36e46a140db934c5a27326d0f36_large.png" alt="" class="w-100">
-                    <div class="menu-item-info">
-                        <h3>
-                            <a href="#">CloudFee Hạnh Nhân Nướng</a>
-                        </h3>
-                        <p class="price-product-item">49.000 đ</p>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-6">
-                    <img src="https://product.hstatic.net/1000075078/product/1669736910_cloudfee-hanh-nhan-nuong_b583e36e46a140db934c5a27326d0f36_large.png" alt="" class="w-100">
-                    <div class="menu-item-info">
-                        <h3>
-                            <a href="#">CloudFee Hạnh Nhân Nướng</a>
-                        </h3>
-                        <p class="price-product-item">49.000 đ</p>
-                    </div>
-                </div>
+                    <?php
+                } ?>
+
 
             </div>
         </div>

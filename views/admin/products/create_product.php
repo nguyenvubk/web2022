@@ -12,14 +12,19 @@
         <?php $form = app\core\Form\Form::begin('', "post") ?>
             <div class="form-group col-md-4">
               <label for="category_id">Tên mục</label>
-              <!-- <input type="text" class="form-control" id="category_id" name="category_id" placeholder="Tên mục"> -->
-                <select name="category_id" id="category_id" class="form-control" style="width:235px">
-                    <option value="1">Cà phê</option>
-                    <option value="18">Thưởng thức tại nhà</option>
-                    <option value="2">Đá Xay</option>
-                    <option value="20">Tumbler collection</option>
-                    <option value="5">Trà trái cây - Trà sữa</option>
-                </select>
+
+              <!-- <input type="text" class="form-control" id="category_id" name="category_id" placeholder="Tên mục">-->
+              <select name="category_id" id="category_id" class='form-control'>
+                <?php
+                  foreach($params['categories'] as $category) {
+                    ?>
+                    <option value="<?=$category->getId()?>"><?=$category->getName()?></option>
+                    <?php
+
+                  }
+
+                ?>
+              </select>
             </div>
             <div class="form-group col-md-4">
               <label for="name">Tên sản phẩm</label>

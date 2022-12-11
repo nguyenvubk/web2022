@@ -12,6 +12,7 @@ use app\core\Request;
 use app\models\Cart;
 use app\models\CartDetail;
 use app\models\Record;
+use app\models\Category;
 
 class ProductController extends Controller
 {
@@ -37,9 +38,11 @@ class ProductController extends Controller
             Application::$app->response->redirect('/admin/products');
         } else if ($request->getMethod() === 'get') {
             $products = Product::getAllProducts();
+            $categories = Category::getAllCategories();
             $this->setLayout('admin');
             return $this->render('/admin/products/create_product', [
-                'productModel' => $products
+                'productModel' => $products,
+                'categories' => $categories
             ]);
         }
     }
@@ -74,9 +77,11 @@ class ProductController extends Controller
         } else if ($request->getMethod() === 'get') {
             $id = Application::$app->request->getParam('id');
             $productModel = Product::getProductDetail($id);
+            $categories = Category::getAllCategories();
             $this->setLayout('admin');
             return $this->render('/admin/products/edit_product', [
-                'productModel' => $productModel
+                'productModel' => $productModel,
+                'categories' => $categories
             ]);
         }
     }

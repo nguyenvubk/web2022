@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet/less" type="text/css" href="styles.less" />
 
-    <title>Buy me store</title>
+    <title>My Coffee</title>
 </head>
 
 <body>

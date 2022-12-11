@@ -187,7 +187,7 @@
 
 .menu-hide {
   position: absolute;
-  height: 75px;
+  /* height: 75px; */
   padding: 10px 0;
   border-radius: 0 0 10px 10px;
   background-color: rgba(255, 255, 255, 0.9);
@@ -195,9 +195,20 @@
   display: none !important; 
 }
 
+
+
 .menu-hide a:hover {
   color: #E57905;
-  border-bottom: 2px solid #E57905;
+  /* border-bottom: 2px solid #E57905; */
+  text-decoration: underline;
+}
+
+.menu-category {
+  width: 600px;
+}
+
+.menu-category div {
+  width: 100px;
 }
 
 @keyframes fade-in {

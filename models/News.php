@@ -216,13 +216,31 @@ class News extends DBModel
         return $list;
     }
 
+    public static function getNews(int $limit)
+    {
+        $list = [];
+        $db = Database::getInstance();
+        $req = $db->query('SELECT * FROM news WHERE is_deleted = 0 AND status = 1 LIMIT '.$limit);
+
+        foreach ($req->fetchAll() as $item) {
+            $list[] = new News($item['id'], $item['title'], $item['description'], $item['image'], $item['status'], $item['content'], $item['updated_at']);
+        }
+
+        return $list;
+    }
+
     public static function getNewsDetail($id)
     {
         $db = Database::getInstance();
         $req = $db->query("SELECT * FROM news WHERE id = '$id' AND is_deleted = 0");
-        $item = $req->fetchAll()[0];
-        $product = new News($item['id'], $item['title'], $item['description'], $item['image'], $item['status'], $item['content'], $item['updated_at']);
-        return $product;
+        
+        $item = $req->fetchAll();
+        if (count($item) > 0) {
+            $item = $item[0];
+            $product = new News($item['id'], $item['title'], $item['description'], $item['image'], $item['status'], $item['content'], $item['updated_at']);
+            return $product;
+        }
+        return null;
     }
 
 
