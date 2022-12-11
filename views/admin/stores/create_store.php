@@ -16,7 +16,7 @@
             </div>
             <div class="form-group col-md-4">
               <label for="price">Địa chỉ</label>
-              <input type="text" class="form-control" id="price" name="price" placeholder="Price">
+              <input type="text" class="form-control" id="price" name="price" placeholder="Địa chỉ">
             </div>
             <div class="form-group col-md-4">
               <label for="price">Name</label>

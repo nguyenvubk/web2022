@@ -11,7 +11,11 @@
       <div class="panel-body">
         <?php $form = app\core\Form\Form::begin('', "post") ?>
             <div class="form-group col-md-6">
-                <?php echo $form->field($storeModel, 'status') ?>
+            <label for="status">Tình trạng</label>
+            <select name="status" id="status" class="form-control">
+              <option value="" <?=$storeModel->getStatus()==''?'selected':''?>>Không hoạt động</option>
+              <option value="hoạt động" <?=$storeModel->getStatus()!=''?'selected':''?>>Hoạt động</option>
+            </select>
             </div>
             <div class="form-group col-md-6">
                 <?php echo $form->field($storeModel, 'address') ?>
