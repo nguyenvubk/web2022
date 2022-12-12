@@ -1,238 +1,322 @@
-create database buyme;
-use buyme;
+-- MySQL dump 10.13  Distrib 8.0.27, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: thecoffeehouse
+-- ------------------------------------------------------
+-- Server version	8.0.27
 
-CREATE TABLE stores (
-    id varchar(100) NOT NULL,
-    address varchar(1000) NOT NULL,
-    status varchar(100) NOT NULL,
-    image_url varchar(4000) NOT NULL,
-    open_time varchar(100) NOT NULL,
-    phone varchar(100) NOT NULL,
-    is_deleted BOOLEAN DEFAULT FALSE,
-    created_at timestamp NOT NULL DEFAULT current_timestamp(),
-    updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-    PRIMARY KEY (id)
-  );
-  
-  CREATE TABLE users (
-    id varchar(100) NOT NULL,
-    firstname varchar(100) NOT NULL,
-    lastname varchar(100) NOT NULL,
-    email varchar(100) NOT NULL,
-    phone_number varchar(100) NOT NULL,
-    password varchar(100) NOT NULL,
-    image_url varchar(4000) DEFAULT NULL,
-    address varchar(100) NOT NULL,
-    ward_id varchar(100) DEFAULT NULL,
-    district_id varchar(100) DEFAULT NULL,
-    province_id varchar(100) DEFAULT NULL,
-    created_at timestamp NOT NULL DEFAULT current_timestamp(),
-    updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-    role varchar(100)   DEFAULT NULL,
-    is_deleted BOOLEAN DEFAULT FALSE,
-    PRIMARY KEY (id)
-  );
-  
-  CREATE TABLE categories (
-    id varchar(100) NOT NULL,
-    name varchar(100) NOT NULL,
-    is_deleted BOOLEAN DEFAULT FALSE,
-    created_at timestamp NOT NULL DEFAULT current_timestamp(),
-    updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-    PRIMARY KEY (id)
-  );
-  
-  CREATE TABLE products (
-    id varchar(100) NOT NULL,
-    category_id varchar(100) NOT NULL,
-    name varchar(100) NOT NULL,
-    image_url varchar(1000) NOT NULL,
-    price int NOT NULL,
-    description varchar(4000) NOT NULL,
-    is_deleted boolean default false,
-    created_at timestamp NOT NULL DEFAULT current_timestamp(),
-    updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-    PRIMARY KEY (id),
-    CONSTRAINT category_id FOREIGN KEY (category_id) REFERENCES categories (id)
-  );
-  
-  CREATE TABLE orders (
-    id varchar(100) NOT NULL,
-    user_id varchar(100) NOT NULL,
-    payment_method varchar(100) NOT NULL,
-    status varchar(100) NOT NULL,
-    created_at timestamp NOT NULL DEFAULT current_timestamp(),
-    updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-    delivery_name varchar(100)   DEFAULT NULL,
-    delivery_phone varchar(100)   DEFAULT NULL,
-    delivery_address varchar(100)   DEFAULT NULL,
-    display varchar(10),
-    PRIMARY KEY (id),
-    CONSTRAINT order_customer_fk FOREIGN KEY (user_id) REFERENCES users (id)
-  );
-  
-  CREATE TABLE order_detail (
-    id varchar(100) NOT NULL,
-    product_id varchar(100) NOT NULL,
-    order_id varchar(100) NOT NULL,
-    quantity int NOT NULL,
-    created_at timestamp NOT NULL DEFAULT current_timestamp(),
-    updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-    size varchar(100)  DEFAULT NULL,
-    note varchar(100)  DEFAULT NULL,
-    CONSTRAINT order_fk FOREIGN KEY (order_id) REFERENCES orders (id),
-    CONSTRAINT order_product_fk FOREIGN KEY (product_id) REFERENCES products (id)
-  );
-  
-  CREATE TABLE cart (
-    id varchar(100) NOT NULL,
-    user_id varchar(100) NOT NULL,
-    status varchar(100) NOT NULL,
-    created_at timestamp NOT NULL DEFAULT current_timestamp(),
-    updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-    PRIMARY KEY (id),
-    CONSTRAINT cart_customer_fk FOREIGN KEY (user_id) REFERENCES users (id)
-  );
-  
-  CREATE TABLE cart_detail (
-    order_detail_id varchar(100) NOT NULL,
-    product_id varchar(100) NOT NULL,
-    cart_id varchar(100) NOT NULL,
-    quantity int NOT NULL,
-    note varchar(100) DEFAULT NULL,
-    created_at timestamp NOT NULL DEFAULT current_timestamp(),
-    updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-    size varchar(100)  DEFAULT NULL,
-    CONSTRAINT cart_fk FOREIGN KEY (cart_id) REFERENCES cart (id),
-    CONSTRAINT product_fk FOREIGN KEY (product_id) REFERENCES products (id)
-  );
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+--
+-- Table structure for table `cart`
+--
+UNLOCK TABLES;
+DROP TABLE IF EXISTS `cart`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cart` (
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `user_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `status` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `cart_customer_fk` (`user_id`),
+  CONSTRAINT `cart_customer_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-INSERT INTO stores (id,address,status,image_url,open_time,phone,created_at,updated_at) VALUES
- ('117','114 Đường 9A Khu Dân cư Trung Sơn','hoạt động','https://minio.thecoffeehouse.com/image/admin/store/5b21f8cb1acd4d02032668ea_trung_20son_201.jpeg','7:00 - 22:00','02871087088','2021-10-30 03:15:23','2021-10-30 03:15:23'),
- ('129','93/5 Nguyễn Ảnh Thủ','hoạt động','https://minio.thecoffeehouse.com/image/admin/store/5b21f8cb1acd4d02032668eb_nguyen_20anh_20thu_201.jpeg','7:00 - 22:00','02871087088','2021-10-30 03:15:23','2021-10-30 03:15:23'),
- ('18','141 Nguyễn Thái Bình','hoạt động','https://minio.thecoffeehouse.com/image/admin/store/5b21f8cb1acd4d02032668ee_5b21f8cb1acd4d02032668ee_nguyen_20thai_20binh_201_20.jpeg','7:00 - 22:00','02871087088','2021-10-30 03:15:23','2021-10-30 03:15:23');
+--
+-- Dumping data for table `cart`
+--
 
-INSERT INTO users (id, firstname, lastname, email, phone_number, password, image_url, address, ward_id, district_id, province_id, role, created_at, updated_at) VALUES
-('6191e42fe4e3f', 'admin', 'admin', 'admin@gmail.com', '0924955363', '$2y$10$nneHV8Gl.awaHeCEh61Q4upQjpo7pN9UyTSPQlBO6H9RLnFLPTAEy', '', 'HCM City', '', '', '', 'admin', '2021-11-15 04:38:07', '2021-11-15 04:38:07');
+LOCK TABLES `cart` WRITE;
+/*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cart` ENABLE KEYS */;
+UNLOCK TABLES;
 
-INSERT INTO categories (id,name,created_at,updated_at) VALUES
-('1','Cà phê','2021-10-30 02:31:28','2021-10-30 02:31:28'),
-('18','Thưởng thức tại nhà','2021-10-30 02:31:28','2021-10-30 02:31:28'),
-('2','Đá Xay - Choco - Matcha','2021-10-30 02:31:28','2021-10-30 02:31:28'),
-('20','Bộ sưu tập quà tặng','2021-10-30 02:31:28','2021-10-30 02:31:28'),
-('5','Trà Trái Cây - Trà Sữa','2021-10-30 02:31:28','2021-10-30 02:31:28');
+--
+-- Table structure for table `cart_detail`
+--
 
+DROP TABLE IF EXISTS `cart_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cart_detail` (
+  `product_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `cart_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `quantity` int NOT NULL,
+  `note` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `size` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `order_detail_id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  KEY `cart_fk` (`cart_id`),
+  KEY `product_fk` (`product_id`),
+  CONSTRAINT `cart_fk` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`),
+  CONSTRAINT `product_fk` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `cart_detail`
+--
 
-INSERT INTO products (id,category_id,name,image_url,price,description,created_at,updated_at) VALUES
-	 ('5b03966a1acd4d5bbd672373','1','Americano Nóng','https://minio.thecoffeehouse.com/image/admin/cfsua-bacsiu_nong-(1)_139962_400x400.jpg',40000,'Americano được pha chế bằng cách pha thêm nước với tỷ lệ nhất định vào tách cà phê Espresso, từ đó mang lại hương vị nhẹ nhàng và giữ trọn được mùi hương cà phê đặc trưng.','2021-10-30 02:31:49','2021-11-11 15:09:29'),
-	 ('5b03966a1acd4d5bbd672374','1','Americano Đá','https://minio.thecoffeehouse.com/image/admin/classic-cold-brew_791256.jpg',40000,'Americano được pha chế bằng cách pha thêm nước với tỷ lệ nhất định vào tách cà phê Espresso, từ đó mang lại hương vị nhẹ nhàng và giữ trọn được mùi hương cà phê đặc trưng.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5b03966a1acd4d5bbd672375','2','Sinh Tố Việt Quất','https://minio.thecoffeehouse.com/image/admin/sinh-to-viet-quoc_145138.jpg',59000,'Mứt Việt Quất chua thanh, ngòn ngọt, phối hợp nhịp nhàng với dòng sữa chua bổ dưỡng. Là món sinh tố thơm ngon mà cả đầu lưỡi và làn da đều thích. 
-        ','2021-10-30 02:56:12','2021-10-30 02:56:12'),
-	 ('5b03966a1acd4d5bbd672377','1','Cappuccino Nóng','https://minio.thecoffeehouse.com/image/admin/cappuccino_621532.jpg',50000,'Capuchino là thức uống hòa quyện giữa hương thơm của sữa, vị béo của bọt kem cùng vị đậm đà từ cà phê Espresso. Tất cả tạo nên một hương vị đặc biệt, một chút nhẹ nhàng, trầm lắng và tinh tế.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5b03966a1acd4d5bbd672378','1','Cappuccino Đá','https://minio.thecoffeehouse.com/image/admin/Capu-da_487470.jpg',50000,'Capuchino là thức uống hòa quyện giữa hương thơm của sữa, vị béo của bọt kem cùng vị đậm đà từ cà phê Espresso. Tất cả tạo nên một hương vị đặc biệt, một chút nhẹ nhàng, trầm lắng và tinh tế.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5b03966a1acd4d5bbd67237a','1','Caramel Macchiato Nóng','https://minio.thecoffeehouse.com/image/admin/caramelmacchiatonong_168039.jpg',50000,'Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê.
-        ','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5b03966a1acd4d5bbd67237b','1','Caramel Macchiato Đá','https://minio.thecoffeehouse.com/image/admin/caramel-macchiato_143623.jpg',50000,'Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê.
-        ','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5b03966a1acd4d5bbd67237c','2','Chocolate Đá Xay','https://minio.thecoffeehouse.com/image/admin/Chocolate-ice-blended_400940.jpg',59000,'Sữa và kem tươi béo ngọt được “cá tính hoá” bởi vị chocolate/sô-cô-la đăng đắng. Dành cho các tín đồ hảo ngọt. Lựa chọn hàng đầu nếu bạn đang cần chút năng lượng tinh thần.','2021-10-30 02:54:53','2021-10-30 02:54:53'),
-	 ('5b03966a1acd4d5bbd67237e','2','Cookie Đá Xay','https://minio.thecoffeehouse.com/image/admin/Chocolate-ice-blended_183602.jpg',59000,'Những mẩu bánh cookies giòn rụm kết hợp ăn ý với sữa tươi, kem tươi béo ngọt và đá xay mát lành, đem đến cảm giác lạ miệng gây thích thú và không thể cưỡng lại. Một món uống phá cách dễ thương đầy mê hoặc.','2021-10-30 02:54:16','2021-10-30 02:54:16'),
-	 ('5b03966a1acd4d5bbd67237f','1','Espresso Đá','https://minio.thecoffeehouse.com/image/admin/cfdenda-espressoDa_185438.jpg',45000,'Một tách Espresso nguyên bản được bắt đầu bởi những hạt Arabica chất lượng, phối trộn với tỉ lệ cân đối hạt Robusta, cho ra vị ngọt caramel, vị chua dịu và sánh đặc.','2021-10-30 02:31:49','2021-10-30 02:31:49');
+LOCK TABLES `cart_detail` WRITE;
+/*!40000 ALTER TABLE `cart_detail` DISABLE KEYS */;
+INSERT INTO `cart_detail` VALUES ('5b03966a1acd4d5bbd672377','61ac4deeef299',1,'','2021-12-05 05:28:18','2021-12-05 05:28:18','Medium','61ac4df2c14c3');
+/*!40000 ALTER TABLE `cart_detail` ENABLE KEYS */;
+UNLOCK TABLES;
 
-INSERT INTO products (id,category_id,name,image_url,price,description,created_at,updated_at) VALUES
-	 ('5b03966a1acd4d5bbd672380','1','Espresso Nóng','https://minio.thecoffeehouse.com/image/admin/espressoNong_612688.jpg',40000,'Một tách Espresso nguyên bản được bắt đầu bởi những hạt Arabica chất lượng, phối trộn với tỉ lệ cân đối hạt Robusta, cho ra vị ngọt caramel, vị chua dịu và sánh đặc.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5b03966a1acd4d5bbd672390','1','Latte Nóng','https://minio.thecoffeehouse.com/image/admin/latte_851143.jpg',50000,'Một sự kết hợp tinh tế giữa vị đắng cà phê Espresso nguyên chất hòa quyện cùng vị sữa nóng ngọt ngào, bên trên là một lớp kem mỏng nhẹ tạo nên một tách cà phê hoàn hảo về hương vị lẫn nhãn quan.
+--
+-- Table structure for table `categories`
+--
 
-        ','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5b03966a1acd4d5bbd672391','1','Latte Đá','https://minio.thecoffeehouse.com/image/admin/latte-da_438410.jpg',50000,'Một sự kết hợp tinh tế giữa vị đắng cà phê Espresso nguyên chất hòa quyện cùng vị sữa nóng ngọt ngào, bên trên là một lớp kem mỏng nhẹ tạo nên một tách cà phê hoàn hảo về hương vị lẫn nhãn quan.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5b03966a1acd4d5bbd672393','2','Matcha Đá Xay','https://minio.thecoffeehouse.com/image/admin/matchadaxay_622077.jpg',59000,'Matcha thanh, nhẫn, và đắng nhẹ được nhân đôi sảng khoái khi uống lạnh. Nhấn nhá thêm những nét bùi béo của kem và sữa. Gây thương nhớ vô cùng!','2021-10-30 02:56:12','2021-10-30 02:56:12'),
-	 ('5b03966a1acd4d5bbd672394','2','Trà Matcha Latte Nóng','https://minio.thecoffeehouse.com/image/admin/matcha-latte-_936022.jpg',59000,'Với màu xanh mát mắt của bột trà Matcha, vị ngọt nhẹ nhàng, pha trộn cùng sữa tươi và lớp foam mềm mịn, Matcha Latte sẽ khiến bạn yêu ngay từ lần đầu tiên.','2021-10-30 02:56:12','2021-10-30 02:56:12'),
-	 ('5b03966a1acd4d5bbd672395','2','Trà Matcha Latte Đá','https://minio.thecoffeehouse.com/image/admin/matcha-latte-da_083173.jpg',59000,'Với màu xanh mát mắt của bột trà Matcha, vị ngọt nhẹ nhàng, pha trộn cùng sữa tươi và lớp foam mềm mịn, Matcha Latte sẽ khiến bạn yêu ngay từ lần đầu tiên.','2021-10-30 02:56:12','2021-10-30 02:56:12'),
-	 ('5b03966a1acd4d5bbd672397','1','Mocha Nóng','https://minio.thecoffeehouse.com/image/admin/mochanong_433980.jpg',50000,'Loại cà phê được tạo nên từ sự kết hợp hoàn hảo của vị đắng đậm đà của Espresso và sốt sô-cô-la ngọt ngào mang tới hương vị đầy lôi cuốn, đánh thức mọi giác quan nên đây chính là thức uống ưa thích của phụ nữ và giới trẻ.
-        ','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5b03966a1acd4d5bbd672398','1','Mocha Đá','https://minio.thecoffeehouse.com/image/admin/mocha-da_538820.jpg',50000,'Loại cà phê được tạo nên từ sự kết hợp hoàn hảo của vị đắng đậm đà của Espresso và sốt sô-cô-la ngọt ngào mang tới hương vị đầy lôi cuốn, đánh thức mọi giác quan nên đây chính là thức uống ưa thích của phụ nữ và giới trẻ.
-        ','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5b03966a1acd4d5bbd67239c','5','Trà Đào Cam Sả - Đá','https://minio.thecoffeehouse.com/image/admin/tra-dao-cam-xa_668678.jpg',45000,'Vị thanh ngọt của đào, vị chua dịu của Cam Vàng nguyên vỏ, vị chát của trà đen tươi được ủ mới mỗi 4 tiếng, cùng hương thơm nồng đặc trưng của sả chính là điểm sáng làm nên sức hấp dẫn của thức uống này.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5b03966a1acd4d5bbd67239d','2','Chocolate Đá','https://minio.thecoffeehouse.com/image/admin/chocolate-da_877186.jpg',59000,'Bột chocolate nguyên chất hoà cùng sữa tươi béo ngậy. Vị ngọt tự nhiên, không gắt cổ, để lại một chút đắng nhẹ, cay cay trên đầu lưỡi.','2021-10-30 02:56:12','2021-10-30 02:56:12');
+DROP TABLE IF EXISTS `categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `categories` (
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `image_url` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-INSERT INTO products (id,category_id,name,image_url,price,description,created_at,updated_at) VALUES
-	 ('5b03966a1acd4d5bbd67239e','5','Trà Đen Macchiato','https://minio.thecoffeehouse.com/image/admin/tra-den-matchiato_430281.jpg',50000,'Trà đen được ủ mới mỗi ngày, giữ nguyên được vị chát mạnh mẽ đặc trưng của lá trà, phủ bên trên là lớp Macchiato homemade bồng bềnh quyến rũ vị phô mai mặn mặn mà béo béo.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5b03966a1acd4d5bbd6723a0','1','Cà Phê Đen Nóng','https://minio.thecoffeehouse.com/image/admin/caphedenda-moi_684880_400x400.jpg',35000,'Không ngọt ngào như Bạc sỉu hay Cà phê sữa, Cà phê đen mang trong mình phong vị trầm lắng, thi vị hơn. Người ta thường phải ngồi rất lâu mới cảm nhận được hết hương thơm ngào ngạt, phảng phất mùi cacao và cái đắng mượt mà trôi tuột xuống vòm họng.','2021-10-30 02:31:49','2021-11-11 15:09:29'),
-	 ('5b03966a1acd4d5bbd6723a1','1','Cà Phê Đen Đá','https://minio.thecoffeehouse.com/image/admin/caphedenda-moi_684880_400x400.jpg',32000,'Không ngọt ngào như Bạc sỉu hay Cà phê sữa, Cà phê đen mang trong mình phong vị trầm lắng, thi vị hơn. Người ta thường phải ngồi rất lâu mới cảm nhận được hết hương thơm ngào ngạt, phảng phất mùi cacao và cái đắng mượt mà trôi tuột xuống vòm họng.','2021-10-30 02:31:49','2021-11-11 15:09:29'),
-	 ('5b03966a1acd4d5bbd6723a2','1','Cà Phê Sữa Nóng','https://minio.thecoffeehouse.com/image/admin/cfsua-bacsiu_nong-(1)_139962_400x400.jpg',35000,'Cà phê được pha phin truyền thống kết hợp với sữa đặc tạo nên hương vị đậm đà, hài hòa giữa vị ngọt đầu lưỡi và vị đắng thanh thoát nơi hậu vị.','2021-10-30 02:31:49','2021-11-11 15:09:29'),
-	 ('5b03966a1acd4d5bbd6723a3','1','Cà Phê Sữa Đá','https://minio.thecoffeehouse.com/image/admin/caphesuada-moi_847396_400x400.jpg',32000,'Cà phê được pha phin truyền thống kết hợp với sữa đặc tạo nên hương vị đậm đà, hài hòa giữa vị ngọt đầu lưỡi và vị đắng thanh thoát nơi hậu vị.','2021-10-30 02:31:49','2021-11-11 15:09:29'),
-	 ('5b03966a1acd4d5bbd6723a4','1','Bạc Sỉu','https://minio.thecoffeehouse.com/image/admin/bacsiu-moi_532206_400x400.jpg',32000,'Bạc sỉu chính là Ly sữa trắng kèm một chút cà phê. Thức uống này rất phù hợp những ai vừa muốn trải nghiệm chút vị đắng của cà phê vừa muốn thưởng thức vị ngọt béo ngậy từ sữa.
-        ','2021-10-30 02:31:49','2021-11-11 15:09:29'),
-	 ('5b4c2f58a9d0590cb37cdade','2','Chocolate Nóng','https://minio.thecoffeehouse.com/image/admin/chocolatenong_949029.jpg',59000,'Bột chocolate nguyên chất hoà cùng sữa tươi béo ngậy. Vị ngọt tự nhiên, không gắt cổ, để lại một chút đắng nhẹ, cay cay trên đầu lưỡi.','2021-10-30 02:56:12','2021-10-30 02:56:12'),
-	 ('5bfb492bacf0d31fd9646728','5','Trà Đào Cam Sả - Nóng','https://minio.thecoffeehouse.com/image/admin/tdcs-nong_288997.jpg',52000,'Vị thanh ngọt của đào, vị chua dịu của Cam Vàng nguyên vỏ, vị chát của trà đen tươi được ủ mới mỗi 4 tiếng, cùng hương thơm nồng đặc trưng của sả chính là điểm sáng làm nên sức hấp dẫn của thức uống này.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5c3ff3c5acf0d338d22adbaa','5','Trà Hạt Sen - Nóng','https://minio.thecoffeehouse.com/image/admin/tra-sen-nong_025153.jpg',52000,'Nền trà oolong hảo hạng kết hợp cùng hạt sen tươi, bùi bùi thơm ngon. Trà hạt sen là thức uống thanh mát, nhẹ nhàng phù hợp cho cả buổi sáng và chiều tối.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5c3ff3c5acf0d338d22adbae','5','Trà Hạt Sen - Đá','https://minio.thecoffeehouse.com/image/admin/tra-sen_905594.jpg',45000,'Nền trà oolong hảo hạng kết hợp cùng hạt sen tươi, bùi bùi và lớp foam cheese béo ngậy. Trà hạt sen là thức uống thanh mát, nhẹ nhàng phù hợp cho cả buổi sáng và chiều tối.
-        ','2021-10-30 02:31:49','2021-10-30 02:31:49');
+--
+-- Dumping data for table `categories`
+--
 
-INSERT INTO products (id,category_id,name,image_url,price,description,created_at,updated_at) VALUES
-	 ('5ca47f92acf0d3492076b299','1','Cold Brew Sữa Tươi','https://minio.thecoffeehouse.com/image/admin/cold-brew-sua-tuoi_379576.jpg',45000,'Thanh mát và cân bằng với hương vị cà phê nguyên bản 100% Arabica Cầu Đất cùng sữa tươi thơm béo cho từng ngụm tròn vị, hấp dẫn.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5ca47f92acf0d3492076b29a','1','Cold Brew Truyền Thống','https://minio.thecoffeehouse.com/image/admin/classic-cold-brew_239501.jpg',45000,' Tại Kaffee store, Cold Brew được ủ và phục vụ mỗi ngày từ 100% hạt Arabica Cầu Đất với hương gỗ thông, hạt dẻ, nốt sô-cô-la đặc trưng, thoang thoảng hương khói nhẹ giúp Cold Brew giữ nguyên vị tươi mới.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5cdb677aacf0d33b682b4b73','2','Chanh Sả Đá Xay','https://minio.thecoffeehouse.com/image/admin/Chanh-sa-da-xay_170980.jpg',49000,'Sự kết hợp hài hoà giữa Chanh & sả - những nguyên liệu mộc mạc rất đỗi quen thuộc cho ra đời một thức uống thanh mát, vị chua chua ngọt ngọt giải nhiệt lại tốt cho sức khỏe.','2021-10-30 02:56:12','2021-10-30 02:56:12'),
-	 ('5cdbd6e8696fb3792a389754','1','Bạc Sỉu Nóng','https://minio.thecoffeehouse.com/image/admin/cfsua-bacsiu_nong-(1)_190838_400x400.jpg',35000,'Bạc sỉu chính là Ly sữa trắng kèm một chút cà phê. Thức uống này rất phù hợp những ai vừa muốn trải nghiệm chút vị đắng của cà phê vừa muốn thưởng thức vị ngọt béo ngậy từ sữa.
-        ','2021-10-30 02:31:49','2021-11-11 15:09:29'),
-	 ('5d2bdfa5acf0d30ba264432b','2','Đào Việt Quất Đá Xay','https://minio.thecoffeehouse.com/image/admin/DaoVietQuat_033985.jpg',59000,'Vị đào quen thuộc, được khoác lên mình dáng vẻ thanh mát hơn khi kết hợp với mứt berry và lớp kem ngọt béo ngậy, cho hương vị kích thích vị giác đầy lôi cuốn và khoan khoái ngay từ ngụm đầu tiên.
-        ','2021-10-30 02:56:12','2021-10-30 02:56:12'),
-	 ('5d43be2e41d3ac39a44bd7a2','5','Trà Phúc Bồn Tử','https://minio.thecoffeehouse.com/image/admin/tra-pbt_728279.jpg',50000,'Quả Phúc Bồn Tử hoàn toàn tự nhiên, được các barista Nhà kết hợp một cách đầy tinh tế cùng trà Oolong và cam vàng tạo ra một dư vị hoàn toàn tươi mới. Mát lạnh ngay từ ngụm đầu tiên, đọng lại cuối cùng là hương vị trà thơm lừng và vị ngọt thanh, chua dịu khó quên của trái phúc bồn tử.
-        ','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5d43bf5d073b26002948a362','2','Phúc Bồn Tử Cam Đá Xay','https://minio.thecoffeehouse.com/image/admin/cam-pbt-da-xay_326000.jpg',59000,'Tê tái ngay đầu lưỡi bởi sự mát lạnh của đá xay. Hòa quyện thêm hương vị chua chua, ngọt ngọt từ cam tươi và phúc bồn tử 100% tự nhiên, cho ra một hương vị thanh mát, kích thích vị giác đầy thú vị ngay từ lần đầu thưởng thức. 
-        ','2021-10-30 02:56:12','2021-10-30 02:56:12'),
-	 ('5d43bfed073b26003161b693','1','Cold Brew Phúc Bồn Tử','https://minio.thecoffeehouse.com/image/admin/cold-brew-pbt_130351.jpg',50000,'Vị chua ngọt của trái phúc bồn tử, làm dậy lên hương vị trái cây tự nhiên vốn sẵn có trong hạt cà phê, hòa quyện thêm vị đăng đắng, ngọt dịu nhẹ nhàng của Cold Brew 100% hạt Arabica Cầu Đất để mang đến một cách thưởng thức cà phê hoàn toàn mới, vừa thơm lừng hương cà phê quen thuộc, vừa nhẹ nhàng và thanh mát bởi hương trái cây đầy thú vị.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5e4f9e4316bd0a0018d2e24e','1','Cà Phê Đá Xay-Lạnh','https://minio.thecoffeehouse.com/image/admin/cf-da-xay-(1)_158038.jpg',59000,'Một phiên bản upgrade từ ly cà phê sữa quen thuộc, nhưng lại tỉnh táo và tươi mát hơn bởi lớp đá xay đi kèm. Nhấp 1 ngụm cà phê đá xay là thấy đã, ngụm thứ hai thêm tỉnh táo và cứ thế lôi cuốn bạn đến ngụm cuối cùng.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('5e92fd7dc788bc0011abaa06','5','Trà Sữa Mắc Ca Trân Châu','https://minio.thecoffeehouse.com/image/admin/tra-sua-mac-ca_377522.jpg',50000,'Mỗi ngày với Kaffee store sẽ là điều tươi mới hơn với sữa hạt mắc ca thơm ngon, bổ dưỡng quyện cùng nền trà oolong cho vị cân bằng, ngọt dịu đi kèm cùng Trân châu trắng giòn dai mang lại cảm giác “đã” trong từng ngụm trà sữa.','2021-10-30 02:31:49','2021-10-30 02:31:49');
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` (id, name,created_at,updated_at) VALUES ('1','Cà phê','2021-10-29 19:31:28','2021-10-29 19:31:28'),('18','Thưởng thức tại nhà','2021-10-29 19:31:28','2021-10-29 19:31:28'),('2','Đá Xay - Choco - Matcha','2021-10-29 19:31:28','2021-10-29 19:31:28'),('20','Bộ sưu tập quà tặng','2021-10-29 19:31:28','2021-10-29 19:31:28'),('5','Trà Trái Cây - Trà Sữa','2021-10-29 19:31:28','2021-10-29 19:31:28');
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
 
-INSERT INTO products (id,category_id,name,image_url,price,description,created_at,updated_at) VALUES
-	 ('5eb92ae0ee4dc00012633b2b','20','Ly inox ống hút đen nhám','https://minio.thecoffeehouse.com/image/admin/5eb92ae0ee4dc00012633b2b_Binh-inox-ong-hut-den-nham_338437.jpg',280000,'Màu đen ngày nào cũng được khen- Chiếc ly inbox kèm ống hút mang sắc đen ngầu này sẽ là người bạn đồng hành may mắn mỗi ngày bên bạn, nước ngon hơn, nhiều cảm hứng hơn. 
-        Dung tích: 500 ml
-        Chất liệu: Inox, nhựa','2021-10-30 02:35:48','2021-10-30 02:35:48'),
-	 ('5eb92ae1ee4dc00012633b2c','20','Ly Inox Ống Hút Xanh Biển','https://minio.thecoffeehouse.com/image/admin/5eb92ae1ee4dc00012633b2c_Binh-inox-ong-hut-xanh-bien_233565.jpg',280000,'Màu xanh chốt gì cũng nhanh - Chiếc ly inbox kèm ống hút mang sắc xanh này sẽ là người bạn đồng hành may mắn mỗi ngày bên bạn, nước ngon hơn, nhiều cảm hứng hơn. 
-        Dung tích: 500 ml
-        Chất liệu: Inox, nhựa','2021-10-30 02:35:48','2021-10-30 02:35:48'),
-	 ('5eb92ae1ee4dc00012633b2d','20','Ly Inox Ống Hút Hồng Xanh','https://minio.thecoffeehouse.com/image/admin/5eb92ae1ee4dc00012633b2d_Binh-inox-ong-hut-xanh-hong_584047.jpg',280000,'Màu hồng xanh may mắn tới nhanh - Chiếc ly inbox kèm ống hút mang sắc xanh này sẽ là người bạn đồng hành may mắn mỗi ngày bên bạn, nước ngon hơn, nhiều cảm hứng hơn. 
-        Dung tích: 500 ml 
-        Chất liệu: Inox, nhựa','2021-10-30 02:35:48','2021-10-30 02:35:48'),
-	 ('5ee30512e852ce0011e71b07','20','Bình giữ nhiệt Inox Quả Dứa','https://minio.thecoffeehouse.com/image/admin/thum-dua_661718.jpg',300000,'Xách bình đi khắp thế gian, với thiết kế xịn sò, màu sắc nổi bật, người bạn mới này sẽ nhắc bạn uống nước mỗi ngày ngon hơn, đều đặn hơn nha. 
-        Dung tích: 500ml 
-        Chất liệu: Inox ','2021-10-30 02:35:48','2021-10-30 02:35:48'),
-	 ('5ee30512e852ce0011e71b08','20','Bình giữ nhiệt Inox Con Thuyền','https://minio.thecoffeehouse.com/image/admin/con-thuyen_238139.jpg',300000,'Xách bình đi khắp thế gian, với thiết kế xịn sò, màu sắc nổi bật, người bạn mới này sẽ nhắc bạn uống nước mỗi ngày ngon hơn, đều đặn hơn nha. 
-        Dung tích: 500ml 
-        Chất liệu: Inox','2021-10-30 02:35:48','2021-10-30 02:35:48'),
-	 ('5ef00e2b91ab1a0012840421','20','Ly Farm to Cup (Cao)','https://minio.thecoffeehouse.com/image/admin/5ef00e2b91ab1a0012840421_Ly-Farm-to-cup-cao_858647.jpg',150000,'Lấy cảm hứng từ vùng đất cà phê Việt Nam, ly sứ Farm To Cup sẽ cho bạn trải nghiệm đầy cảm hứng với món yêu thích  tại nhà, tại nơi làm việc mỗi ngày. 
-        Dung tích ly: 400ml 
-        Thành phần: Cao lanh, đất sét, tráng thạch, men màu.','2021-10-30 02:35:48','2021-10-30 02:35:48'),
-	 ('5ef00e2b91ab1a0012840422','20','Ly Farm to Cup (Thấp)','https://minio.thecoffeehouse.com/image/admin/5ef00e2b91ab1a0012840422_Ly-Farm-to-cup-thap_258417.jpg',120000,'Lấy cảm hứng từ vùng đất cà phê Việt Nam, ly sứ Farm To Cup sẽ cho bạn trải nghiệm đầy cảm hứng với món yêu thích  tại nhà, tại nơi làm việc mỗi ngày. 
-        Dung tích ly: 300ml 
-        Thành phần: Cao lanh, đất sét, tráng thạch, men màu. ','2021-10-30 02:35:48','2021-10-30 02:35:48'),
-	 ('5ffbb2671327f700184f54d4','2','Yogurt Dưa Lưới phát tài','https://minio.thecoffeehouse.com/image/admin/tra-dua-luoi_114296.jpg',59000,'Vị yogurt chua ngọt, mát lạnh tái tê, thêm topping dưa lưới vàng tươi, thơm lừng, vui miệng. Thật khó để không yêu ngay từ ngụm đầu tiên.
-        ','2021-10-30 02:56:12','2021-10-30 02:56:12'),
-	 ('6014df0e540c0c001894d83c','5','Hồng Trà Sữa Trân Châu','https://minio.thecoffeehouse.com/image/admin/hong-tra-sua-tran-chau_326977.jpg',55000,'Thêm chút ngọt ngào cho ngày mới với hồng trà nguyên lá, sữa thơm ngậy được cân chỉnh với tỉ lệ hoàn hảo, cùng trân châu trắng dai giòn có sẵn để bạn tận hưởng từng ngụm trà sữa ngọt ngào thơm ngậy thiệt đã.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('6014df0e540c0c001894d83d','5','Hồng Trà Sữa Nóng','https://minio.thecoffeehouse.com/image/admin/hong-tra-sua-nong_941687.jpg',50000,'Từng ngụm trà chuẩn gu ấm áp, đậm đà beo béo bởi lớp sữa tươi chân ái hoà quyện.
+--
+-- Table structure for table `migrations`
+--
 
-        Trà đen nguyên lá âm ấm dịu nhẹ, quyện cùng lớp sữa thơm béo khó lẫn - hương vị ấm áp chuẩn gu trà, cho từng ngụm nhẹ nhàng, ngọt dịu lưu luyến mãi nơi cuống họng.','2021-10-30 02:31:49','2021-10-30 02:31:49');
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `migrations` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-INSERT INTO products (id,category_id,name,image_url,price,description,created_at,updated_at) VALUES
-	 ('605da09f717e5d00114a3cdc','5','Hồng Trà Latte Macchiato','https://minio.thecoffeehouse.com/image/admin/hong-tra-latte_618293.jpg',55000,'Sự kết hợp hoàn hảo bởi hồng trà dịu nhẹ và sữa tươi, nhấn nhá thêm lớp macchiato trứ danh của Kaffee store mang đến cho bạn hương vị trà sữa đúng gu tinh tế và healthy.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('60c62c8215234d0011ede49e','18','Cà Phê Sữa Đá Hòa Tan','https://minio.thecoffeehouse.com/image/admin/cpsd-3in1_971575.jpg',44000,'Thật dễ dàng để bắt đầu ngày mới với tách cà phê sữa đá sóng sánh, thơm ngon như cà phê pha phin.
-        Vị đắng thanh của cà phê hoà quyện với vị ngọt béo của sữa, giúp bạn luôn tỉnh táo và hứng khởi cho ngày làm việc thật hiệu quả.
-        ','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('60c62c8215234d0011ede49f','18','Cà Phê Peak Flavor Hương Thơm Đỉnh Cao (350G)','https://minio.thecoffeehouse.com/image/admin/peak-plavor-nopromo_715372.jpg',90000,'Được rang dưới nhiệt độ vàng, Cà phê Peak Flavor - Hương thơm đỉnh cao lưu giữ trọn vẹn hương thơm tinh tế đặc trưng của cà phê Robusta Đăk Nông và Arabica Cầu Đất. Với sự hòa trộn nhiều cung bậc giữa hương và vị sẽ mang đến cho bạn một ngày mới tràn đầy cảm hứng.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('60c62c8215234d0011ede4a0','18','Cà Phê Rich Finish Gu Đậm Tinh Tế (350G)','https://minio.thecoffeehouse.com/image/admin/rich-finish-nopromo_485968.jpg',90000,'Kaffee store  hiểu rằng ly cà phê ngon phải đậm đà, rõ vị từ cái chạm đầu tiên đến hậu vị vương vấn. Cà phê Rich Finish mang đến những ly cà phê đậm, thơm, hương vị tinh tế giúp bạn bắt đầu ngày mới đầy năng lượng.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('60c62c8215234d0011ede4a1','5','Trà sữa Oolong Nướng (Nóng)','https://minio.thecoffeehouse.com/image/admin/oolong-nuong-nong_948581.jpg',50000,'Đậm đà chuẩn gu và ấm nóng - bởi lớp trà oolong nướng đậm vị hoà cùng lớp sữa thơm béo. Hương vị chân ái đúng gu đậm đà - trà oolong được sao (nướng) lâu hơn cho vị đậm đà, hoà quyện với sữa thơm ngậy. Cho từng ngụm ấm áp, lưu luyến vị trà sữa đậm đà mãi nơi cuống họng.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('60c62c8215234d0011ede4a2','5','Trà sữa Oolong Nướng Trân Châu','https://minio.thecoffeehouse.com/image/admin/olong-nuong-tran-chau_017573.jpg',55000,'Hương vị chân ái đúng gu đậm đà với trà oolong được “sao” (nướng) lâu hơn cho hương vị đậm đà, hòa quyện với sữa thơm béo mang đến cảm giác mát lạnh, lưu luyến vị trà sữa đậm đà nơi vòm họng.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('60dbe43f5775f50018c71ea8','18','Thùng 24 Lon Cà Phê Sữa Đá ','https://minio.thecoffeehouse.com/image/admin/24-lon-cpsd_225680.jpg',336000,'Với thiết kế lon cao trẻ trung, hiện đại và tiện lợi, Cà phê sữa đá lon thơm ngon đậm vị của Kaffee store sẽ đồng hành cùng nhịp sống sôi nổi của tuổi trẻ và giúp bạn có được một ngày làm việc đầy hứng khởi.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('61224f81ef16be001293cccd','18','Combo 3 Hộp Cà Phê Sữa Đá Hòa Tan','https://minio.thecoffeehouse.com/image/admin/combo-3cfsd-nopromo_320619.jpg',119000,'Thật dễ dàng để bắt đầu ngày mới với tách cà phê sữa đá sóng sánh, thơm ngon như cà phê pha phin. Vị đắng thanh của cà phê hoà quyện với vị ngọt béo của sữa, giúp bạn luôn tỉnh táo và hứng khởi cho ngày làm việc thật hiệu quả.
-        ','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('61534bde26ae260012abe218','5','Trà Đào Cam Sả Chai Fresh 500ML','https://minio.thecoffeehouse.com/image/admin/Bottle_TraDao_836487.jpg',109000,'Với phiên bản chai fresh 500ml, thức uống best seller đỉnh cao mang một diện mạo tươi mới, tiện lợi, phù hợp với bình thường mới và vẫn giữ nguyên vị thanh ngọt của đào, vị chua dịu của cam vàng nguyên vỏ và vị trà đen thơm lừng ly Trà đào cam sả nguyên bản.
-        *Sản phẩm dùng ngon nhất trong ngày.
-        *Sản phẩm mặc định mức đường và không đá.','2021-10-30 02:31:49','2021-10-30 02:31:49'),
-	 ('61534bde26ae260012abe219','1','Cà Phê Sữa Đá Chai Fresh 250ML','https://minio.thecoffeehouse.com/image/admin/BottleCFSD_496652.jpg',79000,'Vẫn là hương vị cà phê sữa đậm đà quen thuộc của Kaffee store nhưng khoác lên mình một chiếc áo mới tiện lợi hơn, tiết kiệm hơn phù hợp với bình thường mới, giúp bạn tận hưởng một ngày dài trọn vẹn.
-        *Sản phẩm dùng ngon nhất trong ngày.
-        *Sản phẩm mặc định mức đường và không đá.','2021-10-30 02:31:49','2021-10-30 02:31:49');
-	
+--
+-- Dumping data for table `migrations`
+--
 
+LOCK TABLES `migrations` WRITE;
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
 
+--
+-- Table structure for table `order_detail`
+--
+
+DROP TABLE IF EXISTS `order_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `order_detail` (
+  `product_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `order_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `quantity` int NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `size` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `note` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `id` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  KEY `order_product_fk` (`product_id`),
+  KEY `order_fk` (`order_id`),
+  CONSTRAINT `order_fk` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
+  CONSTRAINT `order_product_fk` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_detail`
+--
+
+LOCK TABLES `order_detail` WRITE;
+/*!40000 ALTER TABLE `order_detail` DISABLE KEYS */;
+/*!40000 ALTER TABLE `order_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `orders` (
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `user_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `payment_method` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `status` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `delivery_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `delivery_phone` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `delivery_address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `display` varchar(10) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_customer_fk` (`user_id`),
+  CONSTRAINT `order_customer_fk` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders`
+--
+
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `products`
+--
+
+DROP TABLE IF EXISTS `products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `products` (
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `category_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `image_url` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `price` int NOT NULL,
+  `description` varchar(4000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_deleted` boolean default false,
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`),
+  CONSTRAINT `category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `products`
+--
+
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` (id, category_id, name, image_url,price,description,created_at,updated_at) VALUES ('5b03966a1acd4d5bbd672373','1','Americano Nóng','https://minio.thecoffeehouse.com/image/admin/cfsua-bacsiu_nong-(1)_139962_400x400.jpg',40000,'Americano được pha chế bằng cách pha thêm nước với tỷ lệ nhất định vào tách cà phê Espresso, từ đó mang lại hương vị nhẹ nhàng và giữ trọn được mùi hương cà phê đặc trưng.','2021-10-29 19:31:49','2021-11-11 08:09:29'),('5b03966a1acd4d5bbd672374','1','Americano Đá','https://minio.thecoffeehouse.com/image/admin/classic-cold-brew_791256.jpg',40000,'Americano được pha chế bằng cách pha thêm nước với tỷ lệ nhất định vào tách cà phê Espresso, từ đó mang lại hương vị nhẹ nhàng và giữ trọn được mùi hương cà phê đặc trưng.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5b03966a1acd4d5bbd672375','2','Sinh Tố Việt Quất','https://minio.thecoffeehouse.com/image/admin/sinh-to-viet-quoc_145138.jpg',59000,'Mứt Việt Quất chua thanh, ngòn ngọt, phối hợp nhịp nhàng với dòng sữa chua bổ dưỡng. Là món sinh tố thơm ngon mà cả đầu lưỡi và làn da đều thích. \n        ','2021-10-29 19:56:12','2021-10-29 19:56:12'),('5b03966a1acd4d5bbd672377','1','Cappuccino Nóng','https://minio.thecoffeehouse.com/image/admin/cappuccino_621532.jpg',50000,'Capuchino là thức uống hòa quyện giữa hương thơm của sữa, vị béo của bọt kem cùng vị đậm đà từ cà phê Espresso. Tất cả tạo nên một hương vị đặc biệt, một chút nhẹ nhàng, trầm lắng và tinh tế.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5b03966a1acd4d5bbd672378','1','Cappuccino Đá','https://minio.thecoffeehouse.com/image/admin/Capu-da_487470.jpg',50000,'Capuchino là thức uống hòa quyện giữa hương thơm của sữa, vị béo của bọt kem cùng vị đậm đà từ cà phê Espresso. Tất cả tạo nên một hương vị đặc biệt, một chút nhẹ nhàng, trầm lắng và tinh tế.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5b03966a1acd4d5bbd67237a','1','Caramel Macchiato Nóng','https://minio.thecoffeehouse.com/image/admin/caramelmacchiatonong_168039.jpg',50000,'Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê.\n        ','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5b03966a1acd4d5bbd67237b','1','Caramel Macchiato Đá','https://minio.thecoffeehouse.com/image/admin/caramel-macchiato_143623.jpg',50000,'Caramel Macchiato sẽ mang đến một sự ngạc nhiên thú vị khi vị thơm béo của bọt sữa, sữa tươi, vị đắng thanh thoát của cà phê Espresso hảo hạng và vị ngọt đậm của sốt caramel được gói gọn trong một tách cà phê.\n        ','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5b03966a1acd4d5bbd67237c','2','Chocolate Đá Xay','https://minio.thecoffeehouse.com/image/admin/Chocolate-ice-blended_400940.jpg',59000,'Sữa và kem tươi béo ngọt được “cá tính hoá” bởi vị chocolate/sô-cô-la đăng đắng. Dành cho các tín đồ hảo ngọt. Lựa chọn hàng đầu nếu bạn đang cần chút năng lượng tinh thần.','2021-10-29 19:54:53','2021-10-29 19:54:53'),('5b03966a1acd4d5bbd67237e','2','Cookie Đá Xay','https://minio.thecoffeehouse.com/image/admin/Chocolate-ice-blended_183602.jpg',59000,'Những mẩu bánh cookies giòn rụm kết hợp ăn ý với sữa tươi, kem tươi béo ngọt và đá xay mát lành, đem đến cảm giác lạ miệng gây thích thú và không thể cưỡng lại. Một món uống phá cách dễ thương đầy mê hoặc.','2021-10-29 19:54:16','2021-10-29 19:54:16'),('5b03966a1acd4d5bbd67237f','1','Espresso Đá','https://minio.thecoffeehouse.com/image/admin/cfdenda-espressoDa_185438.jpg',45000,'Một tách Espresso nguyên bản được bắt đầu bởi những hạt Arabica chất lượng, phối trộn với tỉ lệ cân đối hạt Robusta, cho ra vị ngọt caramel, vị chua dịu và sánh đặc.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5b03966a1acd4d5bbd672380','1','Espresso Nóng','https://minio.thecoffeehouse.com/image/admin/espressoNong_612688.jpg',40000,'Một tách Espresso nguyên bản được bắt đầu bởi những hạt Arabica chất lượng, phối trộn với tỉ lệ cân đối hạt Robusta, cho ra vị ngọt caramel, vị chua dịu và sánh đặc.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5b03966a1acd4d5bbd672390','1','Latte Nóng','https://minio.thecoffeehouse.com/image/admin/latte_851143.jpg',50000,'Một sự kết hợp tinh tế giữa vị đắng cà phê Espresso nguyên chất hòa quyện cùng vị sữa nóng ngọt ngào, bên trên là một lớp kem mỏng nhẹ tạo nên một tách cà phê hoàn hảo về hương vị lẫn nhãn quan.\n\n        ','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5b03966a1acd4d5bbd672391','1','Latte Đá','https://minio.thecoffeehouse.com/image/admin/latte-da_438410.jpg',50000,'Một sự kết hợp tinh tế giữa vị đắng cà phê Espresso nguyên chất hòa quyện cùng vị sữa nóng ngọt ngào, bên trên là một lớp kem mỏng nhẹ tạo nên một tách cà phê hoàn hảo về hương vị lẫn nhãn quan.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5b03966a1acd4d5bbd672393','2','Matcha Đá Xay','https://minio.thecoffeehouse.com/image/admin/matchadaxay_622077.jpg',59000,'Matcha thanh, nhẫn, và đắng nhẹ được nhân đôi sảng khoái khi uống lạnh. Nhấn nhá thêm những nét bùi béo của kem và sữa. Gây thương nhớ vô cùng!','2021-10-29 19:56:12','2021-10-29 19:56:12'),('5b03966a1acd4d5bbd672394','2','Trà Matcha Latte Nóng','https://minio.thecoffeehouse.com/image/admin/matcha-latte-_936022.jpg',59000,'Với màu xanh mát mắt của bột trà Matcha, vị ngọt nhẹ nhàng, pha trộn cùng sữa tươi và lớp foam mềm mịn, Matcha Latte sẽ khiến bạn yêu ngay từ lần đầu tiên.','2021-10-29 19:56:12','2021-10-29 19:56:12'),('5b03966a1acd4d5bbd672395','2','Trà Matcha Latte Đá','https://minio.thecoffeehouse.com/image/admin/matcha-latte-da_083173.jpg',59000,'Với màu xanh mát mắt của bột trà Matcha, vị ngọt nhẹ nhàng, pha trộn cùng sữa tươi và lớp foam mềm mịn, Matcha Latte sẽ khiến bạn yêu ngay từ lần đầu tiên.','2021-10-29 19:56:12','2021-10-29 19:56:12'),('5b03966a1acd4d5bbd672397','1','Mocha Nóng','https://minio.thecoffeehouse.com/image/admin/mochanong_433980.jpg',50000,'Loại cà phê được tạo nên từ sự kết hợp hoàn hảo của vị đắng đậm đà của Espresso và sốt sô-cô-la ngọt ngào mang tới hương vị đầy lôi cuốn, đánh thức mọi giác quan nên đây chính là thức uống ưa thích của phụ nữ và giới trẻ.\n        ','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5b03966a1acd4d5bbd672398','1','Mocha Đá','https://minio.thecoffeehouse.com/image/admin/mocha-da_538820.jpg',50000,'Loại cà phê được tạo nên từ sự kết hợp hoàn hảo của vị đắng đậm đà của Espresso và sốt sô-cô-la ngọt ngào mang tới hương vị đầy lôi cuốn, đánh thức mọi giác quan nên đây chính là thức uống ưa thích của phụ nữ và giới trẻ.\n        ','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5b03966a1acd4d5bbd67239c','5','Trà Đào Cam Sả - Đá','https://minio.thecoffeehouse.com/image/admin/tra-dao-cam-xa_668678.jpg',45000,'Vị thanh ngọt của đào, vị chua dịu của Cam Vàng nguyên vỏ, vị chát của trà đen tươi được ủ mới mỗi 4 tiếng, cùng hương thơm nồng đặc trưng của sả chính là điểm sáng làm nên sức hấp dẫn của thức uống này.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5b03966a1acd4d5bbd67239d','2','Chocolate Đá','https://minio.thecoffeehouse.com/image/admin/chocolate-da_877186.jpg',59000,'Bột chocolate nguyên chất hoà cùng sữa tươi béo ngậy. Vị ngọt tự nhiên, không gắt cổ, để lại một chút đắng nhẹ, cay cay trên đầu lưỡi.','2021-10-29 19:56:12','2021-10-29 19:56:12'),('5b03966a1acd4d5bbd67239e','5','Trà Đen Macchiato','https://minio.thecoffeehouse.com/image/admin/tra-den-matchiato_430281.jpg',50000,'Trà đen được ủ mới mỗi ngày, giữ nguyên được vị chát mạnh mẽ đặc trưng của lá trà, phủ bên trên là lớp Macchiato homemade bồng bềnh quyến rũ vị phô mai mặn mặn mà béo béo.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5b03966a1acd4d5bbd6723a0','1','Cà Phê Đen Nóng','https://minio.thecoffeehouse.com/image/admin/caphedenda-moi_684880_400x400.jpg',35000,'Không ngọt ngào như Bạc sỉu hay Cà phê sữa, Cà phê đen mang trong mình phong vị trầm lắng, thi vị hơn. Người ta thường phải ngồi rất lâu mới cảm nhận được hết hương thơm ngào ngạt, phảng phất mùi cacao và cái đắng mượt mà trôi tuột xuống vòm họng.','2021-10-29 19:31:49','2021-11-11 08:09:29'),('5b03966a1acd4d5bbd6723a1','1','Cà Phê Đen Đá','https://minio.thecoffeehouse.com/image/admin/caphedenda-moi_684880_400x400.jpg',32000,'Không ngọt ngào như Bạc sỉu hay Cà phê sữa, Cà phê đen mang trong mình phong vị trầm lắng, thi vị hơn. Người ta thường phải ngồi rất lâu mới cảm nhận được hết hương thơm ngào ngạt, phảng phất mùi cacao và cái đắng mượt mà trôi tuột xuống vòm họng.','2021-10-29 19:31:49','2021-11-11 08:09:29'),('5b03966a1acd4d5bbd6723a2','1','Cà Phê Sữa Nóng','https://minio.thecoffeehouse.com/image/admin/cfsua-bacsiu_nong-(1)_139962_400x400.jpg',35000,'Cà phê được pha phin truyền thống kết hợp với sữa đặc tạo nên hương vị đậm đà, hài hòa giữa vị ngọt đầu lưỡi và vị đắng thanh thoát nơi hậu vị.','2021-10-29 19:31:49','2021-11-11 08:09:29'),('5b03966a1acd4d5bbd6723a3','1','Cà Phê Sữa Đá','https://minio.thecoffeehouse.com/image/admin/caphesuada-moi_847396_400x400.jpg',32000,'Cà phê được pha phin truyền thống kết hợp với sữa đặc tạo nên hương vị đậm đà, hài hòa giữa vị ngọt đầu lưỡi và vị đắng thanh thoát nơi hậu vị.','2021-10-29 19:31:49','2021-11-11 08:09:29'),('5b03966a1acd4d5bbd6723a4','1','Bạc Sỉu','https://minio.thecoffeehouse.com/image/admin/bacsiu-moi_532206_400x400.jpg',32000,'Bạc sỉu chính là Ly sữa trắng kèm một chút cà phê. Thức uống này rất phù hợp những ai vừa muốn trải nghiệm chút vị đắng của cà phê vừa muốn thưởng thức vị ngọt béo ngậy từ sữa.\n        ','2021-10-29 19:31:49','2021-11-11 08:09:29'),('5b4c2f58a9d0590cb37cdade','2','Chocolate Nóng','https://minio.thecoffeehouse.com/image/admin/chocolatenong_949029.jpg',59000,'Bột chocolate nguyên chất hoà cùng sữa tươi béo ngậy. Vị ngọt tự nhiên, không gắt cổ, để lại một chút đắng nhẹ, cay cay trên đầu lưỡi.','2021-10-29 19:56:12','2021-10-29 19:56:12'),('5bfb492bacf0d31fd9646728','5','Trà Đào Cam Sả - Nóng','https://minio.thecoffeehouse.com/image/admin/tdcs-nong_288997.jpg',52000,'Vị thanh ngọt của đào, vị chua dịu của Cam Vàng nguyên vỏ, vị chát của trà đen tươi được ủ mới mỗi 4 tiếng, cùng hương thơm nồng đặc trưng của sả chính là điểm sáng làm nên sức hấp dẫn của thức uống này.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5c3ff3c5acf0d338d22adbaa','5','Trà Hạt Sen - Nóng','https://minio.thecoffeehouse.com/image/admin/tra-sen-nong_025153.jpg',52000,'Nền trà oolong hảo hạng kết hợp cùng hạt sen tươi, bùi bùi thơm ngon. Trà hạt sen là thức uống thanh mát, nhẹ nhàng phù hợp cho cả buổi sáng và chiều tối.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5c3ff3c5acf0d338d22adbae','5','Trà Hạt Sen - Đá','https://minio.thecoffeehouse.com/image/admin/tra-sen_905594.jpg',45000,'Nền trà oolong hảo hạng kết hợp cùng hạt sen tươi, bùi bùi và lớp foam cheese béo ngậy. Trà hạt sen là thức uống thanh mát, nhẹ nhàng phù hợp cho cả buổi sáng và chiều tối.\n        ','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5ca47f92acf0d3492076b299','1','Cold Brew Sữa Tươi','https://minio.thecoffeehouse.com/image/admin/cold-brew-sua-tuoi_379576.jpg',45000,'Thanh mát và cân bằng với hương vị cà phê nguyên bản 100% Arabica Cầu Đất cùng sữa tươi thơm béo cho từng ngụm tròn vị, hấp dẫn.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5ca47f92acf0d3492076b29a','1','Cold Brew Truyền Thống','https://minio.thecoffeehouse.com/image/admin/classic-cold-brew_239501.jpg',45000,' Tại Kaffee store, Cold Brew được ủ và phục vụ mỗi ngày từ 100% hạt Arabica Cầu Đất với hương gỗ thông, hạt dẻ, nốt sô-cô-la đặc trưng, thoang thoảng hương khói nhẹ giúp Cold Brew giữ nguyên vị tươi mới.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5cdb677aacf0d33b682b4b73','2','Chanh Sả Đá Xay','https://minio.thecoffeehouse.com/image/admin/Chanh-sa-da-xay_170980.jpg',49000,'Sự kết hợp hài hoà giữa Chanh & sả - những nguyên liệu mộc mạc rất đỗi quen thuộc cho ra đời một thức uống thanh mát, vị chua chua ngọt ngọt giải nhiệt lại tốt cho sức khỏe.','2021-10-29 19:56:12','2021-10-29 19:56:12'),('5cdbd6e8696fb3792a389754','1','Bạc Sỉu Nóng','https://minio.thecoffeehouse.com/image/admin/cfsua-bacsiu_nong-(1)_190838_400x400.jpg',35000,'Bạc sỉu chính là Ly sữa trắng kèm một chút cà phê. Thức uống này rất phù hợp những ai vừa muốn trải nghiệm chút vị đắng của cà phê vừa muốn thưởng thức vị ngọt béo ngậy từ sữa.\n        ','2021-10-29 19:31:49','2021-11-11 08:09:29'),('5d2bdfa5acf0d30ba264432b','2','Đào Việt Quất Đá Xay','https://minio.thecoffeehouse.com/image/admin/DaoVietQuat_033985.jpg',59000,'Vị đào quen thuộc, được khoác lên mình dáng vẻ thanh mát hơn khi kết hợp với mứt berry và lớp kem ngọt béo ngậy, cho hương vị kích thích vị giác đầy lôi cuốn và khoan khoái ngay từ ngụm đầu tiên.\n        ','2021-10-29 19:56:12','2021-10-29 19:56:12'),('5d43be2e41d3ac39a44bd7a2','5','Trà Phúc Bồn Tử','https://minio.thecoffeehouse.com/image/admin/tra-pbt_728279.jpg',50000,'Quả Phúc Bồn Tử hoàn toàn tự nhiên, được các barista Nhà kết hợp một cách đầy tinh tế cùng trà Oolong và cam vàng tạo ra một dư vị hoàn toàn tươi mới. Mát lạnh ngay từ ngụm đầu tiên, đọng lại cuối cùng là hương vị trà thơm lừng và vị ngọt thanh, chua dịu khó quên của trái phúc bồn tử.\n        ','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5d43bf5d073b26002948a362','2','Phúc Bồn Tử Cam Đá Xay','https://minio.thecoffeehouse.com/image/admin/cam-pbt-da-xay_326000.jpg',59000,'Tê tái ngay đầu lưỡi bởi sự mát lạnh của đá xay. Hòa quyện thêm hương vị chua chua, ngọt ngọt từ cam tươi và phúc bồn tử 100% tự nhiên, cho ra một hương vị thanh mát, kích thích vị giác đầy thú vị ngay từ lần đầu thưởng thức. \n        ','2021-10-29 19:56:12','2021-10-29 19:56:12'),('5d43bfed073b26003161b693','1','Cold Brew Phúc Bồn Tử','https://minio.thecoffeehouse.com/image/admin/cold-brew-pbt_130351.jpg',50000,'Vị chua ngọt của trái phúc bồn tử, làm dậy lên hương vị trái cây tự nhiên vốn sẵn có trong hạt cà phê, hòa quyện thêm vị đăng đắng, ngọt dịu nhẹ nhàng của Cold Brew 100% hạt Arabica Cầu Đất để mang đến một cách thưởng thức cà phê hoàn toàn mới, vừa thơm lừng hương cà phê quen thuộc, vừa nhẹ nhàng và thanh mát bởi hương trái cây đầy thú vị.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5e4f9e4316bd0a0018d2e24e','1','Cà Phê Đá Xay-Lạnh','https://minio.thecoffeehouse.com/image/admin/cf-da-xay-(1)_158038.jpg',59000,'Một phiên bản upgrade từ ly cà phê sữa quen thuộc, nhưng lại tỉnh táo và tươi mát hơn bởi lớp đá xay đi kèm. Nhấp 1 ngụm cà phê đá xay là thấy đã, ngụm thứ hai thêm tỉnh táo và cứ thế lôi cuốn bạn đến ngụm cuối cùng.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5e92fd7dc788bc0011abaa06','5','Trà Sữa Mắc Ca Trân Châu','https://minio.thecoffeehouse.com/image/admin/tra-sua-mac-ca_377522.jpg',50000,'Mỗi ngày với Kaffee store sẽ là điều tươi mới hơn với sữa hạt mắc ca thơm ngon, bổ dưỡng quyện cùng nền trà oolong cho vị cân bằng, ngọt dịu đi kèm cùng Trân châu trắng giòn dai mang lại cảm giác “đã” trong từng ngụm trà sữa.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('5eb92ae0ee4dc00012633b2b','20','Ly inox ống hút đen nhám','https://minio.thecoffeehouse.com/image/admin/5eb92ae0ee4dc00012633b2b_Binh-inox-ong-hut-den-nham_338437.jpg',280000,'Màu đen ngày nào cũng được khen- Chiếc ly inbox kèm ống hút mang sắc đen ngầu này sẽ là người bạn đồng hành may mắn mỗi ngày bên bạn, nước ngon hơn, nhiều cảm hứng hơn. \n        Dung tích: 500 ml\n        Chất liệu: Inox, nhựa','2021-10-29 19:35:48','2021-10-29 19:35:48'),('5eb92ae1ee4dc00012633b2c','20','Ly Inox Ống Hút Xanh Biển','https://minio.thecoffeehouse.com/image/admin/5eb92ae1ee4dc00012633b2c_Binh-inox-ong-hut-xanh-bien_233565.jpg',280000,'Màu xanh chốt gì cũng nhanh - Chiếc ly inbox kèm ống hút mang sắc xanh này sẽ là người bạn đồng hành may mắn mỗi ngày bên bạn, nước ngon hơn, nhiều cảm hứng hơn. \n        Dung tích: 500 ml\n        Chất liệu: Inox, nhựa','2021-10-29 19:35:48','2021-10-29 19:35:48'),('5eb92ae1ee4dc00012633b2d','20','Ly Inox Ống Hút Hồng Xanh','https://minio.thecoffeehouse.com/image/admin/5eb92ae1ee4dc00012633b2d_Binh-inox-ong-hut-xanh-hong_584047.jpg',280000,'Màu hồng xanh may mắn tới nhanh - Chiếc ly inbox kèm ống hút mang sắc xanh này sẽ là người bạn đồng hành may mắn mỗi ngày bên bạn, nước ngon hơn, nhiều cảm hứng hơn. \n        Dung tích: 500 ml \n        Chất liệu: Inox, nhựa','2021-10-29 19:35:48','2021-10-29 19:35:48'),('5ee30512e852ce0011e71b07','20','Bình giữ nhiệt Inox Quả Dứa','https://minio.thecoffeehouse.com/image/admin/thum-dua_661718.jpg',300000,'Xách bình đi khắp thế gian, với thiết kế xịn sò, màu sắc nổi bật, người bạn mới này sẽ nhắc bạn uống nước mỗi ngày ngon hơn, đều đặn hơn nha. \n        Dung tích: 500ml \n        Chất liệu: Inox ','2021-10-29 19:35:48','2021-10-29 19:35:48'),('5ee30512e852ce0011e71b08','20','Bình giữ nhiệt Inox Con Thuyền','https://minio.thecoffeehouse.com/image/admin/con-thuyen_238139.jpg',300000,'Xách bình đi khắp thế gian, với thiết kế xịn sò, màu sắc nổi bật, người bạn mới này sẽ nhắc bạn uống nước mỗi ngày ngon hơn, đều đặn hơn nha. \n        Dung tích: 500ml \n        Chất liệu: Inox','2021-10-29 19:35:48','2021-10-29 19:35:48'),('5ef00e2b91ab1a0012840421','20','Ly Farm to Cup (Cao)','https://minio.thecoffeehouse.com/image/admin/5ef00e2b91ab1a0012840421_Ly-Farm-to-cup-cao_858647.jpg',150000,'Lấy cảm hứng từ vùng đất cà phê Việt Nam, ly sứ Farm To Cup sẽ cho bạn trải nghiệm đầy cảm hứng với món yêu thích  tại nhà, tại nơi làm việc mỗi ngày. \n        Dung tích ly: 400ml \n        Thành phần: Cao lanh, đất sét, tráng thạch, men màu.','2021-10-29 19:35:48','2021-10-29 19:35:48'),('5ef00e2b91ab1a0012840422','20','Ly Farm to Cup (Thấp)','https://minio.thecoffeehouse.com/image/admin/5ef00e2b91ab1a0012840422_Ly-Farm-to-cup-thap_258417.jpg',120000,'Lấy cảm hứng từ vùng đất cà phê Việt Nam, ly sứ Farm To Cup sẽ cho bạn trải nghiệm đầy cảm hứng với món yêu thích  tại nhà, tại nơi làm việc mỗi ngày. \n        Dung tích ly: 300ml \n        Thành phần: Cao lanh, đất sét, tráng thạch, men màu. ','2021-10-29 19:35:48','2021-10-29 19:35:48'),('5ffbb2671327f700184f54d4','2','Yogurt Dưa Lưới phát tài','https://minio.thecoffeehouse.com/image/admin/tra-dua-luoi_114296.jpg',59000,'Vị yogurt chua ngọt, mát lạnh tái tê, thêm topping dưa lưới vàng tươi, thơm lừng, vui miệng. Thật khó để không yêu ngay từ ngụm đầu tiên.\n        ','2021-10-29 19:56:12','2021-10-29 19:56:12'),('6014df0e540c0c001894d83c','5','Hồng Trà Sữa Trân Châu','https://minio.thecoffeehouse.com/image/admin/hong-tra-sua-tran-chau_326977.jpg',55000,'Thêm chút ngọt ngào cho ngày mới với hồng trà nguyên lá, sữa thơm ngậy được cân chỉnh với tỉ lệ hoàn hảo, cùng trân châu trắng dai giòn có sẵn để bạn tận hưởng từng ngụm trà sữa ngọt ngào thơm ngậy thiệt đã.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('6014df0e540c0c001894d83d','5','Hồng Trà Sữa Nóng','https://minio.thecoffeehouse.com/image/admin/hong-tra-sua-nong_941687.jpg',50000,'Từng ngụm trà chuẩn gu ấm áp, đậm đà beo béo bởi lớp sữa tươi chân ái hoà quyện.\n\n        Trà đen nguyên lá âm ấm dịu nhẹ, quyện cùng lớp sữa thơm béo khó lẫn - hương vị ấm áp chuẩn gu trà, cho từng ngụm nhẹ nhàng, ngọt dịu lưu luyến mãi nơi cuống họng.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('605da09f717e5d00114a3cdc','5','Hồng Trà Latte Macchiato','https://minio.thecoffeehouse.com/image/admin/hong-tra-latte_618293.jpg',55000,'Sự kết hợp hoàn hảo bởi hồng trà dịu nhẹ và sữa tươi, nhấn nhá thêm lớp macchiato trứ danh của Kaffee store mang đến cho bạn hương vị trà sữa đúng gu tinh tế và healthy.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('60c62c8215234d0011ede49e','18','Cà Phê Sữa Đá Hòa Tan','https://minio.thecoffeehouse.com/image/admin/cpsd-3in1_971575.jpg',44000,'Thật dễ dàng để bắt đầu ngày mới với tách cà phê sữa đá sóng sánh, thơm ngon như cà phê pha phin.\n        Vị đắng thanh của cà phê hoà quyện với vị ngọt béo của sữa, giúp bạn luôn tỉnh táo và hứng khởi cho ngày làm việc thật hiệu quả.\n        ','2021-10-29 19:31:49','2021-10-29 19:31:49'),('60c62c8215234d0011ede49f','18','Cà Phê Peak Flavor Hương Thơm Đỉnh Cao (350G)','https://minio.thecoffeehouse.com/image/admin/peak-plavor-nopromo_715372.jpg',90000,'Được rang dưới nhiệt độ vàng, Cà phê Peak Flavor - Hương thơm đỉnh cao lưu giữ trọn vẹn hương thơm tinh tế đặc trưng của cà phê Robusta Đăk Nông và Arabica Cầu Đất. Với sự hòa trộn nhiều cung bậc giữa hương và vị sẽ mang đến cho bạn một ngày mới tràn đầy cảm hứng.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('60c62c8215234d0011ede4a0','18','Cà Phê Rich Finish Gu Đậm Tinh Tế (350G)','https://minio.thecoffeehouse.com/image/admin/rich-finish-nopromo_485968.jpg',90000,'Kaffee store  hiểu rằng ly cà phê ngon phải đậm đà, rõ vị từ cái chạm đầu tiên đến hậu vị vương vấn. Cà phê Rich Finish mang đến những ly cà phê đậm, thơm, hương vị tinh tế giúp bạn bắt đầu ngày mới đầy năng lượng.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('60c62c8215234d0011ede4a1','5','Trà sữa Oolong Nướng (Nóng)','https://minio.thecoffeehouse.com/image/admin/oolong-nuong-nong_948581.jpg',50000,'Đậm đà chuẩn gu và ấm nóng - bởi lớp trà oolong nướng đậm vị hoà cùng lớp sữa thơm béo. Hương vị chân ái đúng gu đậm đà - trà oolong được sao (nướng) lâu hơn cho vị đậm đà, hoà quyện với sữa thơm ngậy. Cho từng ngụm ấm áp, lưu luyến vị trà sữa đậm đà mãi nơi cuống họng.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('60c62c8215234d0011ede4a2','5','Trà sữa Oolong Nướng Trân Châu','https://minio.thecoffeehouse.com/image/admin/olong-nuong-tran-chau_017573.jpg',55000,'Hương vị chân ái đúng gu đậm đà với trà oolong được “sao” (nướng) lâu hơn cho hương vị đậm đà, hòa quyện với sữa thơm béo mang đến cảm giác mát lạnh, lưu luyến vị trà sữa đậm đà nơi vòm họng.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('60dbe43f5775f50018c71ea8','18','Thùng 24 Lon Cà Phê Sữa Đá ','https://minio.thecoffeehouse.com/image/admin/24-lon-cpsd_225680.jpg',336000,'Với thiết kế lon cao trẻ trung, hiện đại và tiện lợi, Cà phê sữa đá lon thơm ngon đậm vị của Kaffee store sẽ đồng hành cùng nhịp sống sôi nổi của tuổi trẻ và giúp bạn có được một ngày làm việc đầy hứng khởi.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('61224f81ef16be001293cccd','18','Combo 3 Hộp Cà Phê Sữa Đá Hòa Tan','https://minio.thecoffeehouse.com/image/admin/combo-3cfsd-nopromo_320619.jpg',119000,'Thật dễ dàng để bắt đầu ngày mới với tách cà phê sữa đá sóng sánh, thơm ngon như cà phê pha phin. Vị đắng thanh của cà phê hoà quyện với vị ngọt béo của sữa, giúp bạn luôn tỉnh táo và hứng khởi cho ngày làm việc thật hiệu quả.\n        ','2021-10-29 19:31:49','2021-10-29 19:31:49'),('61534bde26ae260012abe218','5','Trà Đào Cam Sả Chai Fresh 500ML','https://minio.thecoffeehouse.com/image/admin/Bottle_TraDao_836487.jpg',109000,'Với phiên bản chai fresh 500ml, thức uống best seller đỉnh cao mang một diện mạo tươi mới, tiện lợi, phù hợp với bình thường mới và vẫn giữ nguyên vị thanh ngọt của đào, vị chua dịu của cam vàng nguyên vỏ và vị trà đen thơm lừng ly Trà đào cam sả nguyên bản.\n        *Sản phẩm dùng ngon nhất trong ngày.\n        *Sản phẩm mặc định mức đường và không đá.','2021-10-29 19:31:49','2021-10-29 19:31:49'),('61534bde26ae260012abe219','1','Cà Phê Sữa Đá Chai Fresh 250ML','https://minio.thecoffeehouse.com/image/admin/BottleCFSD_496652.jpg',79000,'Vẫn là hương vị cà phê sữa đậm đà quen thuộc của Kaffee store nhưng khoác lên mình một chiếc áo mới tiện lợi hơn, tiết kiệm hơn phù hợp với bình thường mới, giúp bạn tận hưởng một ngày dài trọn vẹn.\n        *Sản phẩm dùng ngon nhất trong ngày.\n        *Sản phẩm mặc định mức đường và không đá.','2021-10-29 19:31:49','2021-10-29 19:31:49');
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `stores`
+--
+
+DROP TABLE IF EXISTS `stores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `stores` (
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `address` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `status` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `image_url` varchar(4000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `open_time` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `phone` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `stores`
+--
+
+LOCK TABLES `stores` WRITE;
+/*!40000 ALTER TABLE `stores` DISABLE KEYS */;
+INSERT INTO `stores` VALUES ('117','114 Đường 9A Khu Dân cư Trung Sơn','hoạt động','https://minio.thecoffeehouse.com/image/admin/store/5b21f8cb1acd4d02032668ea_trung_20son_201.jpeg','7:00 - 22:00','02871087088','2021-10-29 20:15:23','2021-10-29 20:15:23'),('129','93/5 Nguyễn Ảnh Thủ','hoạt động','https://minio.thecoffeehouse.com/image/admin/store/5b21f8cb1acd4d02032668eb_nguyen_20anh_20thu_201.jpeg','7:00 - 22:00','02871087088','2021-10-29 20:15:23','2021-10-29 20:15:23'),('18','141 Nguyễn Thái Bình','hoạt động','https://minio.thecoffeehouse.com/image/admin/store/5b21f8cb1acd4d02032668ee_5b21f8cb1acd4d02032668ee_nguyen_20thai_20binh_201_20.jpeg','7:00 - 22:00','02871087088','2021-10-29 20:15:23','2021-10-29 20:15:23');
+/*!40000 ALTER TABLE `stores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+DROP TABLE IF EXISTS news;
+          CREATE TABLE news (
+            id varchar(100) NOT NULL,
+            title varchar(100) NOT NULL,
+            description varchar(255) NOT NULL,
+            image VARCHAR(255) NOT NULL,
+            status boolean default false,
+            content mediumtext CHARACTER SET utf8 NOT NULL,
+            is_deleted boolean default false,
+            created_at timestamp NOT NULL DEFAULT current_timestamp(),
+            updated_at timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+            PRIMARY KEY(id)
+          );
+INSERT INTO `news` (`id`,`title`,`description`,`image`,`status`,`content`,`is_deleted`,`created_at`,`updated_at`) VALUES ('6392da3f069d7','CÀ PHÊ SỮA ESPRESSO THE COFFEE HOUSE - BẬT LON BẬT VỊ NGON','Cà phê sữa Espresso là một lon cà phê sữa giải khát với hương vị cà phê đậm đà từ 100% cà phê Robusta cùng vị sữa béo nhẹ cho bạn một trải nghiệm hương vị cà phê hoàn toàn mới.','banner1.jpg',1,'<p><a href=\"https://order.thecoffeehouse.com/product/combo-6-lon-ca-phe-sua-espresso\"><strong>C&agrave; ph&ecirc; sữa Espresso</strong>&nbsp;</a>l&agrave; một lon c&agrave; ph&ecirc; sữa giải kh&aacute;t với hương vị c&agrave; ph&ecirc; đậm đ&agrave; từ&nbsp;100% c&agrave; ph&ecirc; Robusta&nbsp;c&ugrave;ng&nbsp;vị sữa b&eacute;o nhẹ&nbsp;cho bạn một trải nghiệm hương vị c&agrave; ph&ecirc; ho&agrave;n to&agrave;n mới.</p>&#13;&#10;&#13;&#10;<p><img src=\"https://file.hstatic.net/1000075078/file/1__1__90a516a282eb47e7a9e7b0c067259bc2_grande.jpg\" /></p>&#13;&#10;&#13;&#10;<p><img src=\"https://file.hstatic.net/1000075078/file/3__1__f843d744800248c483147b249705c769_grande.jpg\" /></p>&#13;&#10;&#13;&#10;<p><img src=\"https://file.hstatic.net/1000075078/file/4__1__f4d2204c33d144cc850f2292b602bd68_grande.jpg\" /></p>&#13;&#10;&#13;&#10;<p><img src=\"https://file.hstatic.net/1000075078/file/5_65f8e2cdb6784493899537b6a06e26f3_grande.jpg\" /></p>&#13;&#10;&#13;&#10;<p><img src=\"https://file.hstatic.net/1000075078/file/6_3fc5d2e56c59431485328c344a32f6d0_grande.jpg\" /></p>&#13;&#10;&#13;&#10;<p><img src=\"https://file.hstatic.net/1000075078/file/7__1__0005adebdecd427ab2d20936951a1f07_grande.jpg\" /></p>&#13;&#10;',0,'2022-12-11 08:45:01','2022-12-11 08:45:01');
+         INSERT INTO `news` (`id`,`title`,`description`,`image`,`status`,`content`,`is_deleted`,`created_at`,`updated_at`) VALUES ('63958878adf6b','CÁCH NHẬN BIẾT HƯƠNG VỊ CÀ PHÊ ROBUSTA NGUYÊN CHẤT DỄ DÀNG NHẤT','Cùng Arabica, Robusta cũng là loại cà phê nổi tiếng được sử dụng phổ biến ở Việt Nam và nhiều nước khác trên thế giới. Với nhiều đặc điểm riêng, không quá khó để có thể nhận ra hương vị của loại cà phê trứ danh này.','banner2.jpg',1,'<p><strong>C&ugrave;ng Arabica, Robusta cũng l&agrave; loại c&agrave; ph&ecirc; nổi tiếng được sử dụng phổ biến ở Việt Nam v&agrave; nhiều nước kh&aacute;c tr&ecirc;n thế giới. Với nhiều đặc điểm&nbsp;ri&ecirc;ng, kh&ocirc;ng qu&aacute; kh&oacute; để c&oacute; thể nhận ra hương vị của loại c&agrave; ph&ecirc; trứ danh n&agrave;y.</strong></p>&#13;&#10;&#13;&#10;<p><strong>Đặc điểm c&agrave; ph&ecirc; Robusta&nbsp;</strong></p>&#13;&#10;&#13;&#10;<p>Về h&igrave;nh dạng, hạt c&agrave; ph&ecirc; Robusta c&oacute; h&igrave;nh tr&ograve;n, đường k&iacute;nh khoảng 10 &ndash; 13 mm. Hạt Robusta c&oacute; m&agrave;u n&acirc;u đậm v&agrave; h&agrave;m lượng caffeine từ 3 - 4%, trong khi đ&oacute; Arabica chỉ chiếm từ 1 - 2%.&nbsp;</p>&#13;&#10;&#13;&#10;<p>Về điều kiện trồng, c&agrave; ph&ecirc; Robusta sinh trưởng tốt trong v&ugrave;ng c&oacute; mưa nhiều v&agrave; nhiều &aacute;nh nắng mặt trời. Nhiệt độ th&iacute;ch hợp ở mức 24 - 29 độ C, ưa sống ở những v&ugrave;ng c&oacute; độ cao dưới 1000 m&eacute;t, phổ biến ở 850 &ndash; 900 m&eacute;t v&agrave; ở những v&ugrave;ng c&oacute; đất đỏ bazan m&agrave;u mỡ.</p>&#13;&#10;&#13;&#10;<p><img src=\"https://file.hstatic.net/1000075078/file/thecoffeehouse_ca_phe_robusta_04_77eebbf64f264751945dd2db61050c4b_grande.jpg\" /></p>&#13;&#10;&#13;&#10;<p><em>Ở Việt Nam, Robusta c&ograve;n được gọi với c&aacute;i t&ecirc;n quen thuộc l&agrave; c&agrave; ph&ecirc; Vối</em></p>&#13;&#10;&#13;&#10;<p>Ở Việt Nam c&oacute; rất nhiều v&ugrave;ng ph&ugrave; hợp để trồng giống Robusta, đặc biệt l&agrave;&nbsp;Bu&ocirc;n Ma Thuột, Đắk Lắk, L&acirc;m Đồng, Gia Lai, Đắk N&ocirc;ng,&hellip; Đ&acirc;y l&agrave; những v&ugrave;ng đất mang đến hương vị c&agrave; ph&ecirc; Robusta nguy&ecirc;n chất ngon v&agrave; nổi tiếng. Tuy nhi&ecirc;n, do sự kh&aacute;c biệt về thổ nhưỡng m&agrave; hương vị Robusta ở c&aacute;c v&ugrave;ng cũng c&oacute; sự kh&aacute;c biệt tương đối. Những người s&agrave;nh c&agrave; ph&ecirc;, c&oacute; gu thưởng thức tinh tế sẽ dễ d&agrave;ng cảm nhận được sự kh&aacute;c biệt ấn tượng m&agrave; đầy th&uacute; vị n&agrave;y.&nbsp;</p>&#13;&#10;&#13;&#10;<p><strong>Hương vị c&agrave; ph&ecirc; Robusta nguy&ecirc;n chất&nbsp;</strong></p>&#13;&#10;&#13;&#10;<p>C&agrave; ph&ecirc; Robusta nguy&ecirc;n chất được l&ograve;ng nhiều người bởi vị đậm đ&agrave; v&agrave; m&ugrave;i thơm đặc trưng. Nh&igrave;n chung, Robusta nguy&ecirc;n chất thường c&oacute; vị ch&aacute;t v&agrave; đắng hơn nhiều so với Arabica.&nbsp;Một trong những nguy&ecirc;n nh&acirc;n dẫn đến t&iacute;nh chất n&agrave;y l&agrave; do Robusta&nbsp;thường được &aacute;p dụng phương ph&aacute;p chế biến kh&ocirc;.</p>&#13;&#10;&#13;&#10;<p>Ngo&agrave;i ra, hạt c&agrave; ph&ecirc; Robusta nguy&ecirc;n chất chứa nhiều h&agrave;m lượng Chlorogenic Acid (CGA). Tuy được gọi l&agrave; Acid nhưng Chlorogenic Acid kh&ocirc;ng đặc trưng bởi &ldquo;vị chua&rdquo; m&agrave; l&agrave; &ldquo;vị đắng&rdquo;. Trong qu&aacute; tr&igrave;nh rang hạt c&agrave; ph&ecirc;, CGA sẽ ph&acirc;n hủy để tạo th&agrave;nh&nbsp;axit caffeic&nbsp;v&agrave;&nbsp;axit quinic, những chất n&agrave;y khi kết hợp c&ugrave;ng caffeine sẽ tạo n&ecirc;n vị đắng đặc trưng thường thấy ở Robusta. Vậy n&ecirc;n d&ugrave; Robusta c&oacute; lượng axit gấp đ&ocirc;i Arabica nhưng thực sự n&oacute; kh&ocirc;ng hề chua, m&agrave; đắng hơn Arabica.&nbsp;</p>&#13;&#10;&#13;&#10;<p><img src=\"https://file.hstatic.net/1000075078/file/thecoffeehouse_ca_phe_robusta_03_f41cdb27feb44fe7bffb77ac03aefbad_grande.jpg\" /></p>&#13;&#10;&#13;&#10;<p>B&ecirc;n cạnh đ&oacute;, với h&agrave;m lượng caffeine trung b&igrave;nh cao gấp đ&ocirc;i so với Arabica n&ecirc;n khi kết hợp hai loại c&agrave; ph&ecirc; n&agrave;y lại cho ra&nbsp;sản phẩm h&agrave;i h&ograve;a&nbsp;được nhiều người y&ecirc;u th&iacute;ch. V&igrave; vậy m&agrave; tr&ecirc;n thị trường nhiều loại c&agrave; ph&ecirc; &Yacute; (Espresso) lu&ocirc;n c&oacute; 10 - 15% c&agrave; ph&ecirc; Robusta để l&agrave;m dậy hương vị v&agrave; tạo lớp crema hấp dẫn hơn.</p>&#13;&#10;&#13;&#10;<p><strong>Chọn c&agrave; ph&ecirc; Robusta nguy&ecirc;n chất&nbsp;</strong></p>&#13;&#10;&#13;&#10;<p>T&ugrave;y theo sở th&iacute;ch ri&ecirc;ng của mỗi người, họ sẽ c&oacute; &ldquo;gu&rdquo; c&agrave; ph&ecirc; ri&ecirc;ng cho m&igrave;nh. Tuy nhi&ecirc;n, những loại c&agrave; ph&ecirc; nguy&ecirc;n chất, c&agrave; ph&ecirc; sạch kh&ocirc;ng pha trộn c&aacute;c loại tạp chất lu&ocirc;n l&agrave; ti&ecirc;u ch&iacute; lựa chọn h&agrave;ng đầu của những ai y&ecirc;u&nbsp;c&agrave; ph&ecirc;.&nbsp;</p>&#13;&#10;&#13;&#10;<p>Thấu hiểu sự đam m&ecirc; v&agrave; những cảm x&uacute;c kỳ diệu của c&aacute;c t&iacute;n đồ c&agrave; ph&ecirc; khi được nh&acirc;m nhi những t&aacute;ch c&agrave; ph&ecirc; nguy&ecirc;n chất, đậm vị, The Coffee House đ&atilde; cho ra đời&nbsp;c&agrave; ph&ecirc; Original 1. Sản phẩm c&oacute;&nbsp;100% th&agrave;nh phần l&agrave;&nbsp;c&agrave; ph&ecirc; Robusta Đắk Lắk, v&ugrave;ng trồng c&agrave; ph&ecirc; ngon nhất Việt Nam. Bằng c&aacute;ch &aacute;p dụng kỹ thuật rang xay hiện đại, C&agrave; ph&ecirc; Original 1 mang đến trải nghiệm tuyệt vời khi uống c&agrave; ph&ecirc; tại nh&agrave; với hương vị đậm đ&agrave; truyền thống.&nbsp;</p>&#13;&#10;&#13;&#10;<p><img src=\"https://file.hstatic.net/1000075078/file/thecoffeehouse_ca_phe_rang_xay_01_1d5dc412941442dcbdccfdcd117ebbb3_grande.jpg\" /></p>&#13;&#10;&#13;&#10;<p><em>C&agrave; ph&ecirc; Original 1 của The Coffee House với 100% th&agrave;nh phần c&agrave; ph&ecirc; Robusta Đăk Lăk, v&ugrave;ng trồng c&agrave; ph&ecirc; ngon nhất Việt Nam.&nbsp;</em></p>&#13;&#10;&#13;&#10;<p>B&ecirc;n cạnh đ&oacute;, d&ograve;ng c&agrave; ph&ecirc; Rich Finish của The Coffee House sở hữu c&ocirc;ng thức rang xay chuy&ecirc;n biệt v&agrave; được phối trộn tỷ lệ ho&agrave;n hảo giữa hạt Robusta v&agrave; Arabica. Đối với Rich Finish, ngay từ c&aacute;i chạm m&ocirc;i đầu ti&ecirc;n sẽ cảm nhận được r&otilde; vị đậm đ&agrave; v&agrave; hậu vị vấn vương. Rich Finish cho bạn khởi đầu đầy năng lượng, tỉnh t&aacute;o v&agrave; kết th&uacute;c một ng&agrave;y với những cảm x&uacute;c rộn r&agrave;ng.&nbsp;</p>&#13;&#10;&#13;&#10;<p>Ngo&agrave;i ra, những hạt c&agrave; ph&ecirc; Robusta Đắk N&ocirc;ng v&agrave; hạt c&agrave; ph&ecirc; Arabica Cầu Đất nổi tiếng của Việt Nam c&ograve;n được The Coffee House g&oacute;i trọn v&agrave; tạo th&agrave;nh một hương vị mới mẻ đầy l&ocirc;i cuốn trong d&ograve;ng sản phẩm Peak Flavor. Được rang với nhiệt độ v&agrave;ng, c&agrave; ph&ecirc; Peak Flavor l&agrave; sự h&ograve;a trộn của nhiều cung bậc, c&aacute;c tầng lớp của hương v&agrave; vị sẽ mang đến cho người d&ugrave;ng một ng&agrave;y mới tr&agrave;n đầy cảm hứng.</p>&#13;&#10;',0,'2022-12-11 14:36:24','2022-12-11 14:36:24');
+         INSERT INTO `news` (`id`,`title`,`description`,`image`,`status`,`content`,`is_deleted`,`created_at`,`updated_at`) VALUES ('639589777910c','BẬT MÍ NHIỆT ĐỘ LÝ TƯỞNG ĐỂ PHA CÀ PHÊ NGON, ĐẬM ĐÀ HƯƠNG VỊ','Nhiệt độ nước là một yếu tố quan trọng để có thể tạo nên những tách cà phê thơm ngon. Bạn đã biết nhiệt độ nước lý tưởng để pha cà phê đúng chuẩn? ','banner3.jpg',1,'<p><strong>Nhiệt độ nước l&agrave; một yếu tố quan trọng để c&oacute; thể tạo n&ecirc;n những t&aacute;ch c&agrave; ph&ecirc; thơm ngon. Bạn đ&atilde; biết nhiệt độ nước l&yacute; tưởng để pha c&agrave; ph&ecirc; đ&uacute;ng chuẩn?&nbsp;</strong></p>&#13;&#10;&#13;&#10;<p><strong>V&igrave; sao phải lưu &yacute; nhiệt độ nước khi pha c&agrave; ph&ecirc;?</strong></p>&#13;&#10;&#13;&#10;<p>Nhiều người vẫn thường nghĩ chỉ cần đun nước cho s&ocirc;i, sau đ&oacute; đổ v&agrave;o phin pha chế v&agrave; chờ khoảng 5 ph&uacute;t cho c&agrave; ph&ecirc; nhiễu xuống l&agrave; c&oacute; được ly c&agrave; ph&ecirc; để uống. Tuy nhi&ecirc;n, điều n&agrave;y kh&ocirc;ng hẳn đ&uacute;ng v&igrave; bạn sẽ kh&ocirc;ng được thưởng thức c&agrave; ph&ecirc; với hương vị tốt nhất. Đặc biệt l&agrave; đối với c&aacute;c loại c&agrave; ph&ecirc; c&oacute; đặc trưng pha chế ri&ecirc;ng. Việc ch&uacute; &yacute; đến nhiệt độ nước ph&ugrave; hợp sẽ gi&uacute;p bạn cảm nhận v&agrave; say đắm trong hương vị nồng n&agrave;n, trọn vẹn của những loại c&agrave; ph&ecirc; hảo hạng.&nbsp;</p>&#13;&#10;&#13;&#10;<p><img src=\"https://file.hstatic.net/1000075078/file/thecoffeehouse_caphe_12_ab986d8cb94d48b08ab7d5b7597cbbd9_grande.jpg\" /></p>&#13;&#10;&#13;&#10;<p>Bạn biết kh&ocirc;ng, nếu khi sử dụng nhiệt độ nước thấp, một số hợp chất ch&iacute;nh trong c&agrave; ph&ecirc; sẽ kh&ocirc;ng được chiết xuất hiệu quả, dẫn đến c&agrave; ph&ecirc; c&oacute; thể c&oacute; vị mỏng, nhạt v&agrave; c&oacute; cường độ hương vị thấp. Khi nhiệt độ cao hơn, c&aacute;c ph&acirc;n tử h&ograve;a tan tăng cường hoạt động, sẽ th&uacute;c đẩy chiết xuất c&aacute;c chất kh&oacute; tan gi&uacute;p c&agrave; ph&ecirc; c&oacute; hương vị r&otilde; r&agrave;ng, phong ph&uacute; v&agrave; tinh tế hơn. Thế nhưng, mỗi loại c&agrave; ph&ecirc; sẽ c&oacute; một mức nhiệt l&yacute; tưởng ri&ecirc;ng khi pha chế. Nắm được điều n&agrave;y sẽ gi&uacute;p bạn c&oacute; thể pha chế những t&aacute;ch c&agrave; ph&ecirc; với hương vị r&otilde; r&agrave;ng, chuẩn nhất v&agrave; thưởng thức ch&uacute;ng một c&aacute;ch ưng &yacute; nhất.&nbsp;</p>&#13;&#10;&#13;&#10;<p><strong>Nhiệt độ nước l&yacute; tưởng cho từng loại c&agrave; ph&ecirc; ngon</strong></p>&#13;&#10;&#13;&#10;<p>Theo&nbsp;nghi&ecirc;n cứu,&nbsp;nhiệt độ nước l&yacute; tưởng để pha c&agrave; ph&ecirc; dao động từ&nbsp;khoảng 90 đến 96&deg;C. Tuy nhi&ecirc;n, đối với từng loại c&agrave; ph&ecirc;, sẽ c&oacute; một nhiệt độ tối ưu để&nbsp;c&aacute;c hợp chất được giải ph&oacute;ng một c&aacute;ch c&acirc;n bằng v&agrave; tạo n&ecirc;n hương vị tuyệt vời. Chẳng hạn như đối với Espresso v&agrave; c&agrave; ph&ecirc; phin truyền thống, bạn c&oacute; thể sử dụng ở mức nhiệt độ từ&nbsp; 90 đến 96&deg;C. Tuy nhi&ecirc;n đối với cold brew th&igrave; mức nhiệt độ l&yacute; tưởng đ&oacute; ch&iacute;nh l&agrave; 25&deg;C, c&ograve;n d&ugrave;ng cho c&aacute;c phương ph&aacute;p pha pour over (V60,&hellip;) th&igrave; mức nhiệt độ tối ưu l&agrave; 80 đến 90&deg;C.&nbsp;Vậy n&ecirc;n, bạn cần lưu &yacute; tuỳ theo loại c&agrave; ph&ecirc; m&agrave; đang pha chế, m&agrave; chọn loại nước cho ph&ugrave; hợp.</p>&#13;&#10;&#13;&#10;<p><img src=\"https://file.hstatic.net/1000075078/file/thecoffeehouse_caphe_13_efe9c0fc2c324ecf8cbf936a53566208_grande.jpg\" /></p>&#13;&#10;&#13;&#10;<p><strong>Những lưu &yacute; li&ecirc;n quan đến nhiệt độ nước khi pha c&agrave; ph&ecirc;</strong></p>&#13;&#10;&#13;&#10;<p>Bạn&nbsp;cần lưu &yacute; một số điểm để c&oacute; thể đảm bảo rằng nhiệt độ nước pha c&agrave; ph&ecirc; hay kỹ thuật pha c&agrave; ph&ecirc; bạn đang &aacute;p dụng l&agrave; chuẩn nhất:</p>&#13;&#10;&#13;&#10;<ul>&#13;&#10;&#9;<li>&#13;&#10;&#9;<p>Nhiệt từ nước sẽ bị hao hụt trong qu&aacute; tr&igrave;nh chiết xuất do dẫn nhiệt qua c&agrave; ph&ecirc;, dụng cụ pha chế, m&ocirc;i trường,.. V&igrave; vậy,&nbsp;trong c&aacute;c điều kiện pha chế kh&aacute;c nhau cần điều chỉnh nhiệt độ nước tương th&iacute;ch.&nbsp;</p>&#13;&#10;&#9;</li>&#13;&#10;&#9;<li>&#13;&#10;&#9;<p>C&ugrave;ng một loại c&agrave; ph&ecirc; nhưng nếu được xay với k&iacute;ch thước kh&aacute;c nhau th&igrave; cần điều chỉnh nhiệt độ nước pha ph&ugrave; hợp. Nếu xay th&ocirc; hơn ở mức thường th&igrave; cần tăng nhiệt độ nước, c&ograve;n xay nhuyễn hơn th&igrave; giảm nhiệt độ nước. V&agrave; mức tăng giảm chỉ n&ecirc;n giao động trong khoảng 2 - 3 độ.</p>&#13;&#10;&#9;</li>&#13;&#10;&#9;<li>&#13;&#10;&#9;<p>Cần phải l&agrave;m n&oacute;ng, tr&aacute;ng qua c&aacute;c dụng cụ pha chế để tr&aacute;nh l&agrave;m giảm nhiệt nhanh ch&oacute;ng khi pha c&agrave; ph&ecirc;. Cũng như phải ủ c&agrave; ph&ecirc; trước khi pha để tăng tỉ lệ chiết xuất của c&agrave; ph&ecirc; v&agrave; thời gian ủ thường khoảng 1- 2 ph&uacute;t.</p>&#13;&#10;&#9;</li>&#13;&#10;&#9;<li>&#13;&#10;&#9;<p>Tr&aacute;nh d&ugrave;ng nước được đun bằng củi, than đ&aacute; sẽ g&acirc;y &aacute;m kh&oacute;i ảnh hưởng lớn đến hương vị c&agrave; ph&ecirc; khi thưởng thức.</p>&#13;&#10;&#9;</li>&#13;&#10;</ul>&#13;&#10;&#13;&#10;<p>Chỉ cần nhớ những lưu &yacute; tr&ecirc;n, bạn&nbsp;c&oacute; thể tự tin&nbsp;pha những ly c&agrave; ph&ecirc; chuẩn chỉnh, thơm ngon nhất. V&agrave; nếu như kh&ocirc;ng c&oacute; thời gian, Nh&agrave; vẫn lu&ocirc;n sẵn s&agrave;ng đ&oacute;n bạn v&agrave; tiếp đ&atilde;i bằng những ly c&agrave; ph&ecirc; sữa, c&agrave; ph&ecirc; đen, hay c&aacute;c loại c&agrave; ph&ecirc; m&aacute;y như espresso, latte, macchiato, mocha&hellip; đậm đ&agrave;, thơm ngon kh&oacute; cưỡng.</p>&#13;&#10;',0,'2022-12-11 14:40:39','2022-12-11 14:40:39');
+         INSERT INTO `news` (`id`,`title`,`description`,`image`,`status`,`content`,`is_deleted`,`created_at`,`updated_at`) VALUES ('63958a59ef495','CÁCH PHA CÀ PHÊ PHIN THƠM NGON TRÒN VỊ','Có nhiều cách để pha một ly cà phê ngon, nhưng đối với nhiều người Việt giây phút đợi chờ những giọt cà phê rơi từ chiếc phin đã trở thành nét văn hóa ăn sâu trong tiềm thức','banner4.jpg',1,'<p><strong>C&oacute; nhiều c&aacute;ch để pha một ly c&agrave; ph&ecirc; ngon, nhưng đối với nhiều người Việt gi&acirc;y ph&uacute;t đợi chờ&nbsp;những giọt c&agrave; ph&ecirc; rơi từ chiếc phin đ&atilde; trở th&agrave;nh n&eacute;t văn h&oacute;a ăn s&acirc;u trong tiềm thức.&nbsp;Để tạo n&ecirc;n một ly c&agrave; ph&ecirc; phin chuẩn vị, kh&ocirc;ng chỉ cần sự tinh tế trong c&aacute;ch chọn loại c&agrave; ph&ecirc;&nbsp;m&agrave; c&ograve;n cả sự tỉ mỉ trong từng bước pha.</strong></p>&#13;&#10;&#13;&#10;<p><strong>C&agrave; ph&ecirc; phin l&agrave; g&igrave;?</strong></p>&#13;&#10;&#13;&#10;<p>Phin pha c&agrave; ph&ecirc; bao gồm c&aacute;c bộ phận như th&acirc;n phin, nắp g&agrave;i, đĩa l&oacute;t đ&aacute;y, nắp phin. Với chất liệu bằng nh&ocirc;m hay inox&nbsp;sẽ c&oacute; t&aacute;c dụng giữ n&oacute;ng nước pha c&agrave; ph&ecirc; v&agrave; chắt lọc được những chất tinh t&uacute;y nhất của c&agrave; ph&ecirc;. Đĩa l&oacute;t đ&aacute;y được đặt b&ecirc;n dưới th&acirc;n phin với những lỗ si&ecirc;u nhỏ sẽ gi&uacute;p bột c&agrave; ph&ecirc; kh&ocirc;ng lọt xuống ly, cho cảm nhận trọn vẹn khi uống.</p>&#13;&#10;&#13;&#10;<p>C&agrave; ph&ecirc; phin đặc biệt ở chỗ người ta c&oacute; thể thưởng thức chậm r&atilde;i từ&nbsp;m&ugrave;i thơm quyến rũ của c&agrave; ph&ecirc; rang xay đ&uacute;ng độ đến vị đắng nhẹ, đậm đ&agrave; của từng giọt thấm nơi đầu lưỡi,...&nbsp;Trong khi đ&oacute;, những&nbsp;c&aacute;ch pha c&agrave; ph&ecirc;&nbsp;kh&aacute;c với nhiều biến tấu, dễ&nbsp;l&agrave;m vơi đi nguy&ecirc;n vị của c&agrave; ph&ecirc;.</p>&#13;&#10;&#13;&#10;<p><img src=\"https://file.hstatic.net/1000075078/file/thecoffeehouse_caphe_5_94bce62bbba7450daed24cda2c6a196d_grande.jpeg\" /></p>&#13;&#10;&#13;&#10;<p><strong>C&aacute;ch pha c&agrave; phin thơm ngon</strong></p>&#13;&#10;&#13;&#10;<p>Để c&oacute; thể pha v&agrave; nh&acirc;m nhi những ly c&agrave; ph&ecirc; phin thơm ngon, nồng đượm mỗi s&aacute;ng tại nh&agrave;, khơi nguồn cho một ng&agrave;y l&agrave;m việc hiệu quả, bạn h&atilde;y chuẩn bị khoảng tầm 25g c&agrave; ph&ecirc; bột c&ugrave;ng 80 &ndash; 100ml nước, sau đ&oacute; tiến h&agrave;nh pha c&agrave; ph&ecirc; phin theo c&aacute;c bước như sau:</p>&#13;&#10;&#13;&#10;<p><strong><em>Bước 1:&nbsp;</em></strong>Tr&aacute;ng phin c&agrave; ph&ecirc; v&agrave; chiếc ly d&ugrave;ng để pha c&agrave; ph&ecirc; bằng nước s&ocirc;i. Như vậy, gi&uacute;p phin n&oacute;ng đều đảm bảo c&agrave; ph&ecirc; được thơm ngon khi pha.</p>&#13;&#10;&#13;&#10;<p><strong><em>Bước 2:</em></strong>&nbsp;Cho c&agrave; ph&ecirc; đ&atilde; chuẩn bị v&agrave;o phin, lắc nhẹ phin để tạo mặt phẳng ph&iacute;a tr&ecirc;n, sau đ&oacute; d&ugrave;ng nắp g&agrave;i &eacute;p một lực vừa phải l&ecirc;n tr&ecirc;n bột c&agrave; ph&ecirc;. Thực hiện bước n&agrave;y để khi cho nước v&agrave;o phin, nước thấm đều bột c&agrave; ph&ecirc; v&agrave; sẽ kh&ocirc;ng l&agrave;m c&agrave; ph&ecirc; nhỏ giọt qu&aacute; nhanh.&nbsp;</p>&#13;&#10;&#13;&#10;<p><strong><em>Bước 3:</em></strong>&nbsp;R&oacute;t tầm khoảng 20ml nước đun s&ocirc;i v&agrave;o v&agrave; ủ c&agrave; ph&ecirc; trong khoảng 2 ph&uacute;t. N&ecirc;n r&oacute;t chậm r&atilde;i để c&agrave; ph&ecirc; nở đều m&agrave; kh&ocirc;ng bị tr&agrave;o ra. Ngo&agrave;i ra, để c&agrave; ph&ecirc; b&ecirc;n dưới đ&aacute;y phin cũng c&oacute; thể hấp thụ nước đồng đều, bạn c&oacute; thể đổ &iacute;t nước s&ocirc;i v&agrave;o nắp c&agrave; ph&ecirc; rồi đặt phin pha c&agrave; ph&ecirc; l&ecirc;n tr&ecirc;n.&nbsp;</p>&#13;&#10;&#13;&#10;<p><strong><em>Bước 4:&nbsp;</em></strong>Khi c&agrave; ph&ecirc; đ&atilde; nở v&agrave; hấp thụ hết nước th&igrave; cho khoảng 80ml nước v&agrave;o phin. Đậy nắp lại v&agrave; đợi tầm 5 ph&uacute;t để c&agrave; ph&ecirc; nhiễu xuống, sau đ&oacute; cho đường v&agrave;o để thưởng thức.&nbsp;Nếu bạn th&iacute;ch uống c&agrave; ph&ecirc; sữa th&igrave; trước khi đặt phin pha chế, c&oacute; thể cho v&agrave;o ly thủy tinh một &iacute;t sữa đặc. B&iacute; quyết để c&oacute; ly c&agrave; ph&ecirc; ngon l&agrave; thời gian từ khi r&oacute;t nước cho đến khi được th&agrave;nh phẩm khoảng 5 &ndash; 7 ph&uacute;t. Nếu thời gian qu&aacute; nhanh th&igrave; c&agrave; ph&ecirc; sẽ chua, ngược lại nếu thời gian chảy qu&aacute; chậm th&igrave; c&agrave; ph&ecirc; sẽ bị đắng.&nbsp;</p>&#13;&#10;&#13;&#10;<p><img src=\"https://file.hstatic.net/1000075078/file/thecoffeehouse_caphe_1_f1c054b7412c4b21b6c7c4d0b3fef73d_grande.jpg\" /></p>&#13;&#10;&#13;&#10;<p>Ngo&agrave;i ra, bạn n&ecirc;n lưu &yacute; sử dụng phin pha c&agrave; ph&ecirc; bằng nh&ocirc;m v&igrave; n&oacute; sẽ cho hương vị c&agrave; ph&ecirc; thơm ngon nhất. Đặc biệt, điều quan trọng nhất để c&oacute; được những ly c&agrave; ph&ecirc; phin tuyệt vời đ&oacute; l&agrave; kh&ocirc;ng qu&ecirc;n lựa chọn loại c&agrave; ph&ecirc; chất lượng. Tr&ecirc;n thị trường hiện nay c&oacute; rất nhiều loại c&agrave; ph&ecirc; kh&aacute;c nhau, từ c&agrave; ph&ecirc; hạt đến c&agrave; ph&ecirc; bột, c&agrave; ph&ecirc; Moka, c&agrave; ph&ecirc; Robusta hay Arabica&hellip; The Coffee House giới thiệu bạn những d&ograve;ng c&agrave; ph&ecirc; thượng hạng được ra đời từ mảnh đất bazan nắng gi&oacute; T&acirc;y Nguy&ecirc;n. Tất cả đều được chế biến từ những hạt c&agrave; ph&ecirc; nguy&ecirc;n chất, đạt chuẩn về chất lượng v&agrave; kỹ thuật rang xay, chế biến hiện đại nhất.&nbsp;&nbsp;</p>&#13;&#10;&#13;&#10;<p>Bạn c&oacute; thể chọn sản phẩm c&agrave; ph&ecirc; từ 100% hạt Arabica, được chọn lọc kỹ lưỡng tại v&ugrave;ng Cầu Đất trồng tr&ecirc;n độ cao 1650m. Với vị đắng nhẹ, hậu vị chua thanh, ngọt dịu, c&agrave; ph&ecirc; Arabica của Nh&agrave; sẽ gi&uacute;p bạn tạo ra những t&aacute;ch c&agrave; ph&ecirc; pha phin tinh tế y&ecirc;u th&iacute;ch cho ri&ecirc;ng m&igrave;nh.</p>&#13;&#10;&#13;&#10;<p>B&ecirc;n cạnh đ&oacute;, nếu l&agrave; người th&iacute;ch gu c&agrave; ph&ecirc; đắng, đậm v&agrave; mạnh bạn c&oacute; thể chọn d&ograve;ng Original 1 của The Coffee House với 100% th&agrave;nh phần c&agrave; ph&ecirc; Robusta Đắk Lắk, v&ugrave;ng đất nổi danh trồng c&agrave; ph&ecirc; ngon nhất Việt Nam. Bằng c&aacute;ch &aacute;p dụng kỹ thuật rang xay hiện đại, C&agrave; ph&ecirc; Original 1 mang đến trải nghiệm tuyệt vời khi uống c&agrave; ph&ecirc; tại nh&agrave; với hương vị đậm đ&agrave; truyền thống.&nbsp;</p>&#13;&#10;&#13;&#10;<p><img src=\"https://file.hstatic.net/1000075078/file/thecoffeehouse_caphe_4_9d366365dbfa469f81792403887526e0_grande.jpg\" /></p>&#13;&#10;&#13;&#10;<p>Ngo&agrave;i ra, đội ngũ chuy&ecirc;n gia của The Coffee House đ&atilde; h&ograve;a trộn tỉ lệ ho&agrave;n hảo giữa hai loại c&agrave; ph&ecirc; Arabica v&agrave; Robusta để cho ra đời d&ograve;ng sản phẩm Rich Finish v&agrave; Peak Flavor.&nbsp;</p>&#13;&#10;&#13;&#10;<p>C&agrave; ph&ecirc; Peak Flavor sở hữu những nốt hương đỉnh cao, lưu giữ trọn vẹn hương thơm tinh tế đặc trưng của c&agrave; ph&ecirc; Robusta Đăk N&ocirc;ng v&agrave; Arabica Cầu Đất. C&ograve;n c&agrave; ph&ecirc; Rich Finish sẽ mang đến những ly c&agrave; ph&ecirc; đậm đ&agrave;, hương vị đầy lưu luyến gi&uacute;p bạn bắt đầu ng&agrave;y mới đầy hứng khởi v&agrave; một ng&agrave;y d&agrave;i trọn vẹn với cảm hứng tươi mới.&nbsp;</p>&#13;&#10;',0,'2022-12-11 14:44:25','2022-12-11 14:44:25');
+         INSERT INTO `news` (`id`,`title`,`description`,`image`,`status`,`content`,`is_deleted`,`created_at`,`updated_at`) VALUES ('63958ad2c9d17','8 LỢI ÍCH BẤT NGỜ CỦA CÀ PHÊ COLD BREW','Cold brew là thức uống rất được yêu thích trong thời gian gần đây. Không chỉ có hương thơm đặc trưng và vị lôi cuốn, nó còn có nhiều lợi ích cho sức khỏe. Cùng The Coffee House tìm hiểu 8 lợi ích nổi bật của loại cà phê lạnh siêu hot này. ','banner5.jpg',1,'<p><strong>Cold brew l&agrave; thức uống rất được y&ecirc;u th&iacute;ch trong thời gian gần đ&acirc;y. Kh&ocirc;ng chỉ c&oacute; hương thơm đặc trưng v&agrave; vị l&ocirc;i cuốn, n&oacute; c&ograve;n c&oacute; nhiều lợi &iacute;ch cho sức khỏe. C&ugrave;ng The Coffee House t&igrave;m hiểu 8 lợi &iacute;ch nổi bật của loại c&agrave; ph&ecirc; lạnh si&ecirc;u hot n&agrave;y.&nbsp;</strong></p>&#13;&#10;&#13;&#10;<p>Kh&aacute;c với những loại c&agrave; ph&ecirc; kh&aacute;c, cold brew c&oacute; c&aacute;ch pha chế đặc biệt, cũng ch&iacute;nh v&igrave; l&yacute; do n&agrave;y m&agrave; đ&atilde; tạo n&ecirc;n một loại c&agrave; ph&ecirc; với m&ugrave;i vị kh&aacute;c lạ khiến nhiều người m&ecirc; mẩn. Nếu th&ocirc;ng thường, c&agrave; ph&ecirc; được pha với nước n&oacute;ng th&igrave; cold brew lại được pha bằng c&aacute;ch ủ bột c&agrave; ph&ecirc; trong nước lạnh từ 12 - 24 tiếng. Cũng v&igrave; thế m&agrave; n&oacute; c&ograve;n c&oacute; t&ecirc;n gọi kh&aacute;c l&agrave; &ldquo;c&agrave; ph&ecirc; lạnh&rdquo;. Hương vị cold brew độc đ&aacute;o rất ri&ecirc;ng với vị dịu nhẹ, độ chua nhẹ hơn v&agrave; vị đắng cũng được tiết giảm so với c&aacute;c loại c&agrave; ph&ecirc; kh&aacute;c. Thế nhưng, về lợi &iacute;ch đối với sức khỏe, uống c&agrave; ph&ecirc; lạnh cold brew c&oacute; nhiều t&aacute;c dụng tương tự như nhiều loại c&agrave; ph&ecirc; đ&atilde; được nghi&ecirc;n cứu.&nbsp;</p>&#13;&#10;&#13;&#10;<p><img src=\"https://file.hstatic.net/1000075078/file/img_8668_grande-1_b8f1701567de4ccd87e767a84dcb14bc_grande.jpg\" /></p>&#13;&#10;&#13;&#10;<p><em>Cold Brew &ndash; một trong những kiểu pha chế giữ lại hương vị nguy&ecirc;n bản nhất của hạt c&agrave; ph&ecirc;</em></p>&#13;&#10;&#13;&#10;<p><strong>1. Gi&uacute;p tỉnh t&aacute;o, tập trung</strong></p>&#13;&#10;&#13;&#10;<p>Giống như bất kỳ loại c&agrave; ph&ecirc; n&agrave;o, cold brew chứa chất caffeine, vậy n&ecirc;n n&oacute; c&oacute; thể k&iacute;ch th&iacute;ch thần kinh, gi&uacute;p tỉnh t&aacute;o, tập trung. Ch&iacute;nh v&igrave; thế m&agrave; c&agrave; ph&ecirc; l&agrave; thức uống được sử dụng thường xuy&ecirc;n v&agrave;o mỗi buổi s&aacute;ng, trong những giờ l&agrave;m việc hoặc những buổi chiều v&agrave; buổi tối thường g&acirc;y cảm gi&aacute;c buồn ngủ.</p>&#13;&#10;&#13;&#10;<p><strong>2. Cải thiện t&acirc;m trạng</strong></p>&#13;&#10;&#13;&#10;<p>Cũng nhờ chứa caffeine n&ecirc;n c&agrave; ph&ecirc; lạnh c&oacute; thể gi&uacute;p cải thiện trạng th&aacute;i tinh thần, giảm căng thẳng, gi&uacute;p t&acirc;m trạng phấn chấn hơn, tr&aacute;nh khỏi sự mệt mỏi v&agrave; ủ rũ. Mặt kh&aacute;c, một cuộc nghi&ecirc;n cứu tr&ecirc;n 370.000 người tham gia đ&atilde; cho thấy rằng những người thường xuy&ecirc;n uống c&agrave; ph&ecirc; &iacute;t c&oacute; nguy cơ trầm cảm (c&oacute; thể giảm đến 8%).</p>&#13;&#10;&#13;&#10;<p><strong>3. Tăng cường trao đổi chất</strong></p>&#13;&#10;&#13;&#10;<p>Trong c&agrave; ph&ecirc;, caffeine được xem l&agrave; chất đặc trưng v&agrave; c&oacute; nhiều t&aacute;c động đối với cơ thể của ch&uacute;ng ta. V&igrave; c&oacute; caffeine n&ecirc;n cold brew c&oacute; thể tăng cường trao đổi chất bằng c&aacute;ch đốt ch&aacute;y mỡ. Thực tế caffeine được chứng minh l&agrave; l&agrave;m tăng tỷ lệ trao đổi chất khi nghỉ ngơi l&ecirc;n đến 11%. Trong một nghi&ecirc;n cứu ở 8 nam giới đ&atilde; cho thấy ti&ecirc;u thụ caffeine gi&uacute;p tăng lượng calo đốt ch&aacute;y l&ecirc;n 13% v&agrave; mức độ đốt ch&aacute;y mỡ l&ecirc;n gấp 2 lần.&nbsp;</p>&#13;&#10;&#13;&#10;<p><img src=\"https://file.hstatic.net/1000075078/file/tch2_0084aa29cceb40409025e883cd349f54_grande_b3b231f7ed07493c91424dfd206ebbdd_grande.png\" /></p>&#13;&#10;&#13;&#10;<p><em>Sự kh&aacute;c biệt giữa Cold Brew v&agrave; C&agrave; ph&ecirc; đen đ&aacute; b&igrave;nh thường</em></p>&#13;&#10;&#13;&#10;<p><strong>4. Giảm nguy cơ mắc bệnh tim</strong></p>&#13;&#10;&#13;&#10;<p>Những bệnh li&ecirc;n quan đến tim v&agrave; mạch m&aacute;u hết sức nguy hiểm v&agrave; l&agrave; nguy&ecirc;n nh&acirc;n g&acirc;y tử vong h&agrave;ng đầu. Với c&aacute;c hợp chất c&oacute; thể l&agrave;m giảm nguy cơ mắc c&aacute;c bệnh tim mạch như caffeine, phenolic, magi&ecirc;, trigonelline, quinide v&agrave; lignan,... uống cold brew c&oacute; thể gi&uacute;p ổn định lượng đường trong m&aacute;u, giảm huyết &aacute;p, tr&aacute;nh c&aacute;c bệnh nhồi m&aacute;u cơ tim v&agrave; đột quỵ. Chắc chắn bạn sẽ muốn tr&aacute;nh xa những căn bệnh nguy hiểm n&agrave;y, thế n&ecirc;n h&atilde;y thưởng thức c&agrave; ph&ecirc; mỗi ng&agrave;y nh&eacute;, v&igrave; n&oacute; c&oacute; thể l&agrave;m giảm nguy cơ mắc bệnh tim mạch 15% so với những người kh&ocirc;ng uống c&agrave; ph&ecirc;. Tuy nhi&ecirc;n, những người bị cao huyết &aacute;p kh&ocirc;ng n&ecirc;n ti&ecirc;u thụ caffeine thường xuy&ecirc;n v&igrave; c&oacute; thể khiến cho huyết &aacute;p c&agrave;ng tăng cao.</p>&#13;&#10;&#13;&#10;<p><strong>5. Giảm nguy cơ mắc tiểu đường tu&yacute;p 2</strong></p>&#13;&#10;&#13;&#10;<p>Lượng đường trong m&aacute;u tăng qu&aacute; cao sẽ dẫn đến bệnh tiểu đường, nhiều biến chứng nguy hiểm đến sức khoẻ nếu bệnh kh&ocirc;ng được chữa trị. Thế nhưng bạn biết kh&ocirc;ng, việc uống cold brew c&oacute; thể gi&uacute;p bạn tr&aacute;nh khỏi căn bệnh n&agrave;y. Nghi&ecirc;n cứu cho thấy cold brew gi&uacute;p điều h&ograve;a peptide trong đường ruột, kiểm so&aacute;t v&agrave; l&agrave;m chậm qu&aacute; tr&igrave;nh ti&ecirc;u h&oacute;a, nhờ đ&oacute; giữ cho lượng đường trong m&aacute;u ở mức ổn định, n&oacute; c&oacute; thể gi&uacute;p bạn giảm nguy cơ mắc bệnh đến 30%.&nbsp;</p>&#13;&#10;&#13;&#10;<p><strong>6. Hạn chế mắc bệnh Parkinson v&agrave; Alzheimer</strong></p>&#13;&#10;&#13;&#10;<p>Đ&atilde; c&oacute; nhiều nghi&ecirc;n cứu thực tế khẳng định việc uống c&agrave; ph&ecirc; sẽ gi&uacute;p bảo vệ n&atilde;o khỏi c&aacute;c bệnh tuổi gi&agrave; v&agrave; tho&aacute;i h&oacute;a thần kinh diễn ra theo thời gian. Cụ thể c&oacute; thể tr&aacute;nh khỏi bệnh Parkinson v&agrave; Alzheimer, hạn chế việc suy giảm tr&iacute; nhớ, sa s&uacute;t sức khoẻ tinh thần v&agrave; ảnh hưởng đến đời sống hằng ng&agrave;y v&igrave; tr&iacute; nhớ k&eacute;m hay tay run v&agrave; cứng khớp... Người ở độ tuổi trung ni&ecirc;n c&oacute; thể uống 2-3 cốc c&agrave; ph&ecirc; mỗi ng&agrave;y để giảm nguy cơ mắc hai căn bệnh tuổi gi&agrave; đ&aacute;ng lo ngại n&agrave;y.&nbsp;</p>&#13;&#10;&#13;&#10;<p><strong>7. Tr&aacute;nh t&aacute;c động xấu đến dạ d&agrave;y</strong></p>&#13;&#10;&#13;&#10;<p>C&agrave; ph&ecirc; c&oacute; t&iacute;nh axit n&ecirc;n đối với một số người kh&ocirc;ng quen uống c&oacute; thể gặp phải t&igrave;nh trạng tr&agrave;o ngược axit dạ d&agrave;y hay kh&oacute; ti&ecirc;u v&agrave; ợ chua. Thế nhưng, một v&agrave;i nghi&ecirc;n cứu đ&atilde; cho thấy c&agrave; ph&ecirc; lạnh c&oacute; t&iacute;nh axit thấp hơn một ch&uacute;t so với c&agrave; ph&ecirc; n&oacute;ng. Nhờ đ&oacute; sẽ &iacute;t g&acirc;y k&iacute;ch th&iacute;ch dạ d&agrave;y hơn. Ngo&agrave;i ra trong cold brew c&ograve;n chứa h&agrave;m lượng polysaccharide cao hơn n&ecirc;n cũng sẽ gi&uacute;p tăng cường khả năng miễn dịch của hệ ti&ecirc;u h&oacute;a.&nbsp;</p>&#13;&#10;&#13;&#10;<p><img src=\"https://file.hstatic.net/1000075078/file/final-2_c171692e77d94ca8b9144335a5f62749_grande.jpg\" /></p>&#13;&#10;&#13;&#10;<p><em>Tại The Coffee House, c&aacute;c barista đ&atilde; s&aacute;ng tạo v&agrave; cho ra những kết hợp cực k&igrave; th&uacute; vị, để mang đến trải nghiệm c&agrave; ph&ecirc; một c&aacute;ch nhẹ nh&agrave;ng v&agrave; tươi m&aacute;t hơn</em></p>&#13;&#10;&#13;&#10;<p><strong>8. Tăng tuổi thọ</strong></p>&#13;&#10;&#13;&#10;<p>Với những lợi &iacute;ch tr&ecirc;n th&igrave; thưởng thức cold brew c&ograve;n gi&uacute;p tăng tuổi thọ. Trong c&agrave; ph&ecirc; c&oacute; chứa chất chống oxy ho&aacute; như polyphenol, hydroxycinnamates v&agrave; axit chlorogenic, vậy n&ecirc;n uống c&agrave; ph&ecirc; mỗi ng&agrave;y c&oacute; thể l&agrave;m hạn chế nguy cơ mắc c&aacute;c bệnh nguy hiểm về tim mạch, tiểu đường, h&ocirc; hấp, đột quỵ, ung thư...&nbsp; nhờ đ&oacute; gi&uacute;p k&eacute;o d&agrave;i tuổi thọ. Ngo&agrave;i ra, c&aacute;c nghi&ecirc;n cứu đ&atilde; chỉ ra rằng c&agrave; ph&ecirc; n&oacute;ng c&oacute; lượng chất chống oxy h&oacute;a cao hơn so với c&agrave; ph&ecirc; lạnh. Tuy nhi&ecirc;n, c&agrave; ph&ecirc; lạnh lại chứa một số chất chống oxy h&oacute;a rất mạnh, như axit caffeoylquinic (CQA).</p>&#13;&#10;&#13;&#10;<p>Bạn c&oacute; bất ngờ về những lợi &iacute;ch của c&agrave; ph&ecirc; lạnh cold brew? Uống c&agrave; ph&ecirc; mỗi ng&agrave;y với liều lượng vừa đủ, khoảng từ 2-4 ly chắc chắn sẽ gi&uacute;p bạn bảo vệ cơ thể của m&igrave;nh, th&ecirc;m nguồn cảm hứng v&agrave; năng lượng t&iacute;ch cực cho cuộc sống. Cold brew c&oacute; phải l&agrave; loại c&agrave; ph&ecirc; kho&aacute;i khẩu của bạn? H&atilde;y gh&eacute; The Coffee House để thưởng thức nh&eacute;. Thức uống đặc biệt n&agrave;y được Nh&agrave; ủ mới v&agrave; phục vụ mỗi ng&agrave;y từ 100% hạt Arabica Cầu Đất. Hương vị đậm đ&agrave; với hương gỗ th&ocirc;ng, hạt dẻ, nốt socola đặc trưng, thoang thoảng hương kh&oacute;i nhẹ chắc chắn sẽ l&agrave;m say l&ograve;ng bạn ngay lần đầu nếm thử.&nbsp;</p>&#13;&#10;',0,'2022-12-11 14:46:26','2022-12-11 14:46:26');
+         --
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `firstname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `lastname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `phone_number` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `image_url` varchar(4000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `ward_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `district_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `province_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `role` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `is_deleted` boolean default false,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`,`firstname` ,`lastname` ,`email` ,`phone_number`,`password` ,`image_url` ,`address` ,`ward_id` ,`district_id`,`province_id` ,`created_at` ,`updated_at` ,`role`) VALUES ('6191e42fe4e3f','Nguyễn Xuân','Vũ','admin@gmail.com','0984699491','$2y$10$wFVXGlQ3qFngyLrwYG7JkOCm/dkS2DnVOIydExoUZyObb5AWt4jIC','','HCM City','','','','2021-11-14 21:38:07','2021-12-01 00:12:24','admin');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2022-11-26  9:33:50
